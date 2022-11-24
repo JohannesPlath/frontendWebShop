@@ -6,12 +6,12 @@ import counterModule from './modules/counter/index'
 const debug = process.env.NODE_ENV !== 'production'
 
 export default createStore({
-  state: {},
+  /*state: {},
   mutations: {},
-  actions: {},
+  actions: {},*/
   modules: {
     counterModule,
-    products
+    products,
     // cart,
   },
   strict: debug,

@@ -20,6 +20,10 @@
       <router-link to="/about">About</router-link>
       |
       <router-link to="/shop">Shop</router-link>
+      |
+      <router-link to="/hello">HelloWorld</router-link>
+
+
     </div>
     <v-spacer/>
 
@@ -37,6 +41,7 @@
   </v-app-bar>
 </template>
 
-<script>
-
+<script>export default {
+  components: {}
+}
 </script>

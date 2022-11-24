@@ -8,7 +8,7 @@
       />
     </v-list>
 
-    <v-divider/>
+    <v-divider />
 
     <v-list :lines="false" density="compact" nav>
       <v-list-item
@@ -16,9 +16,9 @@
         :value="item" active-color="primary"
       >
         <template #prepend>
-          <v-icon :icon="item.icon"/>
+          <v-icon :icon="item.icon" />
         </template>
-        <v-list-item-title v-text="item.text"/>
+        <v-list-item-title v-text="item.text" />
       </v-list-item>
     </v-list>
   </v-navigation-drawer>

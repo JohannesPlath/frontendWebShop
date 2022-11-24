@@ -1,6 +1,8 @@
 <template>
   <p>Counter: {{ getCounter }}</p>
-  <button @click="increment(3)">Increment</button>
+  <button @click="increment(1)">
+    Increment
+  </button>
 </template>
 
 <script>
@@ -12,6 +14,7 @@ export default {
   },
   computed: {
     ...mapGetters('counterModule', ['getCounter'])
-  }
+  },
+
 }
 </script>
