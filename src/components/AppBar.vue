@@ -1,11 +1,15 @@
 <template>
   <v-app-bar
-    color="teal-darken-4"
-    image="https://picsum.photos/1920/1080?random"
+    :elevation="20"
+    shaped
+    color="deep-purple accent-4"
+    image="https://img.freepik.com/premium-photo/marijuana-plant-growth-cannabis-medicinal-leaves_705804-471.jpg?w=996"
+    scroll-target="#scrolling-techniques-2"
+
   >
     <template #image>
       <v-img
-        gradient="to top right,to top right, rgba(19,84,122,.8), rgba(128,208,199,.8)"
+        gradient="to top right, rgba(19,84,122,.8), rgba(128,208,199,.8)"
       />
     </template>
 
@@ -13,7 +17,7 @@
       <v-app-bar-nav-icon/>
     </template>
 
-    <v-app-bar-title>Title</v-app-bar-title>
+    <v-app-bar-title>High Quality Ganja Shop</v-app-bar-title>
     <div id="nav">
       <router-link to="/">Home</router-link>
       |
@@ -21,7 +25,7 @@
       |
       <router-link to="/shop">Shop</router-link>
       |
-      <router-link to="/hello">HelloWorld</router-link>
+      <router-link to="/hello">shopping basket</router-link>
 
 
     </div>
@@ -35,6 +39,8 @@
       <v-icon>mdi-heart</v-icon>
     </v-btn>
 
+    <v-btn variant="text" icon="mdi-filter"></v-btn>
+
     <v-btn icon>
       <v-icon>mdi-dots-vertical</v-icon>
     </v-btn>
@@ -42,6 +48,6 @@
 </template>
 
 <script>export default {
-  components: {}
+  components: {},
 }
 </script>

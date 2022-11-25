@@ -1,5 +1,8 @@
 <template>
-  <v-navigation-drawer expand-on-hover rail>
+  <v-navigation-drawer expand-on-hover rail
+                       image="https://cdn.pixabay.com/photo/2019/09/21/15/40/marijuana-4494190_960_720.jpg"
+                       permanent
+                       theme="dark">
     <v-list>
       <v-list-item
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
