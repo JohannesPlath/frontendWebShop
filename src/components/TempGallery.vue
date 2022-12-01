@@ -9,11 +9,16 @@
 export default {
   data: () => ({
     photos: [
-      'src/assets/pictures/01.jpg',
-      'src/assets/pictures/02.jpg',
-      'src/assets/pictures/03.jpg',
-      'src/assets/pictures/04.jpg',
-      'src/assets/pictures/05.jpg',
+      'src/assets/pics/2h-media-1SDw4biQ6us-unsplash.jpg',
+      'src/assets/pics/2h-media-9oIym89cYIc-unsplash.jpg',
+      'src/assets/pics/2h-media-mQVlwFd3OPA-unsplash.jpg',
+      'src/assets/pics/matthew-brodeur-qcCPIhhdgTw-unsplash.jpg',
+      'src/assets/pics/metal-grinder-weed-canabis-oil-joint-posing.jpg',
+      'src/assets/pics/vertical-isolated-shot-marijuana-blunt-white.jpg',
+      'src/assets/pics/marijuana-g966935eb2_1920.jpg',
+      'src/assets/pics/weed-ge36fcac46_1920.jpg',
+      'src/assets/pics/purple-hemp-flowers-medical-cannabis.jpg'
+
     ]
   }),
 }

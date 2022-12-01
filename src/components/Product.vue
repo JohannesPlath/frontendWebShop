@@ -47,11 +47,11 @@
   </v-card>
 </template>
 <script>
-import {Product} from '@/store/modules/products/model'
+import {ProductModel} from '@/store/modules/products/model'
 
 export default {
   props: {
-    product: Product
+    product: ProductModel
   },
   data: () => ({
     show: false,

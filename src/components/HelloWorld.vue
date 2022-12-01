@@ -4,7 +4,7 @@
       <v-img
         contain
         height="300"
-        src="src/assets/logo.svg"
+        src="src/assets/pics/weed-ge36fcac46_1920.jpg"
       />
 
       <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>

@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <product v-for="product in getAllProducts" :product="product" :key="product" class="gallery-panel">
+    <product v-for="product in getAll" :key="product.id" :product="product" class="gallery-panel">
     </product>
   </div>
 </template>
@@ -14,12 +14,12 @@ export default {
     Product
   },
   mounted() {
-    this.$store.dispatch('products/getAllProducts')
+    this.$store.dispatch('products/fetchAllProducts')
   },
   computed: {
-    getAllProducts() {
+    /*getAllProducts() {
       return this.$store.state.products.all
-    },
+    },*/
     ...mapGetters('products', ['getAll']), // TODO same result as above
   }
 }
