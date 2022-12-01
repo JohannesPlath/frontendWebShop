@@ -18,6 +18,7 @@ export default {
       'src/assets/pics/marijuana-g966935eb2_1920.jpg',
       'src/assets/pics/weed-ge36fcac46_1920.jpg',
       'src/assets/pics/purple-hemp-flowers-medical-cannabis.jpg'
+
     ]
   }),
 }
