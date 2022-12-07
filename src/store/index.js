@@ -5,6 +5,7 @@ import counterModule from './modules/counter/index'
 
 const debug = process.env.NODE_ENV !== 'production'
 
+
 export default createStore({
   /*state: {},
   mutations: {},
