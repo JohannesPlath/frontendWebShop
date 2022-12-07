@@ -33,7 +33,7 @@ export default {
     items: [
       {text: 'Start', icon: 'mdi-home', route: '/'},
       {text: 'Team', icon: 'mdi-account-group', route: '/shop'},
-      {text: 'Meine Aufgaben', icon: 'mdi-account', route: '/about'},
+      {text: 'Account', icon: 'mdi-account', route: '/account'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
       {text: 'Kontakt', icon: 'mdi-contacts', route: '/'}
     ]
