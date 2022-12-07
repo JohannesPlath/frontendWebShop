@@ -56,6 +56,14 @@
             placeholder="Select..."
             required
           ></v-autocomplete>
+          <v-text-field
+            ref="mail"
+            v-model="mail"
+            :rules="[() => !!mail || 'This field is required']"
+            label="Mail Adress"
+            required
+            placeholder="mail@me.uk"
+          ></v-text-field>
         </v-card-text>
         <v-divider class="mt-12"></v-divider>
         <v-card-actions>
@@ -108,6 +116,7 @@ export default {
     state: null,
     zip: null,
     country: null,
+    mail: null,
     formHasErrors: false,
   }),
 
@@ -120,6 +129,7 @@ export default {
         state: this.state,
         zip: this.zip,
         country: this.country,
+        mail: this.mail,
       }
     },
 
@@ -132,7 +142,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('accountModule', ['setCredentials']),
+    ...mapActions('account', ['setCredentials']),
 
     addressCheck () {
       this.errorMessages = this.address && !this.name

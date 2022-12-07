@@ -1,14 +1,15 @@
-const accountModule = {
+const account = {
   namespaced: true,
   state() {
     return {
       credential:{
-      name: "",
+      name: "Unregistered User",
       address:"",
       city: "",
       state: "",
       zip: "",
       country: "",
+      mail:"no registerd mail",
     }}
   },
   getters: {
@@ -29,4 +30,4 @@ const accountModule = {
   }
 }
 
-export default accountModule
+export default account
