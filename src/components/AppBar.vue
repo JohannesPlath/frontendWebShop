@@ -40,7 +40,7 @@
 
     <v-btn class="text-none" stacked>
       <v-badge :content="quantityGetter" color="blue">
-        <v-icon>mdi-store-outline</v-icon>
+        <v-icon>mdi-cart</v-icon>
       </v-badge>
     </v-btn>
 

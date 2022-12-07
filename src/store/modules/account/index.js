@@ -10,6 +10,7 @@ const account = {
       zip: "",
       country: "",
       mail:"no registerd mail",
+      password:"",
     }}
   },
   getters: {

@@ -23,7 +23,7 @@ const getters = {
   },
 
   quantityGetter:(state, getters) => {
-    return 12
+    return state.items.length
   },
 
   cartTotalPrice: (state, getters) => {
