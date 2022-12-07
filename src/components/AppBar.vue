@@ -3,10 +3,9 @@
     :elevation="20"
     shaped
     color="deep-purple accent-4"
-    image="https://img.freepik.com/premium-photo/marijuana-plant-growth-cannabis-medicinal-leaves_705804-471.jpg?w=996"
-    scroll-target="#scrolling-techniques-2"
+    :image="photo"
+    scroll-target="#scrolling-techniques-2">
 
-  >
     <template #image>
       <v-img
         gradient="to top right, rgba(19,84,122,.8), rgba(128,208,199,.8)"
@@ -21,11 +20,11 @@
     <div id="nav">
       <router-link to="/">Home</router-link>
       |
-      <router-link to="/about">About</router-link>
-      |
       <router-link to="/shop">Shop</router-link>
       |
       <router-link to="/hello">shopping basket</router-link>
+      |
+      <router-link to="/account">Account</router-link>
 
 
     </div>
@@ -49,5 +48,9 @@
 
 <script>export default {
   components: {},
+  data: () => ({
+    photo:
+      'src/assets/pics/marijuana-g966935eb2_1920.jpg',
+  })
 }
 </script>
