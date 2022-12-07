@@ -6,8 +6,8 @@
     <v-list>
       <v-list-item
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-        title="Sandra Adams"
-        subtitle="sandra_a88@gmailcom"
+        :title="credentials.name"
+        :subtitle="credentials.mail"
       />
     </v-list>
 
@@ -28,15 +28,21 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   data: () => ({
     items: [
       {text: 'Start', icon: 'mdi-home', route: '/'},
-      {text: 'Team', icon: 'mdi-account-group', route: '/shop'},
-      {text: 'Meine Aufgaben', icon: 'mdi-account', route: '/about'},
+      {text: 'Account', icon: 'mdi-account', route: '/account'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
       {text: 'Kontakt', icon: 'mdi-contacts', route: '/'}
-    ]
+    ],
   }),
+  computed: {
+    ...mapGetters('account', {
+      credentials: 'getCredentials'
+    })
+  }
 }
 </script>
