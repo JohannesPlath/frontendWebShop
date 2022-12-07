@@ -167,7 +167,9 @@ export default {
 
 
       })
-      this.setCredentials(this.form)
+      this.setCredentials(this.form).then(
+        this.$router.push({ path: '/shop' })
+      )
     },
   },
 }

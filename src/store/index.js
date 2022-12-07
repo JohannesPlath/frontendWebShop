@@ -1,5 +1,5 @@
 import {createStore, createLogger} from 'vuex'
-// import cart from './modules/cart/cart'
+import cart from './modules/cart/cart'
 import products from './modules/products'
 import account from './modules/account/index'
 
@@ -13,7 +13,7 @@ export default createStore({
   modules: {
     account,
     products,
-    // cart,
+    cart,
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

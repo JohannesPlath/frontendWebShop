@@ -21,11 +21,21 @@
       <v-btn
         color="orange-lighten-2"
         variant="text"
+        @click="addToCart()"
+      >
+        add to cart
+      </v-btn>
+
+
+      <v-btn
+        color="orange-lighten-2"
+        variant="text"
       >
         Explore
       </v-btn>
 
       <v-spacer></v-spacer>
+
 
       <v-btn
         :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
@@ -51,10 +61,17 @@ import {ProductModel} from '@/store/modules/products/model'
 
 export default {
   props: {
-    product: ProductModel
+    product: ProductModel,
   },
   data: () => ({
     show: false,
+
   }),
+  methods: {
+    addToCart(){
+      console.log("addToCart()")
+      this.$emit("cartEvent", this.product)
+    }
+  }
 }
 </script>

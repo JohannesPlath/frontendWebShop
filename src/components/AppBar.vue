@@ -38,6 +38,12 @@
       <v-icon>mdi-heart</v-icon>
     </v-btn>
 
+    <v-btn class="text-none" stacked>
+      <v-badge :content="quantityGetter" color="blue">
+        <v-icon>mdi-store-outline</v-icon>
+      </v-badge>
+    </v-btn>
+
     <v-btn variant="text" icon="mdi-filter"></v-btn>
 
     <v-btn icon>
@@ -46,11 +52,17 @@
   </v-app-bar>
 </template>
 
-<script>export default {
+<script>
+import {mapGetters} from "vuex";
+
+export default {
   components: {},
   data: () => ({
     photo:
       'src/assets/pics/marijuana-g966935eb2_1920.jpg',
-  })
+  }),
+  computed: {
+    ...mapGetters('cart', ['quantityGetter']),
+  },
 }
 </script>

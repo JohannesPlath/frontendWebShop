@@ -1,10 +1,11 @@
-import shop from '../../../../../../../Desktop/shopping-cart/api/shop'
+//import shop from '../../../../../../../Desktop/shopping-cart/api/shop'
 
 // initial state
 // shape: [{ id, quantity }]
 const state = {
   items: [],
   checkoutStatus: null
+
 }
 
 // getters
@@ -19,6 +20,10 @@ const getters = {
         quantity
       }
     })
+  },
+
+  quantityGetter:(state, getters) => {
+    return 12
   },
 
   cartTotalPrice: (state, getters) => {
@@ -48,7 +53,7 @@ const actions = {
 
   addProductToCart({state, commit}, product) {
     commit('setCheckoutStatus', null)
-    if (product.inventory > 0) {
+    /*if (product.inventory > 0) {
       const cartItem = state.items.find(item => item.id === product.id)
       if (!cartItem) {
         commit('pushProductToCart', {id: product.id})
@@ -57,7 +62,9 @@ const actions = {
       }
       // remove 1 item from stock
       commit('products/decrementProductInventory', {id: product.id}, {root: true})
-    }
+    }*/
+    console.log("@ cart : ", product)
+    commit('pushProductToCart', {id: product.id})
   }
 }
 
