@@ -6,7 +6,7 @@
     <v-list>
       <v-list-item
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-        title="Sandra Adams"
+        :title="actualUser"
         subtitle="sandra_a88@gmailcom"
       />
     </v-list>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   data: () => ({
     items: [
@@ -36,7 +38,11 @@ export default {
       {text: 'Account', icon: 'mdi-account', route: '/account'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
       {text: 'Kontakt', icon: 'mdi-contacts', route: '/'}
-    ]
+    ],
+    actualUser: this.getCredentials.name,
   }),
+  computed: {
+    ...mapGetters('accountModule', ['getCredentials'])
+  }
 }
 </script>

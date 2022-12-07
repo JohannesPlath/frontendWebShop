@@ -153,8 +153,8 @@ export default {
 
       Object.keys(this.form).forEach(f => {
         if (!this.form[f]) this.formHasErrors = true
-        this.$refs[f].validate(true)
-        //this.$store.dispatch('accountModule/setCredentials', this.form)
+        //this.$refs[f].validate(true)
+
 
       })
       this.setCredentials(this.form)
@@ -167,8 +167,8 @@ export default {
 <!--  methods: {-->
 <!--    ...mapActions('counterModule', ['increment'])-->
 <!--  },-->
-<!--  computed: {-->
-<!--    ...mapGetters('counterModule', ['getCounter'])-->
+<!--  computed: {
+    ...mapGetters('counterModule', ['getCounter'])-->
 <!--  },-->
 
 <!--}-->
