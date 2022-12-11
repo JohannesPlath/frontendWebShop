@@ -4,7 +4,8 @@
     shaped
     color="deep-purple accent-4"
     :image="photo"
-    scroll-target="#scrolling-techniques-2">
+    scroll-target="#scrolling-techniques-2"
+    style="flex: fit-content">
 
     <template #image>
       <v-img
@@ -12,12 +13,13 @@
       />
     </template>
 
-    <template #prepend>
+<!--    <template #prepend>
       <v-app-bar-nav-icon/>
-    </template>
+    </template>-->
 
-    <v-app-bar-title>High Quality Ganja Shop</v-app-bar-title>
+    <v-app-bar-title style="">High Quality Ganja Products</v-app-bar-title>
     <div id="nav">
+<!--
       <router-link to="/">Home</router-link>
       |
       <router-link to="/shop">Shop</router-link>
@@ -25,6 +27,7 @@
       <router-link to="/hello">shopping basket</router-link>
       |
       <router-link to="/account">Account</router-link>
+-->
 
 
     </div>

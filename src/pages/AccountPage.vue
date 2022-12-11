@@ -64,18 +64,34 @@
             required
             placeholder="mail@me.uk"
           ></v-text-field>
- <v-text-field
-            ref="mail"
+          <v-text-field
+            ref="password"
             v-model="password"
-            :rules="[() => !!password || 'This field is required']"
+            :rules="[
+              () => !!password || 'This field is required',
+              () => !!password && password.length >= 8 || 'Min 8 characters'
+              ]"
             label="Password"
             required
             placeholder="1234"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show1 ? 'text' : 'password'"
+            @click:append="show1 = !show1"
           ></v-text-field>
-
-
-
-
+          <v-text-field
+            ref="passwordconfirmed"
+            v-model="confirmPassword"
+            :rules="[
+              () => !!confirmPassword || 'This field is required',
+              () => password == confirmPassword || 'Confirmed Password is not eqaul!'
+              ]"
+            label="Password"
+            required
+            placeholder="1234"
+            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show2 ? 'text' : 'password'"
+            @click:append="show2 = !show2"
+          ></v-text-field>
 
         </v-card-text>
         <v-divider class="mt-12"></v-divider>
@@ -132,6 +148,9 @@ export default {
     mail: null,
     formHasErrors: false,
     password: null,
+    confirmPassword: null,
+    show1: false,
+    show2: false,
   }),
 
   computed: {
@@ -145,6 +164,7 @@ export default {
         country: this.country,
         mail: this.mail,
         password: this.password,
+        confirmPassword: this.confirmPassword,
       }
     },
 
