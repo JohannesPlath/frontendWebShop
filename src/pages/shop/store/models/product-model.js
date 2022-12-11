@@ -1,5 +1,5 @@
 
-export class ProductDTO {
+export class ProductModel {
   /*uuid;
   title;
   currency;

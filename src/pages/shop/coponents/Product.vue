@@ -58,7 +58,9 @@
   </v-card>
 </template>
 <script>
-import {ProductModel} from '@/pages/shop/store/products/model'
+
+
+import {ProductModel} from "@/pages/shop/store/models/product-model";
 
 export default {
   props: {
