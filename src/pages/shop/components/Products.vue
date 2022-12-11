@@ -8,7 +8,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
-import Product from '@/pages/shop/coponents/Product'
+import Product from '@/pages/shop/components/Product'
 
 export default {
   components: {

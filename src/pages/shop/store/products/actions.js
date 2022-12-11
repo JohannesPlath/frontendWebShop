@@ -6,7 +6,7 @@ const fetchAllProducts = ({commit}) => {
   productService.getProducts(res => {
     const products = []
     for (const p of res) {
-      products.push(new ProductModel(p.id, p.title, p.price, p.inventory, p.category, p.count, p.description, p.url))
+      products.push(new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.url))
     }
     commit('setProducts', products)
   })

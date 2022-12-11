@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld";
+import HelloWorld from "@/pages/cart/components/ShopCart";
 
 export default {
   components: {HelloWorld}

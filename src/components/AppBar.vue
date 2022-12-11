@@ -42,7 +42,7 @@
     </v-btn>-->
 
     <v-btn class="text-none" to="/cart" stacked>
-      <v-badge :content="quantityGetter" color="blue">
+      <v-badge :content="quantity" color="blue">
         <v-icon>mdi-cart</v-icon>
       </v-badge>
     </v-btn>
@@ -65,7 +65,7 @@ export default {
       'src/assets/pics/marijuana-g966935eb2_1920.jpg',
   }),
   computed: {
-    ...mapGetters('cart', ['quantityGetter']),
+    ...mapGetters('cart', ['quantity']),
   },
 }
 </script>
