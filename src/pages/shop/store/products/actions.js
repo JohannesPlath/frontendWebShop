@@ -1,5 +1,5 @@
 import {productService} from './service'
-import {ProductModel} from '@/store/modules/products/model'
+import {ProductModel} from '@/pages/shop/store/products/model'
 
 const fetchAllProducts = ({commit}) => {
   productService.getProducts(res => {

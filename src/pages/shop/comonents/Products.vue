@@ -8,7 +8,7 @@
 
 <script>
 import {mapActions, mapGetters} from 'vuex'
-import Product from '@/components/Product'
+import Product from '@/pages/shop/comonents/Product'
 
 export default {
   components: {
@@ -24,7 +24,7 @@ export default {
     ...mapActions('cart', ['addProductToCart']),
 
     addToCart(product){
-      //console.log("product: ", product)
+      console.log("product: ", product)
       this.addProductToCart(product)
     },
 

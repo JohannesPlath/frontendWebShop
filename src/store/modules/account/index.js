@@ -9,7 +9,7 @@ const account = {
       state: "",
       zip: "",
       country: "",
-      mail:"no registerd mail",
+      mail:"no registered mail",
       password:"",
     }}
   },
