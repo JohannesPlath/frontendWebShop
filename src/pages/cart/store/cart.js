@@ -1,7 +1,4 @@
-//import shop from '../../../../../../../Desktop/shopping-cart/api/shop'
 
-// initial state
-// shape: [{ id, quantity }]
 const state = {
   items: [],
   checkoutStatus: null
@@ -10,21 +7,13 @@ const state = {
 
 // getters
 const getters = {
-  cartProducts: (state, getters, rootState) => {
-    return state.items/*.map(({id, quantity}) => {
-      const product = rootState.products.all.find(product => product.id === id)
-      return {
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        quantity
-      }
-    })*/
+  cartProducts: (state) => {
+    return state.items
   },
 
 
 
-  quantity:(state, getters) => {
+  quantity:(state) => {
     return state.items.length
   },
 
@@ -35,46 +24,22 @@ const getters = {
   }
 }
 
-// actions
+
 const actions = {
-  checkout({commit, state}, products) {
-    const savedCartItems = [...state.items]
-    commit('setCheckoutStatus', null)
-    // empty cart
-    commit('setCartItems', {items: []})
-    shop.buyProducts(
-      products,
-      () => commit('setCheckoutStatus', 'successful'),
-      () => {
-        commit('setCheckoutStatus', 'failed')
-        // rollback to the cart saved before sending the request
-        commit('setCartItems', {items: savedCartItems})
-      }
-    )
-  },
 
   addProductToCart({state, commit}, product) {
-    commit('setCheckoutStatus', null)
-    /*if (product.inventory > 0) {
-      const cartItem = state.items.find(item => item.id === product.id)
-      if (!cartItem) {
-        commit('pushProductToCart', {id: product.id})
-      } else {
-        commit('incrementItemQuantity', cartItem)
-      }
-      // remove 1 item from stock
-      commit('products/decrementProductInventory', {id: product.id}, {root: true})
-    }*/
+
     console.log("@ cart : ", product)
-    commit('pushProductToCart', {id: product.id})
+    commit('pushProductToCart', product)
+
   }
 }
 
 // mutations
 const mutations = {
-  pushProductToCart(state, {id}) {
+  pushProductToCart(state, product) {
     state.items.push({
-      id,
+      product,
       quantity: 1
     })
   },

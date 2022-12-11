@@ -16,7 +16,7 @@
     </v-toolbar>
 
     <v-list lines="two">
-      <v-list-subheader inset>Folders</v-list-subheader>
+      <v-list-subheader inset>Cart:</v-list-subheader>
 
       <v-list-item
         v-for="product in cartProducts"
