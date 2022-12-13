@@ -36,7 +36,7 @@ export default {
       {text: 'Start', icon: 'mdi-home', route: '/'},
       {text: 'Account', icon: 'mdi-account', route: '/account'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
-      {text: 'Cart', icon: 'mdi-contacts', route: '/hello'}
+      {text: 'Cart', icon: 'mdi-contacts', route: '/cart'}
     ],
   }),
   computed: {

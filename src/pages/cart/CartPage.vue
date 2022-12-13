@@ -1,12 +1,12 @@
 <template>
-  <hello-world/>
+  <shop-cart/>
 </template>
 
 <script>
-import HelloWorld from "@/pages/cart/components/ShopCart";
+import ShopCart from "@/pages/cart/components/ShopCart";
 
 export default {
-  components: {HelloWorld}
+  components: {ShopCart}
 }
 </script>
 

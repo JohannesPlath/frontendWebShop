@@ -7,6 +7,7 @@
 
 
       <v-toolbar-title>Your Choose:</v-toolbar-title>
+      <v-icon color="purple">mdi-cart</v-icon>
 
       <v-spacer></v-spacer>
 
@@ -22,29 +23,40 @@
         v-for="item in cartProducts"
         :key="item.product.uuid"
         :title="item.product.title"
-        :subtitle="'count: ' + item.product.count + ', price: ' + item.product.price +' = '+ item.product.count * item.product.price + item.product.currency"
+        :subtitle=" 'Price: ' + item.product.price "
 
       >
         <template v-slot:prepend>
-          <v-avatar color="grey-lighten-1">
-            <v-icon color="white">mdi-folder</v-icon>
-          </v-avatar>
+          <v-avatar>
+            <v-img
+              :src="item.product.picUrl"
+              alt="John"       >
+            </v-img>     </v-avatar>
         </template>
 
         <template v-slot:append>
           <v-btn
             color="grey-lighten-1"
-            icon="mdi-information"
+            icon="mdi-plus"
             variant="text"
+            @click="addOne(item.product)"
+          ></v-btn>
+
+          <v-btn
+            color="grey-lighten-1"
+            icon="mdi-minus"
+            variant="text"
+            @click="removeOne(item.product)"
           ></v-btn>
         </template>
+
       </v-list-item>
     </v-list>
   </v-card>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   data: () => ({
@@ -52,6 +64,19 @@ export default {
   }),
   computed: {
     ...mapGetters('cart', ['cartProducts']),
+  },
+  methods:{
+    ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart']),
+
+    addOne(product){
+      console.log("addOne", product)
+      this.addProductToCart(product)
+    },
+
+    removeOne(product){
+      console.log("removeOne", product)
+      this.reduceProductFromCart(product)
+    },
   }
 }
 </script>

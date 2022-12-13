@@ -26,13 +26,15 @@ const getters = {
 
 
 const actions = {
+  reduceProductFromCart({state, commit}, product){
+    console.log("@ cart reduceOne: ", product)
+    commit('reduceProductFromCart', product)
+  },
 
   addProductToCart({state, commit}, product) {
-
     console.log("@ cart : ", product)
     commit('pushProductToCart', product)
-
-  }
+  },
 }
 
 // mutations
@@ -43,6 +45,12 @@ const mutations = {
       quantity: 1
     })
   },
+  reduceProductFromCart(state, product) {
+      state.items.pop({
+        product,
+        quantity: -1
+      })
+    },
 
   incrementItemQuantity(state, {id}) {
     const cartItem = state.items.find(item => item.id === id)
