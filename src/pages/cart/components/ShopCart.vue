@@ -21,15 +21,15 @@
 
       <v-list-item
         v-for="item in cartProducts"
-        :key="item.product.uuid"
-        :title="item.product.title"
-        :subtitle=" 'Price: ' + item.product.price "
+        :key="item.uuid"
+        :title="item.title"
+        :subtitle=" 'Price: ' + item.price "
 
       >
         <template v-slot:prepend>
           <v-avatar>
             <v-img
-              :src="item.product.picUrl"
+              :src="item.picUrl"
               alt="John"       >
             </v-img>     </v-avatar>
         </template>
@@ -39,14 +39,14 @@
             color="grey-lighten-1"
             icon="mdi-plus"
             variant="text"
-            @click="addOne(item.product)"
+            @click="addOne(item)"
           ></v-btn>
 
           <v-btn
             color="grey-lighten-1"
             icon="mdi-minus"
             variant="text"
-            @click="removeOne(item.product)"
+            @click="removeOne(item)"
           ></v-btn>
         </template>
 

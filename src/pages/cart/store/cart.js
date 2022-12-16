@@ -47,9 +47,10 @@ const mutations = {
     state.quantity++;
   },
   reduceProductFromCart(state, deleteProduct) {
-      console.log("delteP ", deleteProduct)
+    state.items.splice(state.items.indexOf(deleteProduct),1)
+    console.log("delteP ", deleteProduct)
       console.log("state.items  ", state.items.indexOf(deleteProduct) )
-
+    state.quantity--;
     },
 
   incrementItemQuantity(state, {id}) {
