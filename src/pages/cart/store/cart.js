@@ -1,6 +1,7 @@
 
 const state = {
   items: [],
+  quantity: 0,
   checkoutStatus: null
 
 }
@@ -14,12 +15,12 @@ const getters = {
 
 
   quantity:(state) => {
-    return state.items.length
+    return state.quantity
   },
 
   cartTotalPrice: (state, getters) => {
     return getters.cartProducts.reduce((total, product) => {
-      return total + product.price * product.quantity
+      //to implement
     }, 0)
   }
 }
@@ -40,16 +41,15 @@ const actions = {
 // mutations
 const mutations = {
   pushProductToCart(state, product) {
-    state.items.push({
+    state.items.push(
       product,
-      quantity: 1
-    })
+    ),
+    state.quantity++;
   },
-  reduceProductFromCart(state, product) {
-      state.items.pop({
-        product,
-        quantity: -1
-      })
+  reduceProductFromCart(state, deleteProduct) {
+      console.log("delteP ", deleteProduct)
+      console.log("state.items  ", state.items.indexOf(deleteProduct) )
+
     },
 
   incrementItemQuantity(state, {id}) {
