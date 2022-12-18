@@ -173,7 +173,7 @@ export default {
 
 
   computed: {
-    ...mapGetters('cart', ['cartProducts', 'quantity', 'cartTotalPrice', 'getCartTotalPrice']),
+    ...mapGetters('cart', ['cartProducts', 'quantity',  'getCartTotalPrice']),
   },
   methods:{
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart']),

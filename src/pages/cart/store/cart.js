@@ -20,16 +20,14 @@ const getters = {
   getCartTotalPrice:(state) => {
     return state.cartTotalPrice;
   },
-  cartTotalPrice: (state) => {
+  /*cartTotalPrice: (state) => {
      let result;
       for (let x = 0; x < state.items.length; x++){
-        console.log("state.items.at(x).price ",state.items.at(x).price)
         result = result + state.items.at(x).price;
-        console.log("Result: ", result);
 
      return result;
     }
-  }
+  }*/
 }
 
 
@@ -61,16 +59,13 @@ const mutations = {
       product,
     ),
     state.cartTotalPrice = state.cartTotalPrice + product.price;
-    console.log("state.cartTotalPrice ", state.cartTotalPrice)
     state.quantity++;
   },
   reduceProductFromCart(state, deleteProduct) {
     state.items.splice(state.items.indexOf(deleteProduct),1)
-    console.log("delteP ", deleteProduct)
-      console.log("state.items  ", state.items.indexOf(deleteProduct) )
     state.quantity--;
     state.cartTotalPrice = state.cartTotalPrice - product.price;
-    console.log("state.cartTotalPrice ", state.cartTotalPrice)
+
     },
 
   incrementItemQuantity(state, {id}) {
