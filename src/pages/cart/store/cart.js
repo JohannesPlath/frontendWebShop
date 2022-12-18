@@ -2,7 +2,8 @@
 const state = {
   items: [],
   quantity: 0,
-  checkoutStatus: null
+  checkoutStatus: null,
+  cartTotalPrice: 0,
 
 }
 
@@ -12,38 +13,55 @@ const getters = {
     return state.items
   },
 
-
-
   quantity:(state) => {
     return state.quantity
   },
 
-  cartTotalPrice: (state, getters) => {
-    return getters.cartProducts.reduce((total, product) => {
-      //to implement
-    }, 0)
+  getCartTotalPrice:(state) => {
+    return state.cartTotalPrice;
+  },
+  cartTotalPrice: (state) => {
+     let result;
+      for (let x = 0; x < state.items.length; x++){
+        console.log("state.items.at(x).price ",state.items.at(x).price)
+        result = result + state.items.at(x).price;
+        console.log("Result: ", result);
+
+     return result;
+    }
   }
 }
 
 
 const actions = {
   reduceProductFromCart({state, commit}, product){
-    console.log("@ cart reduceOne: ", product)
+    //console.log("@ cart reduceOne: ", product)
     commit('reduceProductFromCart', product)
   },
 
   addProductToCart({state, commit}, product) {
-    console.log("@ cart : ", product)
+    //console.log("@ cart : ", product)
     commit('pushProductToCart', product)
   },
+
+  getCountOfCart({state, commit}){
+    commit('getCountOfCartMutation', count)
+    return state.quantity;
+  }
 }
 
 // mutations
 const mutations = {
+  getCountOfCartMutation(state, count){
+    return state.quantity;
+  },
+
   pushProductToCart(state, product) {
     state.items.push(
       product,
     ),
+    state.cartTotalPrice = state.cartTotalPrice + product.price;
+    console.log("state.cartTotalPrice ", state.cartTotalPrice)
     state.quantity++;
   },
   reduceProductFromCart(state, deleteProduct) {
@@ -51,6 +69,8 @@ const mutations = {
     console.log("delteP ", deleteProduct)
       console.log("state.items  ", state.items.indexOf(deleteProduct) )
     state.quantity--;
+    state.cartTotalPrice = state.cartTotalPrice - product.price;
+    console.log("state.cartTotalPrice ", state.cartTotalPrice)
     },
 
   incrementItemQuantity(state, {id}) {
