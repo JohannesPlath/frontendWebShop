@@ -22,11 +22,11 @@ const getters = {
   },
   /*cartTotalPrice: (state) => {
      let result;
-      for (let x = 0; x < state.items.length; x++){
-        result = result + state.items.at(x).price;
-
-     return result;
-    }
+      for (let x = 0; x < state.items.length; x++) {
+        this.result += Interger.valueOf(state.items.at(x).price)
+        console.log("result ", this.result);
+        console.log("state.items.at(x).price ", state.items.at(x).price)
+      }
   }*/
 }
 
@@ -64,7 +64,7 @@ const mutations = {
   reduceProductFromCart(state, deleteProduct) {
     state.items.splice(state.items.indexOf(deleteProduct),1)
     state.quantity--;
-    state.cartTotalPrice = state.cartTotalPrice - product.price;
+    state.cartTotalPrice -=  deleteProduct.price;
 
     },
 

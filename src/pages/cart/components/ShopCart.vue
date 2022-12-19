@@ -60,14 +60,15 @@
       style="max-width: fit-content"
       :dot-color="itemFinalize.secColor"
       :icon="itemFinalize.icon"
-      fill-dot>
+      fill-dot
+    >
       <v-card>
         <v-card-title :class="['text-h6', `bg-${itemFinalize.color}`]">
           Sum of your order:
         </v-card-title>
         <v-card-text class="bg-white text--primary">
-          <p> Sum of products: {{quantity}}, total Price: {{getCartTotalPrice}}  eur </p>
-<!--          <v-btn
+          <p> Sum of products: {{ quantity }}, total Price: {{ getCartTotalPrice }}  eur </p>
+          <!--          <v-btn
             :color="itemFinalize.color"
             variant="outlined">
             Accept
@@ -80,7 +81,8 @@
       style="max-width: fit-content"
       :dot-color="itemAddress.secColor"
       :icon="itemAddress.icon"
-      fill-dot>
+      fill-dot
+    >
       <v-card>
         <v-card-title :class="['text-h6', `bg-${itemAddress.color}`]">
           Check your Address:
@@ -89,7 +91,8 @@
           <p>your order will be send to:  </p>
           <v-btn
             :color="itemAddress.secColor"
-            variant="outlined">
+            variant="outlined"
+          >
             Change
           </v-btn>
         </v-card-text>
@@ -100,7 +103,8 @@
       style="max-width: fit-content"
       :dot-color="itemBank.secColor"
       :icon="itemBank.icon"
-      fill-dot>
+      fill-dot
+    >
       <v-card>
         <v-card-title :class="['text-h6', `bg-${itemBank.color}`]">
           Check your Payment:
@@ -109,7 +113,8 @@
           <p>your order will payed by:   </p>
           <v-btn
             :color="itemBank.secColor"
-            variant="outlined">
+            variant="outlined"
+          >
             Change
           </v-btn>
         </v-card-text>
@@ -120,7 +125,8 @@
       style="max-width: fit-content"
       :dot-color="itemFinalize.secColor"
       :icon="itemFinalize.icon"
-      fill-dot>
+      fill-dot
+    >
       <v-card>
         <v-card-title :class="['text-h6', `bg-${itemFinalize.color}`]">
           Finalize:
@@ -129,15 +135,14 @@
           <p>If everything is ok, push order</p>
           <v-btn
             :color="itemFinalize.secColor"
-            variant="outlined">
+            variant="outlined"
+          >
             Order
           </v-btn>
         </v-card-text>
       </v-card>
     </v-timeline-item>
   </v-timeline>
-
-
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
