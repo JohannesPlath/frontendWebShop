@@ -21,9 +21,9 @@ export const cartService = {
     let dto = {
       productId: null,
       count: 0,
-    }
-    /*for (item of items){
-      if (item.id )
+    }/*
+    for (item of items){
+      dtoList.
     }*/
   }
 }

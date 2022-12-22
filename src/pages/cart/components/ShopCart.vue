@@ -23,14 +23,14 @@
 
       <v-list-item
         v-for="item in cartProducts"
-        :key="item.uuid"
-        :title="item.title"
-        :subtitle=" 'Price: ' + item.price "
+        :key="item.product.uuid"
+        :title="item.product.title"
+        :subtitle=" 'Price: ' + item.product.price "
       >
         <template #prepend>
           <v-avatar>
             <v-img
-              :src="item.picUrl"
+              :src="item.product.picUrl"
               alt="John"
             />
           </v-avatar>
@@ -41,14 +41,14 @@
             color="grey-lighten-1"
             icon="mdi-plus"
             variant="text"
-            @click="addOne(item)"
+            @click="addOne(item.product)"
           />
 
           <v-btn
             color="grey-lighten-1"
             icon="mdi-minus"
             variant="text"
-            @click="removeOne(item)"
+            @click="removeOne(item.product)"
           />
         </template>
       </v-list-item>
