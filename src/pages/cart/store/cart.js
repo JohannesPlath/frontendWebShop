@@ -47,7 +47,7 @@ const actions = {
 
   finalize({state, commit}, credentials, payment) {
     console.log('actions finalizeOrder: ', state.items, credentials, payment)
-    commit('finalizeOrder', credentials, payment)
+    commit('finalizeOrder', state, credentials, payment)
   }
 }
 
@@ -59,7 +59,7 @@ const mutations = {
     },
   */
 
-  finalizeOrder({state, commit}, credentials, payment) {
+  finalizeOrder(state, credentials, payment) {
     cartService.pushToCartBackend(state.items, credentials, payment)
   },
 
