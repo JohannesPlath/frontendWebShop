@@ -72,14 +72,21 @@ const mutations = {
         product: product,
         amount: 1,
       })
-      state.quantity++;
+
     }
+    state.quantity++;
     state.cartTotalPrice = state.cartTotalPrice + product.price;
   },
 
 
   reduceProductFromCart(state, deleteProduct) {
-    state.items.splice(state.items.indexOf(deleteProduct), 1)
+    let existItem = state.items.find(item => item.product.uuid === deleteProduct.uuid);
+    console.log('mutations reduceProductFromCart: ', existItem)
+    existItem.amount--;
+    if (existItem.amount === 0) {
+      state.items.splice(state.items.indexOf(existItem), 1)
+    }
+    console.log('mutations reduceProductFromCart: state.items', state.items)
     state.quantity--;
     state.cartTotalPrice -= deleteProduct.price;
   },
