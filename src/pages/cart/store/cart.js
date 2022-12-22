@@ -61,7 +61,7 @@ const mutations = {
   */
 
   finalizeOrder({state, commit}, credentials, payment) {
-    pushToCartBackend(state.items, credentials, payment)
+    cartService.pushToCartBackend(state.items, credentials, payment)
   },
 
   pushProductToCart(state, product) {
@@ -91,6 +91,8 @@ const mutations = {
   }*/
 }
 
+import {cartService} from './cart.service'
+
 export default {
   namespaced: true,
   state,
@@ -98,3 +100,4 @@ export default {
   actions,
   mutations
 }
+

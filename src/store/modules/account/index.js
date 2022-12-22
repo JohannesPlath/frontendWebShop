@@ -2,16 +2,17 @@ const account = {
   namespaced: true,
   state() {
     return {
-      credential:{
-      name: "Unregistered User",
-      address:"",
-      city: "",
-      state: "",
-      zip: "",
-      country: "",
-      mail:"no registered mail",
-      password:"",
-    }}
+      credential: {
+        name: "John Do",
+        address: "FancyStreet 32",
+        city: "CloudVallay-Amsterdam",
+        state: "Heaven",
+        zip: "12345",
+        country: "Netherlands",
+        mail: "no registered mail",
+        password: "",
+      }
+    }
   },
   getters: {
     getCredentials(state) {

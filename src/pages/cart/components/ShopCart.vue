@@ -68,7 +68,7 @@
         </v-card-title>
         <v-card-text class="bg-white text--primary">
           <p> Sum of products: {{ quantity }} </p>
-          <p>total Price: {{ getCartTotalPrice }} € </p>
+          <p>total Price: {{ getCartTotalPrice.toFixed(2) }} € </p>
           <!--          <v-btn
             :color="itemFinalize.color"
             variant="outlined">
@@ -92,7 +92,7 @@
           <h3>your order will be send to: </h3>
           <p> {{ credentials.name }} </p>
           <p> {{ credentials.address }} </p>
-          <p> {{ credentials.zip }}", " {{ credentials.city }} </p>
+          <p> {{ credentials.zip }} {{ credentials.city }} </p>
           <p> {{ credentials.state }} </p>
 
           <v-btn
