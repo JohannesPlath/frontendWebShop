@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <product v-for="product in getAll" :key="product.id" :product="product" class="gallery-panel"
-    @cartEvent="addToCart" >
+    <product v-for="item in getAll" :key="item.product.id" :product="item.product" class="gallery-panel"
+             @cartEvent="addToCart"
+    >
     </product>
   </div>
 </template>
@@ -23,7 +24,7 @@ export default {
   methods: {
     ...mapActions('cart', ['addProductToCart']),
 
-    addToCart(product){
+    addToCart(product) {
       console.log("product: ", product)
       this.addProductToCart(product)
     },

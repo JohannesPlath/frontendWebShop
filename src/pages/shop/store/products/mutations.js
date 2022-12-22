@@ -3,8 +3,8 @@ export default {
     state.all = products
   },
 
-  decrementProductInventory(state, {id}) {
-    const product = state.all.find(product => product.id === id)
-    product.inventory--
-  }
+  /* decrementProductInventory(state, {id}) {
+     const product = state.all.find(product => product.id === id)
+     product.inventory--
+   }*/
 }
