@@ -1,4 +1,3 @@
-
 const state = {
   items: [],
   quantity: 0,
@@ -13,11 +12,11 @@ const getters = {
     return state.items
   },
 
-  quantity:(state) => {
+  quantity: (state) => {
     return state.quantity
   },
 
-  getCartTotalPrice:(state) => {
+  getCartTotalPrice: (state) => {
     return state.cartTotalPrice;
   },
   /*cartTotalPrice: (state) => {
@@ -32,7 +31,7 @@ const getters = {
 
 
 const actions = {
-  reduceProductFromCart({state, commit}, product){
+  reduceProductFromCart({state, commit}, product) {
     //console.log("@ cart reduceOne: ", product)
     commit('reduceProductFromCart', product)
   },
@@ -42,32 +41,43 @@ const actions = {
     commit('pushProductToCart', product)
   },
 
-  getCountOfCart({state, commit}){
-    commit('getCountOfCartMutation', count)
-    return state.quantity;
+  /* getCountOfCart({state, commit}){
+     commit('getCountOfCartMutation', count)
+     return state.quantity;
+   }*/
+
+  finalize({state, commit}, credentials, payment) {
+    console.log('actions finalizeOrder: ', state.items, credentials, payment)
+    commit('finalizeOrder', credentials, payment)
   }
 }
 
 // mutations
 const mutations = {
-  getCountOfCartMutation(state, count){
-    return state.quantity;
+  /*
+    getCountOfCartMutation(state, count) {
+      return state.quantity;
+    },
+  */
+
+  finalizeOrder({state, commit}, credentials, payment) {
+    pushToCartBackend(state.items, credentials, payment)
   },
 
   pushProductToCart(state, product) {
     state.items.push(
       product,
     ),
-    state.cartTotalPrice = state.cartTotalPrice + product.price;
+      state.cartTotalPrice = state.cartTotalPrice + product.price;
     state.quantity++;
   },
   reduceProductFromCart(state, deleteProduct) {
-    state.items.splice(state.items.indexOf(deleteProduct),1)
+    state.items.splice(state.items.indexOf(deleteProduct), 1)
     state.quantity--;
-    state.cartTotalPrice -=  deleteProduct.price;
-    },
+    state.cartTotalPrice -= deleteProduct.price;
+  },
 
-  incrementItemQuantity(state, {id}) {
+  /*incrementItemQuantity(state, {id}) {
     const cartItem = state.items.find(item => item.id === id)
     cartItem.quantity++
   },
@@ -78,7 +88,7 @@ const mutations = {
 
   setCheckoutStatus(state, status) {
     state.checkoutStatus = status
-  }
+  }*/
 }
 
 export default {

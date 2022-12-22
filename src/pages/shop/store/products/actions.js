@@ -1,9 +1,9 @@
-import {productService} from './service'
+import {service} from './product.service'
 import {ProductModel} from "@/pages/shop/store/models/product-model";
 
 
 const fetchAllProducts = ({commit}) => {
-  productService.getProducts(res => {
+  service.getProducts(res => {
     const products = []
     for (const p of res) {
       products.push(new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl))
@@ -13,7 +13,7 @@ const fetchAllProducts = ({commit}) => {
 }
 
 const buyProducts = ({commit}, payload) => {
-  productService.buyProducts(payload, message => {
+  service.buyProducts(payload, message => {
     commit('receiveMessage', message)
   })
 }

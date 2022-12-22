@@ -3,8 +3,8 @@ import axios from 'axios'
 export const productService = {
   async getProducts(cb) {
     console.log("-------------> ");
-    try {  //jsonList; //
-      const productList = await axios.get("http://localhost:8080/product");
+    try {
+      const productList = await axios.post("http://localhost:8082/finalize");
       cb(productList.data)
       console.log("-------------> ", productList);
     } catch (error) {

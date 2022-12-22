@@ -9,7 +9,7 @@
         mdi-cart
       </v-icon>
 
-      <v-spacer />
+      <v-spacer/>
 
       <!--      <v-btn variant="text" icon="mdi-magnify"></v-btn>
 
@@ -68,7 +68,7 @@
         </v-card-title>
         <v-card-text class="bg-white text--primary">
           <p> Sum of products: {{ quantity }} </p>
-            <p>total Price: {{ getCartTotalPrice }} € </p>
+          <p>total Price: {{ getCartTotalPrice }} € </p>
           <!--          <v-btn
             :color="itemFinalize.color"
             variant="outlined">
@@ -89,11 +89,11 @@
           Check your Address:
         </v-card-title>
         <v-card-text class="bg-white text--primary">
-          <h3>your order will be send to:  </h3>
-          <p> {{credentials.name}}  </p>
-          <p> {{credentials.address}}  </p>
-          <p> {{credentials.zip}}", " {{credentials.city}}  </p>
-          <p> {{credentials.state}}  </p>
+          <h3>your order will be send to: </h3>
+          <p> {{ credentials.name }} </p>
+          <p> {{ credentials.address }} </p>
+          <p> {{ credentials.zip }}", " {{ credentials.city }} </p>
+          <p> {{ credentials.state }} </p>
 
           <v-btn
             :color="itemAddress.secColor"
@@ -117,7 +117,8 @@
           Check your Payment:
         </v-card-title>
         <v-card-text class="bg-white text--primary">
-          <p>your order will payed by:   </p>
+          <p>your order will payed by: </p>
+          <p>{{ payment.name }} </p>
           <v-btn
             :color="itemBank.secColor"
             variant="outlined"
@@ -142,7 +143,9 @@
           <p>If everything is ok, push order</p>
           <v-btn
             :color="itemFinalize.secColor"
-            variant="outlined">
+            variant="outlined"
+            @click=finalizeOrder(cartProducts,credentials,payment)
+          >
             Order NOW
 
           </v-btn>
@@ -153,6 +156,7 @@
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
+
 
 export default {
   data: () => ({
@@ -186,22 +190,30 @@ export default {
 
   computed: {
     ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice']),
-    ...mapGetters('account', {
-      credentials: 'getCredentials'
-    })
+    ...mapGetters('account', {credentials: 'getCredentials'}),
+    ...mapGetters('payment', {payment: 'getPayment'}),
   },
-  methods:{
-    ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart']),
+  methods: {
+    payment() {
+      return payment
+    },
+    ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
 
-    addOne(product){
-      console.log("addOne", product)
+    addOne(product) {
+      //console.log("addOne", product)
       this.addProductToCart(product)
     },
 
-    removeOne(product){
-      console.log("removeOne", product)
+    removeOne(product) {
+      //console.log("removeOne", product)
       this.reduceProductFromCart(product)
     },
+
+    finalizeOrder(cartProducts, credentials, payment) {
+      console.log('methods finalizeOrder: ', cartProducts, credentials, payment)
+      this.finalize(cartProducts, credentials, payment)
+    }
   }
 }
+
 </script>
