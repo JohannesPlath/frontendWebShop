@@ -3,14 +3,9 @@ import axios from 'axios'
 export const cartService = {
 
   async pushToCartBackend(items, credentials, payment) {
-    let dto = getItemsAndCount(items)
-    try {
-      const productList = await axios.post("http://localhost:8082/finalize");
-      cb(productList.data)
-      console.log("-------------> ", productList);
-    } catch (error) {
-      console.error(error);
-    }
+    let dtoList = this.getItemsAndCount(items)
+    let axiosResponse = await axios.post("http://localhost:8082/finalize", dtoList);
+    console.log('cartService pushToCartBackend: ', axiosResponse)
   },
 
   buyProducts(products, cb, errorCb) {
@@ -18,13 +13,10 @@ export const cartService = {
 
   getItemsAndCount(items) {
     let dtoList = []
-    let dto = {
-      productId: null,
-      count: 0,
-    }/*
-    for (item of items){
-      dtoList.
-    }*/
+    for (item of items) {
+      dtoList.push({productId: item.uuid, count: item.amount})
+    }
+    return dtoList
   }
 }
 

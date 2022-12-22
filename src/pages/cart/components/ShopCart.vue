@@ -10,7 +10,6 @@
       </v-icon>
 
       <v-spacer/>
-
       <!--      <v-btn variant="text" icon="mdi-magnify"></v-btn>
 
       <v-btn variant="text" icon="mdi-view-module"></v-btn>-->
