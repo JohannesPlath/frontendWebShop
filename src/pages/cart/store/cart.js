@@ -64,7 +64,7 @@ const mutations = {
     cartService.pushToCartBackend(state.items, credentials, payment)
   },
 
-  pushProductToCart(state, item, quantity) {
+  pushProductToCart(state, product, quantity) {
     let existItem = state.items.find(item => item.uuid === product.uuid);
     console.log('mutations pushProductToCart: ', existItem)
     if (existItem) {
@@ -78,7 +78,7 @@ const mutations = {
         },
       )
     }
-    state.cartTotalPrice = state.cartTotalPrice + item.product.price;
+    state.cartTotalPrice = state.cartTotalPrice + product.price;
     state.quantity++;
   },
   reduceProductFromCart(state, deleteProduct) {
