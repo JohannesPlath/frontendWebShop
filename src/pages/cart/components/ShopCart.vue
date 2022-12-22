@@ -25,7 +25,7 @@
         v-for="item in cartProducts"
         :key="item.product.uuid"
         :title="item.product.title"
-        :subtitle=" 'Price: ' + item.product.price "
+        :subtitle=" 'Price: ' + item.product.price + '€, Amount: ' + item.product.amount "
       >
         <template #prepend>
           <v-avatar>

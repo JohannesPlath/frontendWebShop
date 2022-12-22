@@ -3,7 +3,6 @@ const state = {
   quantity: 0,
   checkoutStatus: null,
   cartTotalPrice: 0,
-
 }
 
 // getters
@@ -64,23 +63,21 @@ const mutations = {
     cartService.pushToCartBackend(state.items, credentials, payment)
   },
 
-  pushProductToCart(state, product, quantity) {
-    let existItem = state.items.find(item => item.uuid === product.uuid);
-    console.log('mutations pushProductToCart: ', existItem)
+  pushProductToCart(state, product, amount) {
+    let existItem = state.items.find(item => item.product.uuid === product.uuid);
     if (existItem) {
-
+      existItem.amount++;
     } else {
-      state.items.push(
-        {
-          product: product,
-          quantity: quantity,
-
-        },
-      )
+      state.items.push({
+        product: product,
+        amount: 1,
+      })
+      state.quantity++;
     }
     state.cartTotalPrice = state.cartTotalPrice + product.price;
-    state.quantity++;
   },
+
+
   reduceProductFromCart(state, deleteProduct) {
     state.items.splice(state.items.indexOf(deleteProduct), 1)
     state.quantity--;
@@ -110,4 +107,3 @@ export default {
   actions,
   mutations
 }
-
