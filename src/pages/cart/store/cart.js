@@ -65,7 +65,6 @@ const mutations = {
     state.items.splice(state.items.indexOf(deleteProduct),1)
     state.quantity--;
     state.cartTotalPrice -=  deleteProduct.price;
-
     },
 
   incrementItemQuantity(state, {id}) {

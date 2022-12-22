@@ -55,7 +55,7 @@
     </v-list>
   </v-card>
 
-  <v-timeline align="start" color="secondary">
+  <v-timeline side="end" color="secondary">
     <v-timeline-item
       style="max-width: fit-content"
       :dot-color="itemFinalize.secColor"
@@ -67,7 +67,8 @@
           Sum of your order:
         </v-card-title>
         <v-card-text class="bg-white text--primary">
-          <p> Sum of products: {{ quantity }}, total Price: {{ getCartTotalPrice }}  eur </p>
+          <p> Sum of products: {{ quantity }} </p>
+            <p>total Price: {{ getCartTotalPrice }} € </p>
           <!--          <v-btn
             :color="itemFinalize.color"
             variant="outlined">
@@ -88,10 +89,16 @@
           Check your Address:
         </v-card-title>
         <v-card-text class="bg-white text--primary">
-          <p>your order will be send to:  </p>
+          <h3>your order will be send to:  </h3>
+          <p> {{credentials.name}}  </p>
+          <p> {{credentials.address}}  </p>
+          <p> {{credentials.zip}}", " {{credentials.city}}  </p>
+          <p> {{credentials.state}}  </p>
+
           <v-btn
             :color="itemAddress.secColor"
             variant="outlined"
+            to="/account"
           >
             Change
           </v-btn>
@@ -135,9 +142,9 @@
           <p>If everything is ok, push order</p>
           <v-btn
             :color="itemFinalize.secColor"
-            variant="outlined"
-          >
-            Order
+            variant="outlined">
+            Order NOW
+
           </v-btn>
         </v-card-text>
       </v-card>
@@ -178,7 +185,10 @@ export default {
 
 
   computed: {
-    ...mapGetters('cart', ['cartProducts', 'quantity',  'getCartTotalPrice']),
+    ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice']),
+    ...mapGetters('account', {
+      credentials: 'getCredentials'
+    })
   },
   methods:{
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart']),
