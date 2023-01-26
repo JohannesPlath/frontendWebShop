@@ -14,7 +14,7 @@
     </v-card-title>
 
     <v-card-subtitle>
-      {{ product.price }}
+      {{ product.price }} €
     </v-card-subtitle>
 
     <v-card-actions>
@@ -43,13 +43,16 @@
       ></v-btn>
     </v-card-actions>
 
-    <v-expand-transition>
+    <v-expand-transition
+      color="orange-lighten-2"
+      variant="text"
+    >
       <div v-show="show">
         <v-divider></v-divider>
 
 
         <v-card-text>
-          {{product.description}}
+          {{ product.description }}
         </v-card-text>
       </div>
     </v-expand-transition>
@@ -69,7 +72,7 @@ export default {
 
   }),
   methods: {
-    addToCart(){
+    addToCart() {
       console.log("addToCart()")
       this.$emit("cartEvent", this.product)
     }
