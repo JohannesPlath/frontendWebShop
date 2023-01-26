@@ -63,6 +63,7 @@ const mutations = {
     cartService.pushToCartBackend(state.items, credentials, payment)
   },
 
+
   pushProductToCart(state, product, amount) {
     let existItem = state.items.find(item => item.product.uuid === product.uuid);
     if (existItem) {
