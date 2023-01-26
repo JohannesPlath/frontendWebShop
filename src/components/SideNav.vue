@@ -2,16 +2,18 @@
   <v-navigation-drawer expand-on-hover rail
                        image="https://cdn.pixabay.com/photo/2019/09/21/15/40/marijuana-4494190_960_720.jpg"
                        permanent
-                       theme="dark">
+                       theme="dark"
+  >
     <v-list>
       <v-list-item
+        to="/account"
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
         :title="credentials.name"
         :subtitle="credentials.mail"
       />
     </v-list>
 
-    <v-divider />
+    <v-divider/>
 
     <v-list :lines="false" density="compact" nav>
       <v-list-item
@@ -19,9 +21,9 @@
         :value="item" active-color="primary"
       >
         <template #prepend>
-          <v-icon :icon="item.icon" />
+          <v-icon :icon="item.icon"/>
         </template>
-        <v-list-item-title v-text="item.text" />
+        <v-list-item-title v-text="item.text"/>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -36,7 +38,7 @@ export default {
       {text: 'Start', icon: 'mdi-home', route: '/'},
       {text: 'Account', icon: 'mdi-account', route: '/account'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
-      {text: 'Kontakt', icon: 'mdi-contacts', route: '/'}
+      {text: 'Cart', icon: 'mdi-contacts', route: '/cart'}
     ],
   }),
   computed: {

@@ -4,6 +4,7 @@
       <v-btn
         v-for="link in links"
         :key="link"
+        to="/shop"
         color="white"
         variant="text"
         class="mx-2"

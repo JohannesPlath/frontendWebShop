@@ -1,13 +1,15 @@
 <template>
   <div class="container">
-    <product v-for="product in getAll" :key="product.id" :product="product" class="gallery-panel">
+    <product v-for="item in getAll" :key="item.product.id" :product="item.product" class="gallery-panel"
+             @cartEvent="addToCart"
+    >
     </product>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
-import Product from '@/components/Product'
+import {mapActions, mapGetters} from 'vuex'
+import Product from '@/pages/shop/components/Product'
 
 export default {
   components: {
@@ -17,11 +19,19 @@ export default {
     this.$store.dispatch('products/fetchAllProducts')
   },
   computed: {
-    /*getAllProducts() {
-      return this.$store.state.products.all
-    },*/
-    ...mapGetters('products', ['getAll']), // TODO same result as above
+    ...mapGetters('products', ['getAll']),
+  },
+  methods: {
+    ...mapActions('cart', ['addProductToCart']),
+
+    addToCart(product) {
+      console.log("product: ", product)
+      this.addProductToCart(product)
+    },
+
+
   }
+
 }
 </script>
 

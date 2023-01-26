@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import TempGallery from '@/components/TempGallery'
+import TempGallery from '@/components/WelcomePage'
 </script>
