@@ -5,7 +5,8 @@
     color="deep-purple accent-4"
     :image="photo"
     scroll-target="#scrolling-techniques-2"
-    style="flex: fit-content">
+    style="flex: fit-content"
+  >
 
     <template #image>
       <v-img
@@ -13,11 +14,12 @@
       />
     </template>
 
-<!--    <template #prepend>
-      <v-app-bar-nav-icon/>
-    </template>-->
-    <v-spacer/><v-spacer/>
-    <v-app-bar-title >High Quality Ganja Products </v-app-bar-title>
+    <!--    <template #prepend>
+          <v-app-bar-nav-icon/>
+        </template>-->
+    <!--    <v-spacer/>-->
+    <v-spacer/>
+    <v-app-bar-title>High Quality Ganja Products</v-app-bar-title>
     <!--    <div id="nav">
 
           <router-link to="/">Home</router-link>
@@ -31,15 +33,8 @@
 
 
     </div> -->
-    <v-spacer/>
+    <!--    <v-spacer/>-->
 
-    <v-btn icon to="/shop">
-      <v-icon>mdi-magnify</v-icon>
-    </v-btn>
-
-<!--    <v-btn icon>
-      <v-icon>mdi-heart</v-icon>
-    </v-btn>-->
 
     <v-btn class="text-none" to="/cart" stacked>
       <v-badge :content="quantity" color="blue">
@@ -49,9 +44,9 @@
 
     <v-btn variant="text" icon="mdi-account" to="/account"></v-btn>
 
-<!--    <v-btn icon>
-      <v-icon>mdi-dots-vertical</v-icon>
-    </v-btn>-->
+    <!--    <v-btn icon>
+          <v-icon>mdi-dots-vertical</v-icon>
+        </v-btn>-->
   </v-app-bar>
 </template>
 
