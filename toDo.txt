@@ -17,6 +17,7 @@ endpunkte des backends/GateWay
 umbau am Frontend:
 - loginPage (mail/passw) vor Accountpage / Registrierung
 - shop sperren ohne Registrierung
-- cart infos aus Backend beziehen
+- cart infos aus Backend beziehen - abrufen der CartBackend infos zu einem user
 - nachricht an CartBackend bei "AddToCart"
-- DTO´s definieren
+
+- DTOs definieren
