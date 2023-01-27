@@ -6,7 +6,7 @@
   >
     <v-list>
       <v-list-item
-        to="/account"
+        to="/login"
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
         :title="credentials.name"
         :subtitle="credentials.mail"

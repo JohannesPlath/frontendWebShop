@@ -3,6 +3,8 @@ import Home from '@/pages/HomePage.vue';
 import Shop from '@/pages/shop/ShopPage.vue';
 import CartPage from "@/pages/cart/CartPage";
 import AccountLogin from "@/pages/account/AccountLogin.vue";
+import AccountLayout from "@/pages/account/AccountLayout.vue";
+import AccountPage from "@/pages/account/AccountPage.vue";
 
 const routes = [
   {
@@ -11,10 +13,18 @@ const routes = [
     component: Home,
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: AccountLogin,
-
+    path: '/account',
+    name: 'Account',
+    component: AccountLayout,
+    children: [
+      {
+        path: 'profile',
+        component: AccountPage,
+      },
+      {
+        path: 'login',
+        component: AccountLogin,
+      }],
   },
   {
     path: '/shop',
