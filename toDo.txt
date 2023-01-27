@@ -6,7 +6,7 @@ endpunkte des backends/GateWay
 - DELETE/ProductFROMCart/{userId}/{productId}/{ProductCount} ggf als json /DTO
 - (to CartService) DELETE/Order{userID}
 - Sync LogIn:  PUT/login/userdata (als Json: nur cridentials)  -> keycloak
- - Sync Register:  PUT/register/userdata (als Json: alle daten)  -> keycloak
+- Sync Register:  PUT/register/userdata (als Json: alle daten)  -> keycloak
 - sync lockout: GET/logout/userID -> to keycloak
 - ChoosePaymentl (sync): PUT/payment/{userID}/{Paymentprovider}
 - PUT/finalize{userID}
