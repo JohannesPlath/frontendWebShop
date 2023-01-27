@@ -18,7 +18,7 @@ const routes = [
     component: AccountLayout,
     children: [
       {
-        path: 'profile',
+        path: 'overview',
         component: AccountPage,
       },
       {

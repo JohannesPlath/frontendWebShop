@@ -1,12 +1,12 @@
 <template>
   <v-navigation-drawer expand-on-hover rail
-                       image="https://cdn.pixabay.com/photo/2019/09/21/15/40/marijuana-4494190_960_720.jpg"
+                       :image="photo"
                        permanent
                        theme="dark"
   >
     <v-list>
       <v-list-item
-        to="/login"
+        to="/account/overview"
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
         :title="credentials.name"
         :subtitle="credentials.mail"
@@ -34,6 +34,8 @@ import {mapGetters} from "vuex";
 
 export default {
   data: () => ({
+    photo: 'src/assets/pics/marijuana-g966935eb2_1920.jpg',
+
     items: [
       {text: 'Start', icon: 'mdi-home', route: '/'},
       {text: 'Account', icon: 'mdi-account', route: '/account'},
