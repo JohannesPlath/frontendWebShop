@@ -1,7 +1,7 @@
 import {createStore, createLogger} from 'vuex'
 import cart from '../pages/cart/store/cart'
 import products from '../pages/shop/store/products'
-import account from './modules/account/index'
+import account from '../pages/account/store'
 import payment from "@/store/modules/payment/payment";
 
 const debug = process.env.NODE_ENV !== 'production'
