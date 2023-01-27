@@ -1,7 +1,7 @@
 import {createWebHistory, createRouter} from 'vue-router';
 import Home from '@/pages/HomePage.vue';
 import Shop from '@/pages/shop/ShopPage.vue';
-import AccountPage from '@/pages/AccountPage.vue';
+import AccountPage from '@/pages/account/AccountPage.vue';
 import CartPage from "@/pages/cart/CartPage";
 
 const routes = [
@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: '/cart',
-    name:'Cart',
+    name: 'Cart',
     component: CartPage,
   }
 ];
