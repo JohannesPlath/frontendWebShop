@@ -8,7 +8,7 @@
       <v-list-item
         to="/account/overview"
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-        :title="credentials.name"
+        :title="credentials.familyName"
         :subtitle="credentials.mail"
       />
     </v-list>

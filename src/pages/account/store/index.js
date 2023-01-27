@@ -3,7 +3,8 @@ const account = {
   state() {
     return {
       credential: {
-        name: "John Do",
+        firstname: "John",
+        familyName: "NotRegistered",
         address: "FancyStreet 32",
         city: "CloudVallay-Amsterdam",
         state: "Heaven",

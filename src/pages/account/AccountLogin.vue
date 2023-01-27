@@ -51,7 +51,7 @@ export default {
 
 
   data: () => ({
-    form: false,
+
     email: null,
     password: null,
     loading: false,
@@ -60,7 +60,6 @@ export default {
   computed: {
     form() {
       return {
-
         mail: this.mail,
         password: this.password,
       }

@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   data: () => ({
@@ -178,6 +178,10 @@ export default {
         confirmPassword: this.confirmPassword,
       }
     },
+
+    ...mapGetters('account', {
+      credentials: 'getCredentials'
+    }),
 
   },
 
@@ -218,6 +222,13 @@ export default {
       )
     },
   },
+
+  mounted() {
+    if (this.credentials.familyName === "NotRegistered") {
+      this.$router.push({path: '/account/login'})
+    }
+  }
+
 }
 </script>
 
