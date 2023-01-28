@@ -1,7 +1,7 @@
 <template>
   <v-container class="py-8 px-6" fluid>
     <router-view>
-      <v-sheet class="bg-deep-purple pa-12" rounded>
+      <v-sheet class="bg-secondary pa-12" rounded>
         <v-card class="mx-auto px-6 py-8" max-width="344">
           <v-form
             v-model="form"
@@ -31,12 +31,25 @@
               :disabled="!form"
               :loading="loading"
               block
-              color="success"
+              color="purple"
               size="large"
               type="submit"
               variant="elevated"
             >
               Sign In
+            </v-btn>
+            <br>
+            <v-btn
+              :disabled="!form"
+              :loading="loading"
+              block
+              color="purple"
+              size="large"
+              type="submit"
+              variant="elevated"
+              to="/account/overview"
+            >
+              or Register
             </v-btn>
           </v-form>
         </v-card>
@@ -46,6 +59,8 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: "AccountLayout",
 
@@ -55,6 +70,12 @@ export default {
     email: null,
     password: null,
     loading: false,
+    itemFinalize:
+      {
+        secColor: 'purple',
+        color: 'secondary',
+        icon: 'mdi-cart',
+      },
   }),
 
   computed: {
@@ -72,10 +93,14 @@ export default {
 
       this.loading = true
 
+
       setTimeout(() => (this.loading = false), 2000)
     },
     required(v) {
       return !!v || 'Field is required'
+    },
+    methods: {
+      ...mapActions('account', ['setCredentials']),
     },
   },
 

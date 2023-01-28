@@ -102,6 +102,22 @@
             @click:append="show2 = !show2"
           ></v-text-field>
 
+          <v-card>
+            <v-card-text>
+              <div class="d-flex pa-sm-1">
+                <v-checkbox-btn
+                  v-model="enabled"
+                  class="pe-2"
+                ></v-checkbox-btn>
+                <v-text-field
+                  :disabled="!enabled"
+                  hide-details
+                  label="I´m 18 years old or have an receipt of my Doctor"
+                ></v-text-field>
+              </div>
+            </v-card-text>
+          </v-card>
+
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
@@ -129,6 +145,7 @@
             </v-tooltip>
           </v-slide-x-reverse-transition>
           <v-btn
+            :disabled="!enabled"
             color="primary"
             variant="text"
             @click="submit"
@@ -161,6 +178,7 @@ export default {
     confirmPassword: null,
     show1: false,
     show2: false,
+    enabled: false,
   }),
 
   computed: {
@@ -207,6 +225,8 @@ export default {
       Object.keys(this.form).forEach(f => {
         this.$refs[f].reset()
       })
+
+      
     },
     submit() {
       this.formHasErrors = false
@@ -225,7 +245,7 @@ export default {
 
   mounted() {
     if (this.credentials.familyName === "NotRegistered") {
-      this.$router.push({path: '/account/login'})
+      //this.$router.push({path: '/account/login'})
     }
   }
 

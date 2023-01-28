@@ -30,6 +30,7 @@
       <v-btn
         color="orange-lighten-2"
         variant="text"
+        @click="show = !show"
       >
         Explore
       </v-btn>

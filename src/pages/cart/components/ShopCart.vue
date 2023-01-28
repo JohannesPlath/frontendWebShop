@@ -97,7 +97,7 @@
           <v-btn
             :color="itemAddress.secColor"
             variant="outlined"
-            to="/account"
+            to="/account/overview"
           >
             Change
           </v-btn>
