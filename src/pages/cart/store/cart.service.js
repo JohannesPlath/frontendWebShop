@@ -1,4 +1,5 @@
 import axios from 'axios'
+import account from "@/pages/account/store";
 
 export const cartService = {
 
@@ -18,7 +19,13 @@ export const cartService = {
     }
 
   },
- 
+
+  async addProduct(state, product, amount) {
+    console.log("cart.service -> addProduct", product, " ", amount)
+    console.log('cartService addProduct: ', this.$store)
+    axios.post("http://localhost:8082/CartStatus/", {userId: this.$store.state.account.credential.zip})
+  },
+//"/CartStatus/{userid}/{productId}/{productCount}"
 
   getItemsAndCount(items) {
     let dtoList = []
