@@ -42,7 +42,7 @@
       </v-badge>
     </v-btn>
 
-    <v-btn variant="text" icon="mdi-account" to="/account/overview"></v-btn>
+    <v-btn variant="text" icon="mdi-account" to="/account/login"></v-btn>
 
     <!--    <v-btn icon>
           <v-icon>mdi-dots-vertical</v-icon>

@@ -6,7 +6,7 @@
   >
     <v-list>
       <v-list-item
-        to="/account/overview"
+        to="/account/login"
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
         :title="credentials.familyName"
         :subtitle="credentials.mail"
@@ -38,7 +38,7 @@ export default {
 
     items: [
       {text: 'Start', icon: 'mdi-home', route: '/'},
-      {text: 'Account', icon: 'mdi-account', route: '/account/overview'},
+      {text: 'Account', icon: 'mdi-account', route: '/account/login'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
       {text: 'Cart', icon: 'mdi-contacts', route: '/cart'}
     ],
