@@ -1,6 +1,6 @@
 endpunkte des backends/GateWay
 
-- GET/allProducts/ -> wareHouseBackend
+done - GET/allProducts/ -> wareHouseBackend
 - GET/CartStatus/{USERID}  bekommt List<Products> (inkl. anzahl)
 - PUT/ProductToCart/{userId}/{productId}/{ProductCount} ggf als json /DTO
 - DELETE/ProductFROMCart/{userId}/{productId}/{ProductCount} ggf als json /DTO

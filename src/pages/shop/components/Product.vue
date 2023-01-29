@@ -74,7 +74,7 @@ export default {
   }),
   methods: {
     addToCart() {
-      console.log("addToCart()")
+      //console.log("addToCart()")
       this.$emit("cartEvent", this.product)
     }
   }

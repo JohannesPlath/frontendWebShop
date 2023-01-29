@@ -89,7 +89,7 @@
         </v-card-title>
         <v-card-text class="bg-white text--primary">
           <h3>your order will be send to: </h3>
-          <p> {{ credentials.name }} </p>
+          <p> {{ credentials.firstname }} {{ credentials.familyName }} </p>
           <p> {{ credentials.address }} </p>
           <p> {{ credentials.zip }} {{ credentials.city }} </p>
           <p> {{ credentials.state }} </p>

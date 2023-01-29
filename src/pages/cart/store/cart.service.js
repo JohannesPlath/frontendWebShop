@@ -18,9 +18,7 @@ export const cartService = {
     }
 
   },
-  /*
-    buyProducts(products, cb, errorCb) {
-    },*/
+ 
 
   getItemsAndCount(items) {
     let dtoList = []

@@ -1,161 +1,165 @@
 <template>
-  <v-row justify="center">
-    <v-col
-      cols="12"
-      sm="10"
-      md="8"
-      lg="6"
-    >
-      <v-card ref="form">
-        <v-card-text>
-          <v-text-field
-            ref="firstname"
-            v-model="firstname"
-            :rules="[() => !!firstname || 'This field is required']"
-            :error-messages="errorMessages"
-            label="First Name"
-            placeholder="Johnny"
-            required
-          ></v-text-field>
-          <v-text-field
-            ref="familyname"
-            v-model="familyName"
-            :rules="[() => !!familyName || 'This field is required']"
-            :error-messages="errorMessages"
-            label="Family Name"
-            placeholder="John Walker"
-            required
-          ></v-text-field>
-          <v-text-field
-            ref="address"
-            v-model="address"
-            :rules="[
+  <v-form ref="form" v-model="valid" lazy-validation>
+    <v-row justify="center">
+      <v-col
+        cols="12"
+        sm="10"
+        md="8"
+        lg="6"
+      >
+        <v-card>
+          <v-card-text>
+            <v-text-field
+              ref="firstname"
+              v-model="firstname"
+              :rules="[() => !!firstname || 'This field is required']"
+              :error-messages="errorMessages"
+              label="First Name"
+              placeholder="Johnny"
+              required
+            ></v-text-field>
+            <v-text-field
+              ref="familyname"
+              v-model="familyName"
+              :rules="[() => !!familyName || 'This field is required']"
+              :error-messages="errorMessages"
+              label="Family Name"
+              placeholder="John Walker"
+              required
+            ></v-text-field>
+            <v-text-field
+              ref="address"
+              v-model="address"
+              :rules="[
               () => !!address || 'This field is required',
               () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
               addressCheck
             ]"
-            label="Address Line"
-            placeholder="Snowy Rock Place 34"
-            counter="25"
-            required
-          ></v-text-field>
-          <v-text-field
-            ref="city"
-            v-model="city"
-            :rules="[() => !!city || 'This field is required', addressCheck]"
-            label="City"
-            placeholder="Berlin"
-            required
-          ></v-text-field>
+              label="Address Line"
+              placeholder="Snowy Rock Place 34"
+              counter="25"
+              required
+            ></v-text-field>
+            <v-text-field
+              ref="city"
+              v-model="city"
+              :rules="[() => !!city || 'This field is required', addressCheck]"
+              label="City"
+              placeholder="Berlin"
+              required
+            ></v-text-field>
 
-          <v-text-field
-            ref="zip"
-            v-model="zip"
-            :rules="[() => !!zip || 'This field is required']"
-            label="ZIP / Postal Code"
-            required
-            placeholder="79938"
-          ></v-text-field>
-          <v-autocomplete
-            ref="country"
-            v-model="country"
-            :rules="[() => !!country || 'This field is required']"
-            :items="countries"
-            label="Country"
-            placeholder="Select..."
-            required
-          ></v-autocomplete>
-          <v-text-field
-            ref="mail"
-            v-model="mail"
-            :rules="[() => !!mail || 'This field is required']"
-            label="Mail Adress"
-            required
-            placeholder="mail@me.uk"
-          ></v-text-field>
-          <v-text-field
-            ref="password"
-            v-model="password"
-            :rules="[
+            <v-text-field
+              ref="zip"
+              v-model="zip"
+              :rules="[() => !!zip || 'This field is required']"
+              label="ZIP / Postal Code"
+              required
+              placeholder="79938"
+            ></v-text-field>
+            <v-autocomplete
+              ref="country"
+              v-model="country"
+              :rules="[() => !!country || 'This field is required']"
+              :items="countries"
+              label="Country"
+              placeholder="Select..."
+              required
+            ></v-autocomplete>
+            <v-text-field
+              ref="mail"
+              v-model="mail"
+              :rules="[() => !!mail || 'This field is required']"
+              label="Mail Adress"
+              required
+              placeholder="mail@me.uk"
+            ></v-text-field>
+            <v-text-field
+              ref="password"
+              v-model="password"
+              :rules="[
               () => !!password || 'This field is required',
               () => !!password && password.length >= 8 || 'Min 8 characters'
               ]"
-            label="Password"
-            required
-            placeholder="1234"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show1 ? 'text' : 'password'"
-            @click:append="show1 = !show1"
-          ></v-text-field>
-          <v-text-field
-            ref="passwordconfirmed"
-            v-model="confirmPassword"
-            :rules="[
+              label="Password"
+              required
+              placeholder="1234"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show1 ? 'text' : 'password'"
+              @click:append="show1 = !show1"
+            ></v-text-field>
+            <v-text-field
+              ref="passwordconfirmed"
+              v-model="confirmPassword"
+              :rules="[
               () => !!confirmPassword || 'This field is required',
               () => password == confirmPassword || 'Confirmed Password is not eqaul!'
               ]"
-            label="Password"
-            required
-            placeholder="1234"
-            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show2 ? 'text' : 'password'"
-            @click:append="show2 = !show2"
-          ></v-text-field>
+              label="Password"
+              required
+              placeholder="1234"
+              :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show2 ? 'text' : 'password'"
+              @click:append="show2 = !show2"
+            ></v-text-field>
 
-          <v-card>
-            <v-card-text>
-              <div class="d-flex pa-sm-1">
-                <v-checkbox-btn
-                  v-model="enabled"
-                  class="pe-2"
-                ></v-checkbox-btn>
-                <v-text-field
-                  :disabled="!enabled"
-                  hide-details
-                  label="I´m 18 years old or have an receipt of my Doctor"
-                ></v-text-field>
-              </div>
-            </v-card-text>
-          </v-card>
+            <v-card>
+              <v-card-text>
+                <div class="d-flex pa-sm-1">
+                  <v-checkbox-btn
+                    v-model="enabled"
+                    class="pe-2"
+                  ></v-checkbox-btn>
+                  <v-text-field
+                    :disabled="!enabled"
+                    hide-details
+                    label="I´m 18 years old or have an receipt of my Doctor"
+                  ></v-text-field>
+                </div>
+              </v-card-text>
+            </v-card>
 
-        </v-card-text>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-btn variant="text">
-            Cancel
-          </v-btn>
-          <v-spacer></v-spacer>
-          <v-slide-x-reverse-transition>
-            <v-tooltip
-              v-if="formHasErrors"
-              location="left"
+          </v-card-text>
+          <v-divider></v-divider>
+          <v-card-actions>
+            <v-btn variant="text"
+                   @click="resetForm()"
             >
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  icon
-                  class="my-0"
-                  v-bind="attrs"
-                  @click="resetForm"
-                  v-on="on"
-                >
-                  <v-icon>mdi-refresh</v-icon>
-                </v-btn>
-              </template>
-              <span>Refresh form</span>
-            </v-tooltip>
-          </v-slide-x-reverse-transition>
-          <v-btn
-            :disabled="!enabled"
-            color="primary"
-            variant="text"
-            @click="submit"
-          >
-            Submit
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+              Cancel
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-slide-x-reverse-transition>
+              <v-tooltip
+                v-if="formHasErrors"
+                location="left"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    class="my-0"
+                    v-bind="attrs"
+
+                    v-on="on"
+                  >
+                    <v-icon>mdi-refresh</v-icon>
+                  </v-btn>
+                </template>
+                <span>Refresh form</span>
+              </v-tooltip>
+            </v-slide-x-reverse-transition>
+            <v-btn
+              :disabled="!enabled"
+              color="primary"
+              variant="text"
+              @click="submit"
+            >
+              Submit
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-form>
 </template>
 
 <script>
@@ -220,13 +224,15 @@ export default {
     },
 
     resetForm() {
+
       this.errorMessages = []
       this.formHasErrors = false
-      Object.keys(this.form).forEach(f => {
+      this.$refs.form.reset()
+      /*Object.keys(this.form).forEach(f => {
         this.$refs[f].reset()
-      })
+      })*/
 
-      
+
     },
     submit() {
       this.formHasErrors = false
