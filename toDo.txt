@@ -2,7 +2,7 @@ endpunkte des backends/GateWay
 
 done - GET/allProducts/ -> wareHouseBackend
 - GET/CartStatus/{USERID}  bekommt List<Products> (inkl. anzahl)
-- PUT/ProductToCart/{userId}/{productId}/{ProductCount} ggf als json /DTO
+done - PUT/ProductToCart/{userId}/{productId}/{ProductCount} ggf als json /DTO
 - DELETE/ProductFROMCart/{userId}/{productId}/{ProductCount} ggf als json /DTO
 - (to CartService) DELETE/Order{userID}
 - Sync LogIn:  PUT/login/userdata (als Json: nur cridentials)  -> keycloak

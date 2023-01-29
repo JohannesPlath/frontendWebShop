@@ -38,6 +38,7 @@ const actions = {
   addProductToCart({state, commit, rootState}, product) {
     let userId = rootState.account.credential.userID
     console.log("@ cart : ", userId)
+    cartService.addProduct(userId, product, 1)
     commit('pushProductToCart', product, userId)
   },
 
@@ -67,9 +68,7 @@ const mutations = {
 
   pushProductToCart(state, product, userId) {
 
-    console.log('mutations pushProductToCart: ',)
-    cartService.addProduct(userId, product, 1)
-
+    
     /*let existItem = state.items.find(item => item.product.uuid === product.uuid);
     if (existItem) {
       existItem.amount++;
