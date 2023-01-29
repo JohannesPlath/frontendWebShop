@@ -35,9 +35,10 @@ const actions = {
     commit('reduceProductFromCart', product)
   },
 
-  addProductToCart({state, commit}, product) {
-    //console.log("@ cart : ", product)
-    commit('pushProductToCart', product)
+  addProductToCart({state, commit, rootState}, product) {
+    let userId = rootState.account.credential.userID
+    console.log("@ cart : ", userId)
+    commit('pushProductToCart', product, userId)
   },
 
   /* getCountOfCart({state, commit}){
@@ -64,8 +65,10 @@ const mutations = {
   },
 
 
-  pushProductToCart(state, product, amount) {
-    cartService.addProduct(state, product, amount)
+  pushProductToCart(state, product, userId) {
+
+    console.log('mutations pushProductToCart: ',)
+    cartService.addProduct(userId, product, 1)
 
     /*let existItem = state.items.find(item => item.product.uuid === product.uuid);
     if (existItem) {
