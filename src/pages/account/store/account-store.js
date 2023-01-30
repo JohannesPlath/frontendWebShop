@@ -16,16 +16,19 @@ const account = {
       }
     }
   },
+
   getters: {
     getCredentials(state) {
       return state.credential
     }
   },
+
   mutations: {
     setCredentials(state, payload) {
       state.credential = payload
     }
   },
+
   actions: {
     setCredentials(context, payload) {
       console.log("payload ", payload)

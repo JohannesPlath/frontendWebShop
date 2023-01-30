@@ -5,18 +5,16 @@ const state = {
   currentId: 0,
 }
 
-// getters
 const getters = {
   getAll(state) {
     return state.all
   },
-  getCurrentProduct(state) {
+  /* getCurrentProduct(state) {
     return state.currentId
       ? state.products[state.currentId]
       : {}
-  }
+  }*/
 }
-
 
 const actions = {
   fetchAllProducts({commit}) {
@@ -32,11 +30,11 @@ const actions = {
     })
   },
 
-  buyProducts({commit}, payload) {
+  /*buyProducts({commit}, payload) {
     service.buyProducts(payload, message => {
       commit('receiveMessage', message)
     })
-  }
+  }*/
 }
 
 // mutations

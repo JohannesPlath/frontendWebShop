@@ -89,11 +89,9 @@ export default {
   },
   methods: {
     onSubmit() {
+      console.log('methods onSubmit: ', this.form)
       if (!this.form) return
-
       this.loading = true
-
-
       setTimeout(() => (this.loading = false), 2000)
     },
     required(v) {
