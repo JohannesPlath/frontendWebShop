@@ -15,9 +15,9 @@ done - PUT/ProductToCart/{userId}/{productId}/{ProductCount} ggf als json /DTO
 ----------------------------------
 
 umbau am Frontend:
-- loginPage (mail/passw) vor Accountpage / Registrierung
+done - loginPage (mail/passw) vor Accountpage / Registrierung
 - shop sperren ohne Registrierung
 - cart infos aus Backend beziehen - abrufen der CartBackend infos zu einem user
-- nachricht an CartBackend bei "AddToCart"
+done - nachricht an CartBackend bei "AddToCart"
 
 - DTOs definieren

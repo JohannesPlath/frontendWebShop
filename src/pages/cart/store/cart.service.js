@@ -21,11 +21,18 @@ export const cartService = {
   },*/
 
   async addProduct(userId, product, amount) {
-    let addProductDto = new AddProductDTO(product.uuid, userId, 1)
+    let addProductDto = new AddProductDTO(product.uuid, userId, amount)
     console.log('cartService addProduct: ', addProductDto)
     axios.post("http://localhost:8080/cart/ProductToCart/", addProductDto)
   },
 //"/CartStatus/{userid}/{productId}/{productCount}"
+
+  async reduceProduct(userId, product, amount) {
+    let addProductDto = new AddProductDTO(product.uuid, userId, amount)
+    console.log('cartService reduceProduct: ', addProductDto)
+    axios.delete("http://localhost:8080/cart/productFromCart/", addProductDto)
+  },
+
 
   getItemsAndCount(items) {
     let dtoList = []

@@ -30,8 +30,10 @@ const getters = {
 
 
 const actions = {
-  reduceProductFromCart({state, commit}, product) {
-    //console.log("@ cart reduceOne: ", product)
+  reduceProductFromCart({state, commit, rootState}, product) {
+    let userId = rootState.account.credential.userID
+    console.log("@ cart reduceOne: ", product, userId)
+    cartService.reduceProduct(userId, product, -1)
     commit('reduceProductFromCart', product)
   },
 
@@ -55,21 +57,15 @@ const actions = {
 
 // mutations
 const mutations = {
-  /*
-    getCountOfCartMutation(state, count) {
-      return state.quantity;
-    },
-  */
 
   finalizeOrder(state, credentials, payment) {
     cartService.pushToCartBackend(state.items, credentials, payment)
   },
 
-
   pushProductToCart(state, product, userId) {
 
-    
-    /*let existItem = state.items.find(item => item.product.uuid === product.uuid);
+    //todo löschen wenn backend aktiv
+    let existItem = state.items.find(item => item.product.uuid === product.uuid);
     if (existItem) {
       existItem.amount++;
     } else {
@@ -80,7 +76,7 @@ const mutations = {
 
     }
     state.quantity++;
-    state.cartTotalPrice = state.cartTotalPrice + product.price;*/
+    state.cartTotalPrice = state.cartTotalPrice + product.price;
   },
 
 
