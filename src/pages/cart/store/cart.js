@@ -49,7 +49,7 @@ const actions = {
      return state.quantity;
    }*/
 
-  finalize({state, commit}, credentials, payment) {
+  finalize(state, products, credentials, payment) {
     console.log('actions finalizeOrder: ', state.items, credentials, payment)
     commit('finalizeOrder', state, credentials, payment)
   }

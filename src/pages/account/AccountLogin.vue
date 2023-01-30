@@ -88,10 +88,10 @@ export default {
 
   methods: {
     onSubmit() {
-      //console.log('methods onSubmit: ', this.form)
+      console.log('methods onSubmit: ', this.form.email, this.form.password)
+      this.signIn({mail: this.form.email, passw: this.form.password})
       if (!this.form) return
       this.loading = true
-      this.signIn(this.form.email, this.form.password)
       setTimeout(() => (this.loading = false), 2000)
 
     },

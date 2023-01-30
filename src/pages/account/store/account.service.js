@@ -3,10 +3,11 @@ import {AccountDTO} from "@/pages/account/store/DTO/accountDTO";
 
 export const accountService = {
 
-  async sendLoginData(email, password) {
-    let accountDTO = new AccountDTO(null, null, null, null, null, null, null, null, this.email, this.password)
+  async sendLoginData(payload) {
+    console.log('accountService sendLoginData: ', payload.mail)
+    let accountDTO = new AccountDTO(null, null, null, null, null, null, null, null, payload.mail, payload.passw)
     console.log('accountService sendLoginData: ', accountDTO.mail, " & ", accountDTO.password)
-    let loginAnswer = axios.put("http://localhost:8080/user/login/", accountDTO)
+    let loginAnswer = axios.post("http://localhost:8080/user/login/",  accountDTO)
     console.log('accountService sendLoginData: ', loginAnswer)
   }
 

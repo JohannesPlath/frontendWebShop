@@ -1,3 +1,5 @@
+import {accountService} from "@/pages/account/store/account.service";
+
 const account = {
   namespaced: true,
   state() {
@@ -24,9 +26,10 @@ const account = {
   },
 
   actions: {
-    signIn(mail, password) {
-      console.log("payload ", mail, " ", password)
-      context.commit("logInMutation")
+    signIn({state, commit}, payload) {
+      console.log("payload ", payload.mail, " ", payload.passw)
+      let isRegisterrdUser = accountService.sendLoginData(payload)
+      commit("logInMutation")
     },
 
     setCredentials(context, payload) {
@@ -36,7 +39,7 @@ const account = {
   },
 
   mutations: {
-    singInMutation(state, mail, passw) {
+    logInMutation(state, mail, passw) {
 
     },
 
