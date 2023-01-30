@@ -23,18 +23,28 @@ const account = {
     }
   },
 
+  actions: {
+    signIn(mail, password) {
+      console.log("payload ", mail, " ", password)
+      context.commit("logInMutation")
+    },
+
+    setCredentials(context, payload) {
+      console.log("payload ", payload)
+      context.commit('setCredentials', payload)
+    }
+  },
+
   mutations: {
+    singInMutation(state, mail, passw) {
+
+    },
+
     setCredentials(state, payload) {
       state.credential = payload
     }
   },
 
-  actions: {
-    setCredentials(context, payload) {
-      console.log("payload ", payload)
-      context.commit('setCredentials', payload)
-    }
-  }
 }
 
 export default account

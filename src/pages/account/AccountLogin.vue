@@ -64,7 +64,6 @@ import {mapActions} from "vuex";
 export default {
   name: "AccountLayout",
 
-
   data: () => ({
 
     email: null,
@@ -81,25 +80,28 @@ export default {
   computed: {
     form() {
       return {
-        mail: this.mail,
+        email: this.email,
         password: this.password,
       }
     },
-
   },
+
   methods: {
     onSubmit() {
-      console.log('methods onSubmit: ', this.form)
+      //console.log('methods onSubmit: ', this.form)
       if (!this.form) return
       this.loading = true
+      this.signIn(this.form.email, this.form.password)
       setTimeout(() => (this.loading = false), 2000)
+
     },
+
     required(v) {
       return !!v || 'Field is required'
     },
-    methods: {
-      ...mapActions('account', ['setCredentials']),
-    },
+
+    ...mapActions('account', ['signIn']),
+
   },
 
 }
