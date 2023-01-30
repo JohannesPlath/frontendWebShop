@@ -1,9 +1,9 @@
 endpunkte des backends/GateWay
 
-done - GET/allProducts/ -> wareHouseBackend
+done - GET/allProducts/ -> wareHouseBackend // await axios.get("http://localhost:8080/product")
 - GET/CartStatus/{USERID}  bekommt List<Products> (inkl. anzahl)
-done - PUT/ProductToCart/{userId}/{productId}/{ProductCount} ggf als json /DTO
-- DELETE/ProductFROMCart/{userId}/{productId}/{ProductCount} ggf als json /DTO
+done - Post/ProductToCart    // axios.post("http://localhost:8080/cart/ProductToCart/", changeAtCartDTO)
+done - Post/ProductFromCart/ ggf als json /DTO
 - (to CartService) DELETE/Order{userID}
 - Sync LogIn:  PUT/login/userdata (als Json: nur cridentials)  -> keycloak
 - Sync Register:  PUT/register/userdata (als Json: alle daten)  -> keycloak
@@ -20,4 +20,29 @@ done - loginPage (mail/passw) vor Accountpage / Registrierung
 - cart infos aus Backend beziehen - abrufen der CartBackend infos zu einem user
 done - nachricht an CartBackend bei "AddToCart"
 
-- DTOs definieren
+ DTOs definieren:
+
+export class ChangeAtCartDTO {
+
+  constructor(productId, userID, count) {
+    this.productId = productId;
+    this.userID = userID;
+    this.count = count;
+  }
+}
+
+export class ProductModel {
+
+  constructor(uuid, title, currency, category, count, price, description, picUrl, countForCart) {
+    this.uuid = uuid;
+    this.title = title;
+    this.currency = currency;
+    this.category = category;
+    this.count = count;
+    this.price = price;
+    this.description = description;
+    this.picUrl = picUrl;
+    this.countForCart = countForCart;
+
+  }
+}

@@ -1,4 +1,4 @@
-export class AddProductDTO {
+export class ChangeAtCartDTO {
 
   constructor(productId, userID, count) {
     this.productId = productId;

@@ -1,14 +1,5 @@
-
 export class ProductModel {
-  /*uuid;
-  title;
-  currency;
-  category;
-  count;
-  price;
-  description;
-  url;
-  countForCart;*/
+
   constructor(uuid, title, currency, category, count, price, description, picUrl, countForCart) {
     this.uuid = uuid;
     this.title = title;

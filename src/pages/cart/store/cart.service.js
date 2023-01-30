@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {AddProductDTO} from "@/pages/cart/store/DTO/addProductDTO";
+import {ChangeAtCartDTO} from "@/pages/cart/store/DTO/changeAtCartDTO";
 
 export const cartService = {
 
@@ -21,16 +21,16 @@ export const cartService = {
   },*/
 
   async addProduct(userId, product, amount) {
-    let addProductDto = new AddProductDTO(product.uuid, userId, amount)
-    console.log('cartService addProduct: ', addProductDto)
-    axios.post("http://localhost:8080/cart/ProductToCart/", addProductDto)
+    let changeAtCartDTO = new ChangeAtCartDTO(product.uuid, userId, amount)
+    console.log('cartService addProduct: ', changeAtCartDTO)
+    axios.post("http://localhost:8080/cart/ProductToCart/", changeAtCartDTO)
   },
 //"/CartStatus/{userid}/{productId}/{productCount}"
 
   async reduceProduct(userId, product, amount) {
-    let addProductDto = new AddProductDTO(product.uuid, userId, amount)
-    console.log('cartService reduceProduct: ', addProductDto)
-    axios.delete("http://localhost:8080/cart/productFromCart/", addProductDto)
+    let changeAtCartDTO = new ChangeAtCartDTO(product.uuid, userId, amount)
+    console.log('cartService reduceProduct: ', changeAtCartDTO)
+    axios.post("http://localhost:8080/cart/ProductFromCart/", changeAtCartDTO)
   },
 
 
