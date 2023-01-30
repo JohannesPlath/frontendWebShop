@@ -1,6 +1,6 @@
 import {createStore, createLogger} from 'vuex'
 import cart from '../pages/cart/store/cart'
-import products from '../pages/shop/store/products'
+import products from '../pages/shop/store/products/product-store'
 import account from '../pages/account/store'
 import payment from "@/store/modules/payment/payment";
 
