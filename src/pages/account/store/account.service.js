@@ -1,14 +1,16 @@
 import axios from "axios";
 import {AccountDTO} from "@/pages/account/store/DTO/accountDTO";
+import accountStore from "@/pages/account/store/account-store";
 
 export const accountService = {
 
-  async sendLoginData(payload) {
+  async sendLoginData({state, commit}, payload) {
     console.log('accountService sendLoginData: ', payload.mail)
     let accountDTO = new AccountDTO(null, null, null, null, null, null, null, null, payload.mail, payload.passw)
     console.log('accountService sendLoginData: ', accountDTO.mail, " & ", accountDTO.password)
-    let loginAnswer = axios.post("http://localhost:8080/user/login/",  accountDTO)
-    console.log('accountService sendLoginData: ', loginAnswer)
+    const loginAnswer = await axios.post("http://localhost:8080/user/login/", accountDTO)
+    console.log('accountService logInAnswer: ', loginAnswer)
+    accountStore.actions.setCredentials({state, commit}, loginAnswer.data);
   }
 
   /*async pushToCartBackend(items, credentials, payment) {

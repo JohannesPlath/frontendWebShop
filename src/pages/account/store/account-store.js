@@ -28,13 +28,14 @@ const account = {
   actions: {
     signIn({state, commit}, payload) {
       console.log("payload ", payload.mail, " ", payload.passw)
-      let isRegisterrdUser = accountService.sendLoginData(payload)
+      let isRegisterrdUser = accountService.sendLoginData({state, commit}, payload)
+      console.log('----- >  actions signIn: ', isRegisterrdUser)
       commit("logInMutation")
     },
 
-    setCredentials(context, payload) {
+    setCredentials({state, commit}, payload) {
       console.log("payload ", payload)
-      context.commit('setCredentials', payload)
+      commit('setCredentials', payload)
     }
   },
 
