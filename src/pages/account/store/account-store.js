@@ -9,7 +9,7 @@ const account = {
         firstname: "John",
         familyName: "NotRegistered",
         address: "FancyStreet 32",
-        city: "CloudVallay-Amsterdam",
+        city: "Cloud Valley-Amsterdam",
         state: "Heaven",
         zip: "12345",
         country: "Netherlands",
@@ -28,8 +28,8 @@ const account = {
   actions: {
     signIn({state, commit}, payload) {
       console.log("payload ", payload.mail, " ", payload.passw)
-      let isRegisterrdUser = accountService.sendLoginData({state, commit}, payload)
-      console.log('----- >  actions signIn: ', isRegisterrdUser)
+      let isRegisteredUser = accountService.sendLoginData({state, commit}, payload)
+      console.log('----- >  actions signIn: ', isRegisteredUser)
       commit("logInMutation")
     },
 
