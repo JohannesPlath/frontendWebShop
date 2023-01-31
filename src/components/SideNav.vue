@@ -12,7 +12,14 @@
         :subtitle="credentials.mail"
       />
     </v-list>
+    <v-btn
+      color="light-red"
+      size="small"
+      icon="mdi-logout"
+      @click=logout(credentials)
+    >
 
+    </v-btn>
     <v-divider/>
 
     <v-list :lines="false" density="compact" nav>
@@ -31,6 +38,7 @@
 
 <script>
 import {mapGetters} from "vuex";
+import account from "@/pages/account/store/account-store";
 
 export default {
   data: () => ({
@@ -47,6 +55,12 @@ export default {
     ...mapGetters('account', {
       credentials: 'getCredentials'
     })
+  },
+  methods: {
+    logout(credentials) {
+      console.log('@ Sidenave methods logout: ', credentials.uuid)
+      account.actions.logout(credentials.uuid);
+    }
   }
 }
 </script>

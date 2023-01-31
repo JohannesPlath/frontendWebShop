@@ -1,4 +1,5 @@
 import {accountService} from "@/pages/account/store/account.service";
+import {mapActions} from "vuex";
 
 const account = {
   namespaced: true,
@@ -36,6 +37,11 @@ const account = {
     setCredentials({state, commit}, payload) {
       console.log("payload ", payload)
       commit('setCredentials', payload)
+    },
+
+    logout(userId) {
+      console.log('actions logout: ',)
+      accountService.logout(userId)
     }
   },
 
@@ -49,6 +55,9 @@ const account = {
     }
   },
 
+  methods: {
+    ...mapActions('account', ['logout']),
+  }
 }
 
 export default account

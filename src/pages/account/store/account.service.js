@@ -11,8 +11,11 @@ export const accountService = {
     const loginAnswer = await axios.post("http://localhost:8080/user/login/", accountDTO)
     console.log('accountService logInAnswer: ', loginAnswer)
     accountStore.actions.setCredentials({state, commit}, loginAnswer.data);
-  }
-
+  },
+  logout(userID) {
+    console.log('accountService logout: ', userID)
+    axios.post("http://localhost:8080/user/logout/", {userId: userID})
+  },
   /*async pushToCartBackend(items, credentials, payment) {
     let dtoList = this.getItemsAndCount(items)
     /!*let axiosResponse = await axios.get("http://localhost:8080/product/finalize" /!*{body: dtoList}*!/);
@@ -51,4 +54,5 @@ export const accountService = {
      }
      return dtoList
    }*/
+
 }

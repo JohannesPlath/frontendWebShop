@@ -43,6 +43,7 @@
     </v-btn>
 
     <v-btn variant="text" icon="mdi-account" to="/account/login"></v-btn>
+    <v-btn color="orange" size="small" icon="mdi-logout" @click="logout()"></v-btn>
 
     <!--    <v-btn icon>
           <v-icon>mdi-dots-vertical</v-icon>
@@ -52,6 +53,7 @@
 
 <script>
 import {mapGetters} from "vuex";
+import account from "@/pages/account/store/account-store";
 
 export default {
   components: {},
@@ -61,6 +63,12 @@ export default {
   }),
   computed: {
     ...mapGetters('cart', ['quantity']),
+  },
+  methods: {
+    logout() {
+      console.log('methods logout: ', this.state)
+      account.actions.logout(this.state);
+    }
   },
 }
 </script>
