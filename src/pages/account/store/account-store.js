@@ -39,15 +39,20 @@ const account = {
       commit('setCredentials', payload)
     },
 
-    logout({state, commit}) {
+    async logout({state, commit}) {
       console.log('actions logout: ', state.credential.userID)
-      accountService.logout(state.credential.userID)
+      let isLoggedOutData = await accountService.logout(state.credential.userID)
+      console.log('actions logout after post: ', isLoggedOutData.data)
+      if (isLoggedOutData.data) commit('clearCredentials')
     }
   },
 
   mutations: {
     logInMutation(state, mail, passw) {
-
+    },
+    clearCredentials(state, payload) {
+      console.log('mutations clearCredentials: ', payload)
+      state.credential = {}
     },
 
     setCredentials(state, payload) {

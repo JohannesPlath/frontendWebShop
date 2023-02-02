@@ -10,13 +10,13 @@ export const accountService = {
     console.log('accountService sendLoginData: ', accountDTO.mail, " & ", accountDTO.password)
     const loginAnswer = await axios.post("http://localhost:8080/user/login/", accountDTO)
     console.log('accountService logInAnswer: ', loginAnswer)
-    accountStore.actions.setCredentials({state, commit}, loginAnswer.data);
+    accountStore.actions.setCredentials({state, commit}, loginAnswer.data); //toDo nach account.store schieben
   },
   async logout(userID) {
     console.log('accountService logout: ', userID)
     let accountDTO = new AccountDTO(userID, null, null, null, null, null, null, null, null, null)
     console.log('accountService sendLogOut: ', accountDTO.userID,)
-    const isLoggedOut = await axios.post("http://localhost:8080/user/logout/", accountDTO)
+    return await axios.post("http://localhost:8080/user/logout/", accountDTO)
   },
   /*async pushToCartBackend(items, credentials, payment) {
     let dtoList = this.getItemsAndCount(items)
