@@ -13,12 +13,10 @@
       />
     </v-list>
     <v-btn
-      color="light-red"
       size="small"
       icon="mdi-logout"
-      @click=logout(this.credentials)
+      @click="logout"
     >
-
     </v-btn>
     <v-divider/>
 
@@ -48,20 +46,18 @@ export default {
       {text: 'Start', icon: 'mdi-home', route: '/'},
       {text: 'Account', icon: 'mdi-account', route: '/account/login'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
-      {text: 'Cart', icon: 'mdi-contacts', route: '/cart'}
+      {text: 'Cart', icon: 'mdi-contacts', route: '/cart'},
+
     ],
   }),
   computed: {
     ...mapGetters('account', {
       credentials: 'getCredentials'
     }),
-    ...mapActions('account', ['logout']),
   },
   methods: {
-    logout() {
-      console.log('@ Sidenave methods logout: ')
-      this.logout();
-    }
-  }
+    ...mapActions('account', ['logout']),
+  },
+
 }
 </script>
