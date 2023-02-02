@@ -39,9 +39,9 @@ const account = {
       commit('setCredentials', payload)
     },
 
-    logout(userId) {
-      console.log('actions logout: ',)
-      accountService.logout(userId)
+    logout({state, commit}) {
+      console.log('actions logout: ', state.credential.userID)
+      accountService.logout(state.credential.userID)
     }
   },
 
@@ -55,9 +55,7 @@ const account = {
     }
   },
 
-  methods: {
-    ...mapActions('account', ['logout']),
-  }
+
 }
 
 export default account

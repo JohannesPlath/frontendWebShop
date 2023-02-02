@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     logout() {
-      console.log('methods logout: ', this.state)
+      console.log('@appBar methods logout: ', this.state)
       account.actions.logout(this.state);
     }
   },

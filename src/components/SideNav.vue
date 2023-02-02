@@ -8,7 +8,7 @@
       <v-list-item
         to="/account/login"
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-        :title="credentials.firstname + credentials.familyName"
+        :title="credentials.firstname + ' ' + credentials.familyName"
         :subtitle="credentials.mail"
       />
     </v-list>
@@ -16,7 +16,7 @@
       color="light-red"
       size="small"
       icon="mdi-logout"
-      @click=logout(credentials)
+      @click=logout(this.credentials)
     >
 
     </v-btn>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import account from "@/pages/account/store/account-store";
 
 export default {
@@ -54,12 +54,13 @@ export default {
   computed: {
     ...mapGetters('account', {
       credentials: 'getCredentials'
-    })
+    }),
+    ...mapActions('account', ['logout']),
   },
   methods: {
-    logout(credentials) {
-      console.log('@ Sidenave methods logout: ', credentials.uuid)
-      account.actions.logout(credentials.uuid);
+    logout() {
+      console.log('@ Sidenave methods logout: ')
+      this.logout();
     }
   }
 }
