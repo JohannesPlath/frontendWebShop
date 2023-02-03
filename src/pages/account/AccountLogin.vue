@@ -1,5 +1,5 @@
 <template>
-  <v-container class="py-8 px-6" fluid>
+  <v-container class="py-8 px-6">
     <router-view>
       <v-sheet class="bg-secondary pa-12" rounded>
         <v-card class="mx-auto px-6 py-8" max-width="344">
@@ -14,7 +14,7 @@
               class="mb-2"
               clearable
               label="Email"
-            ></v-text-field>
+            />
 
             <v-text-field
               v-model="password"
@@ -23,7 +23,7 @@
               clearable
               label="Password"
               placeholder="Enter your password"
-            ></v-text-field>
+            />
 
             <br>
 
@@ -40,7 +40,7 @@
             </v-btn>
             <br>
             <v-btn
-              :disabled="!form"
+              :disabled="form"
               :loading="loading"
               block
               color="purple"
@@ -65,7 +65,7 @@ export default {
   name: "AccountLayout",
 
   data: () => ({
-
+    form: false,
     email: null,
     password: null,
     loading: false,
@@ -77,14 +77,6 @@ export default {
       },
   }),
 
-  computed: {
-    form() {
-      return {
-        email: this.email,
-        password: this.password,
-      }
-    },
-  },
 
   methods: {
     onSubmit() {

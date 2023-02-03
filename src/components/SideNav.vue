@@ -30,8 +30,14 @@
         </template>
         <v-list-item-title v-text="item.text"/>
       </v-list-item>
-      <v-btn color="orange" size="small" icon="mdi-logout" @click="logout"></v-btn>
     </v-list>
+    <template v-slot:append>
+      <div class="pa-2">
+        <v-btn icon="mdi-logout">
+
+        </v-btn>
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -53,7 +59,6 @@ export default {
       {text: 'Account', icon: 'mdi-account', route: '/account/login'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
       {text: 'Cart', icon: 'mdi-contacts', route: '/cart'},
-      {text: 'logout', icon: 'mdi-logout',}
     ],
   }),
   computed: {
