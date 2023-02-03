@@ -30,6 +30,7 @@
         </template>
         <v-list-item-title v-text="item.text"/>
       </v-list-item>
+      <v-btn color="orange" size="small" icon="mdi-logout" @click="logout"></v-btn>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -37,6 +38,11 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import account from "@/pages/account/store/account-store";
+
+
+function logouttest() {
+  return 'logout'
+}
 
 export default {
   data: () => ({
@@ -47,7 +53,7 @@ export default {
       {text: 'Account', icon: 'mdi-account', route: '/account/login'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
       {text: 'Cart', icon: 'mdi-contacts', route: '/cart'},
-
+      {text: 'logout', icon: 'mdi-logout',}
     ],
   }),
   computed: {
