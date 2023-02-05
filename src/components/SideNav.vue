@@ -12,12 +12,6 @@
         :subtitle="credentials.mail"
       />
     </v-list>
-    <v-btn
-      size="small"
-      icon="mdi-logout"
-      @click="logout"
-    >
-    </v-btn>
     <v-divider/>
 
     <v-list :lines="false" density="compact" nav>
@@ -32,11 +26,14 @@
       </v-list-item>
     </v-list>
     <template v-slot:append>
-      <div class="pa-2">
-        <v-btn icon="mdi-logout">
-
-        </v-btn>
-      </div>
+      <v-list :lines="false" density="compact" nav>
+        <v-list-item title="logout" active-color="primary" @click="logout()">
+          <template #prepend>
+            <v-icon icon="mdi-logout"/>
+          </template>
+          <v-list-item-title/>
+        </v-list-item>
+      </v-list>
     </template>
   </v-navigation-drawer>
 </template>

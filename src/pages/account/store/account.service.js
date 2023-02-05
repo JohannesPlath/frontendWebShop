@@ -1,5 +1,5 @@
 import axios from "axios";
-import {AccountDTO} from "@/pages/account/store/DTO/accountDTO";
+import {AccountDTO} from "@/pages/account/store/models/DTO/accountDTO";
 import accountStore from "@/pages/account/store/account-store";
 
 export const accountService = {
@@ -9,9 +9,17 @@ export const accountService = {
     let accountDTO = new AccountDTO(null, null, null, null, null, null, null, null, payload.mail, payload.passw)
     console.log('accountService sendLoginData: ', accountDTO.mail, " & ", accountDTO.password)
     const loginAnswer = await axios.post("http://localhost:8080/user/login/", accountDTO)
+    console.log('accountService logInAnswer: ', loginAnswer.data)
+    return loginAnswer.data;
+  },
+  /*async register({state, commit}, payload) {
+    console.log('accountService sendLoginData: ', payload.mail)
+    let accountDTO = new AccountDTO(payload.userID, payload.firstname, payload.familyName, payload.address, payload.city, payload.state, payload.zip, payload.country, payload.mail, payload.passw)
+    console.log('accountService sendLoginData: ', accountDTO.mail, " & ", accountDTO.password)
+    const loginAnswer = await axios.post("http://localhost:8080/user/login/", accountDTO)
     console.log('accountService logInAnswer: ', loginAnswer)
     accountStore.actions.setCredentials({state, commit}, loginAnswer.data); //toDo nach account.store schieben
-  },
+  },*/
   async logout(userID) {
     console.log('accountService logout: ', userID)
     let accountDTO = new AccountDTO(userID, null, null, null, null, null, null, null, null, null)

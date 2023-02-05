@@ -1,5 +1,7 @@
 import {accountService} from "@/pages/account/store/account.service";
 import {mapActions} from "vuex";
+import {is} from "@babel/types";
+import {User} from "@/pages/account/store/models/user";
 
 const account = {
   namespaced: true,
@@ -27,29 +29,46 @@ const account = {
   },
 
   actions: {
-    signIn({state, commit}, payload) {
-      console.log("payload ", payload.mail, " ", payload.passw)
-      let isRegisteredUser = accountService.sendLoginData({state, commit}, payload)
-      console.log('----- >  actions signIn: ', isRegisteredUser)
-      commit("logInMutation")
+    async signIn({state, commit}, payload) {
+      //console.log("payload ", payload.mail, " ", payload.passw)
+      const singInAnswer = await accountService.sendLoginData({state, commit}, payload)
+      console.log('----- >  actions signIn: ', singInAnswer)
+      const user = new User(singInAnswer.userID, singInAnswer.firstname, singInAnswer.familyName, singInAnswer.address, singInAnswer.city, singInAnswer.state, singInAnswer.zip, singInAnswer.country, singInAnswer.mail, singInAnswer.password)
+      commit('setCredentials', user)
+      commit("signInMutation")
+
+
     },
+    /* async register({state, commit}, payload) {
+       console.log("payload @ register", payload.mail, " ", payload.passw)
+       let registeredUser = await accountService.register({state, commit}, payload)
+       console.log('----- >  actions register: ', registeredUser)
+       commit("registerMutation")
+     },*/
 
     setCredentials({state, commit}, payload) {
-      console.log("payload ", payload)
-      commit('setCredentials', payload)
+      console.log("ACTIONS setcredentials payload ", payload)
+      console.log('actions setCredentials: state', state)
+      console.log('actions setCredentials: commit ', commit)
+      commit('setCredentials', {state, commit}, payload)
     },
 
-    async logout({state, commit}) {
+    logout({state, commit}) {
       console.log('actions logout: ', state.credential.userID)
-      let isLoggedOutData = await accountService.logout(state.credential.userID)
-      console.log('actions logout after post: ', isLoggedOutData.data)
-      if (isLoggedOutData.data) commit('clearCredentials')
+      let isLoggedOut = accountService.logout(state.credential.userID)
+      console.log('actions logout after post: ', isLoggedOut)
+      commit('clearCredentials', isLoggedOut)
     }
   },
 
   mutations: {
-    logInMutation(state, mail, passw) {
+    signInMutation(state, mail, passw) {
+
     },
+
+    registerMutation(state, mail, passw) {
+    },
+
     clearCredentials(state, payload) {
       console.log('mutations clearCredentials: ', payload)
       state.credential = {}
