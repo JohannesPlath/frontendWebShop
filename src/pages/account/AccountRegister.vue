@@ -68,8 +68,8 @@
             ></v-autocomplete>
             <v-text-field
               ref="mail"
-              v-model="mail"
-              :rules="[() => !!mail || 'This field is required']"
+              v-model="email"
+              :rules="[() => !!email || 'This field is required']"
               label="Mail Adress"
               required
               placeholder="mail@me.uk"
@@ -167,7 +167,7 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   data: () => ({
-    countries: ['Argentina', 'Australia', 'Austria', 'Belgium', 'Brazil', 'Bulgaria', 'Croatia', 'Czech Republic', 'Denmark', 'Ecuador', 'Egypt', 'Faroe Islands', 'Finland', 'France', 'Germany', 'Greece', 'Grenada', 'Hungary', 'Iceland', 'Israel', 'Italy', 'Jamaica', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Mauritius', 'Mexico', 'Monaco', 'Montenegro', 'Netherlands Antilles', 'Norway', 'Paraguay', 'Peru', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'South Korea', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Venezuela'],
+    countries: ['Argentina', 'Australia', 'Austria', 'Belgium', 'Brazil', 'Bulgaria', 'Croatia', 'Czech Republic', 'Denmark', 'Deutschland', 'Finland', 'France', 'Germany', 'Greece', 'Grenada', 'Hungary', 'Iceland', 'Israel', 'Italy', 'Jamaica', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Mauritius', 'Mexico', 'Monaco', 'Montenegro', 'Netherlands Antilles', 'Norway', 'Paraguay', 'Peru', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'South Korea', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Venezuela'],
     errorMessages: '',
     firstname: null,
     familyName: null,
@@ -176,7 +176,7 @@ export default {
     state: null,
     zip: null,
     country: null,
-    mail: null,
+    email: null,
     formHasErrors: false,
     password: null,
     confirmPassword: null,
@@ -195,7 +195,7 @@ export default {
         state: this.state,
         zip: this.zip,
         country: this.country,
-        mail: this.mail,
+        email: this.email,
         password: this.password,
         confirmPassword: this.confirmPassword,
       }
@@ -230,7 +230,6 @@ export default {
 
     },
     submit() {
-      console.log('methods submit credentials: ', this.credentials)
       console.log('methods submit: form ', this.form)
       this.formHasErrors = false
       Object.keys(this.form).forEach(f => {
@@ -238,9 +237,9 @@ export default {
         //this.$refs[f].validate(true)
       })
 
-      this.setCredentials(this.form).then(
+      /*this.setCredentials(this.form).then(
         this.$router.push({path: '/shop'})
-      )
+      )*/
     },
   },
 

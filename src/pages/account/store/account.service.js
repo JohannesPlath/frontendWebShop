@@ -12,6 +12,7 @@ export const accountService = {
     console.log('accountService logInAnswer: ', loginAnswer.data)
     return loginAnswer.data;
   },
+
   /*async register({state, commit}, payload) {
     console.log('accountService sendLoginData: ', payload.mail)
     let accountDTO = new AccountDTO(payload.userID, payload.firstname, payload.familyName, payload.address, payload.city, payload.state, payload.zip, payload.country, payload.mail, payload.passw)
