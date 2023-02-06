@@ -11,7 +11,7 @@
           <v-card-text>
             <v-text-field
               ref="firstname"
-              v-model="credentials.firstname" input
+              v-model="firstname" input
               :rules="[() => !!firstname || 'This field is required']"
               :error-messages="errorMessages"
               label="First Name"
@@ -20,7 +20,7 @@
             ></v-text-field>
             <v-text-field
               ref="familyName"
-              v-model="credentials.familyName" input
+              v-model="familyName" input
               :rules="[() => !!familyName || 'This field is required']"
               :error-messages="errorMessages"
               label="Family Name"
@@ -29,12 +29,12 @@
             />
             <v-text-field
               ref="address"
-              v-model="credentials.address" input
+              v-model="address" input
               :rules="[
-                            () => !!address || 'This field is required',
+                () => !!address || 'This field is required',
                 () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
-                            addressCheck
-                          ]"
+                addressCheck
+              ]"
               label="Address Line"
               placeholder="Snowy Rock Place 34"
               counter="25"
@@ -42,16 +42,23 @@
             ></v-text-field>
             <v-text-field
               ref="city"
-              v-model="credentials.city" input
+              v-model="city" input
               :rules="[() => !!city || 'This field is required', addressCheck]"
               label="City"
               placeholder="Berlin"
               required
             ></v-text-field>
-
+            <v-text-field
+              ref="state"
+              v-model="state"
+              :rules="[() => !!state || 'This field is required']"
+              label="State/Province/Region"
+              required
+              placeholder="TX"
+            ></v-text-field>
             <v-text-field
               ref="zip"
-              v-model="credentials.zip" input
+              v-model="zip" input
               :rules="[() => !!zip || 'This field is required']"
               label="ZIP / Postal Code"
               required
@@ -59,7 +66,7 @@
             ></v-text-field>
             <v-autocomplete
               ref="country"
-              v-model="credentials.countries" input
+              v-model="countries" input
               :rules="[() => !!country || 'This field is required']"
               :items="countries"
               label="Country"
@@ -68,7 +75,7 @@
             ></v-autocomplete>
             <v-text-field
               ref="mail"
-              v-model="credentials.email" input
+              v-model="email" input
               :rules="[() => !!email || 'This field is required']"
               label="Mail Adress"
               required
@@ -76,7 +83,7 @@
             ></v-text-field>
             <v-text-field
               ref="newPassword"
-              v-model="credentials.password" input
+              v-model="password" input
               :rules="[
                             () => !!password || 'This field is required',
                             () => !!password && password.length >= 8 || 'Min 8 characters'
@@ -90,7 +97,7 @@
             ></v-text-field>
             <v-text-field
               ref="newPasswordconfirmed"
-              v-model="credentials.confirmPassword" input
+              v-model="confirmPassword" input
               :rules="[
                             () => !!confirmPassword || 'This field is required',
                             () => password === confirmPassword || 'Confirmed Password is not eqaul!'
@@ -123,25 +130,25 @@
           <v-divider></v-divider>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-slide-x-reverse-transition>
-              <v-tooltip
-                v-if="formHasErrors"
-                location="left"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    class="my-0"
-                    v-bind="attrs"
+            <!--            <v-slide-x-reverse-transition>
+                          <v-tooltip
+                            v-if="formHasErrors"
+                            location="left"
+                          >
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn
+                                icon
+                                class="my-0"
+                                v-bind="attrs"
 
-                    v-on="on"
-                  >
-                    <v-icon>mdi-refresh</v-icon>
-                  </v-btn>
-                </template>
-                <span>Refresh form</span>
-              </v-tooltip>
-            </v-slide-x-reverse-transition>
+                                v-on="on"
+                              >
+                                <v-icon>mdi-refresh</v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Refresh form</span>
+                          </v-tooltip>
+                        </v-slide-x-reverse-transition>-->
             <v-btn
               :disabled="!enabled"
               color="primary"
@@ -158,7 +165,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
   data: () => ({
@@ -179,8 +186,10 @@ export default {
     show2: false,
     enabled: false,
   }),
-
   computed: {
+    userCredentials() {
+      return this.credentials
+    },
     form() {
       return {
         firstname: this.firstname,
@@ -206,10 +215,22 @@ export default {
     name() {
       this.errorMessages = ''
     },
+    userCredentials: {
+      immediate: true,
+      deep: false,
+      handler(newValue, oldValue) {
+        console.log('userCredentials handler: ', this.zip)
+        console.log('user', newValue);
+        this.zip = newValue.zip
+        this.city = newValue.city
+        this.firstname = newValue.firstname
+        this.familyName = newValue.familyName //todo rest auffüllen
+      }
+    }
   },
 
   methods: {
-    ...mapActions('account', ['setCredentials', "register"]),
+    ...mapActions('account', ['setCredentials', 'register']),
 
     addressCheck() {
       this.errorMessages = this.address && !this.name
@@ -246,5 +267,3 @@ export default {
 
 }
 </script>
-
-

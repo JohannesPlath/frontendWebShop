@@ -1,15 +1,16 @@
 <template>
-  <v-navigation-drawer expand-on-hover rail
-                       :image="photo"
-                       permanent
-                       theme="dark"
+  <v-navigation-drawer
+    expand-on-hover rail
+    :image="photo"
+    permanent
+    theme="dark"
   >
     <v-list>
       <v-list-item
         to="/account/login"
         prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
         :title="credentials.firstname + ' ' + credentials.familyName"
-        :subtitle="credentials.mail"
+        :subtitle="credentials.email"
       />
     </v-list>
     <v-divider/>
@@ -40,12 +41,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import account from "@/pages/account/store/account.store";
 
-
-function logouttest() {
-  return 'logout'
-}
 
 export default {
   data: () => ({

@@ -48,7 +48,14 @@
               placeholder="Berlin"
               required
             ></v-text-field>
-
+            <v-text-field
+              ref="state"
+              v-model="state"
+              :rules="[() => !!state || 'This field is required']"
+              label="State/Province/Region"
+              required
+              placeholder="TX"
+            ></v-text-field>
             <v-text-field
               ref="zip"
               v-model="zip"

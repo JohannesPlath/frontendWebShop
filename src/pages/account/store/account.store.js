@@ -40,7 +40,8 @@ const account = {
 
     },
     async register({state, commit}, payload) {
-      const registeredUser = await accountService.register({state, commit}, payload)
+      console.log('@accountStore actions register: ', payload)
+      const registeredUser = await accountService.register(payload)
       commit('setCredentials', registeredUser)
 
     },

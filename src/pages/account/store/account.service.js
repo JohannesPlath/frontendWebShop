@@ -10,9 +10,10 @@ export const accountService = {
     return loginAnswer.data;
   },
 
-  async register({state, commit}, payload) {
-    let accountDTO = new AccountDTO(payload.userID, payload.firstname, payload.familyName, payload.address, payload.city, payload.state, payload.zip, payload.country, payload.email, payload.password)
-    const registerAnswer = await axios.post("http://localhost:8080/user/login/", accountDTO)
+  async register(payload) {
+    console.log('Account.service accountService register: ', payload)
+    let accountDTO = new AccountDTO(null, payload.firstname, payload.familyName, payload.address, payload.city, payload.state, payload.zip, payload.country, payload.email, payload.password)
+    const registerAnswer = await axios.post("http://localhost:8080/user/register/", accountDTO)
     return registerAnswer.data;
   },
   async logout(userID) {

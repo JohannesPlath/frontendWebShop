@@ -5,11 +5,11 @@
     prepend-icon="mdi-account"
     justify="center"
   >
-    <template v-slot:title>
+    <template #title>
       Your Active Data:
     </template>
   </v-card>
-  <user-overview-form></user-overview-form>
+  <user-overview-form/>
 </template>
 
 <script>
