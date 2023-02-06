@@ -4,7 +4,8 @@ import Shop from '@/pages/shop/ShopPage.vue';
 import CartPage from "@/pages/cart/CartPage";
 import AccountLogin from "@/pages/account/AccountLogin.vue";
 import AccountLayout from "@/pages/account/AccountLayout.vue";
-import AccountPage from "@/pages/account/AccountRegister.vue";
+import AccountRegister from "@/pages/account/AccountRegister.vue";
+import AccountOverview from "@/pages/account/AccountOverview.vue";
 
 const routes = [
   {
@@ -19,7 +20,10 @@ const routes = [
     children: [
       {
         path: 'overview',
-        component: AccountPage,
+        component: AccountOverview,
+      }, {
+        path: 'register',
+        component: AccountRegister,
       },
       {
         path: 'login',

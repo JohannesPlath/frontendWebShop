@@ -47,7 +47,7 @@
               size="large"
               type="submit"
               variant="elevated"
-              to="/account/overview"
+              to="/account/register"
             >
               or Register
             </v-btn>

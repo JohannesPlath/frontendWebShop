@@ -53,7 +53,7 @@ export default {
 
     items: [
       {text: 'Start', icon: 'mdi-home', route: '/'},
-      {text: 'Account', icon: 'mdi-account', route: '/account/login'},
+      {text: 'Account', icon: 'mdi-account', route: '/account/overview'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
       {text: 'Cart', icon: 'mdi-contacts', route: '/cart'},
     ],
