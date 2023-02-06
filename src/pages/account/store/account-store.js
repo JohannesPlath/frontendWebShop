@@ -39,12 +39,12 @@ const account = {
 
 
     },
-    /* async register({state, commit}, payload) {
-       console.log("payload @ register", payload.mail, " ", payload.passw)
-       let registeredUser = await accountService.register({state, commit}, payload)
-       console.log('----- >  actions register: ', registeredUser)
-       commit("registerMutation")
-     },*/
+    async register({state, commit}, payload) {
+      const registeredUser = await accountService.register({state, commit}, payload)
+      console.log('----- >  actions signIn: ', registeredUser)
+      commit('setCredentials', registeredUser)
+
+    },
 
     setCredentials({state, commit}, payload) {
       console.log("ACTIONS setcredentials payload ", payload)
