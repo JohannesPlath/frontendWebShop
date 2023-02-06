@@ -17,7 +17,7 @@
               label="First Name"
               placeholder="Johnny"
               required
-            />
+            ></v-text-field>
             <v-text-field
               ref="familyName"
               v-model="familyName"

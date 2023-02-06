@@ -80,8 +80,6 @@ export default {
 
   methods: {
     onSubmit() {
-      console.log('methods onSubmit: AccountLogin this.mail', this.email)
-      console.log('methods onSubmit @ AccountLogin: ', this.email, this.password)
       this.signIn({mail: this.email, passw: this.password})
       if (!this.form) return
       this.loading = true

@@ -1,5 +1,5 @@
 /**
- * plugins/product-store.js
+ * plugins/product.store.js
  *
  * Automatically included in `./src/main.js`
  */

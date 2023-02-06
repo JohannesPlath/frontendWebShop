@@ -53,7 +53,7 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import account from "@/pages/account/store/account-store";
+import account from "@/pages/account/store/account.store";
 
 export default {
   components: {},

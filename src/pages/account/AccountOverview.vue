@@ -1,17 +1,24 @@
 <template>
-  <credentials-form>
-  </credentials-form>
+  <v-card
+    class="mx-auto"
+    width="300"
+    prepend-icon="mdi-account"
+    justify="center"
+  >
+    <template v-slot:title>
+      Your Active Data:
+    </template>
+  </v-card>
+  <user-overview-form></user-overview-form>
 </template>
 
 <script>
 
 
 import {defineComponent} from "vue";
-import CredentialsForm from "@/pages/account/components/CredentialsForm.vue";
-import {mapGetters} from "vuex";
+import UserOverviewForm from "@/pages/account/components/UserOverviewForm.vue";
 
 export default defineComponent({
-  components: {CredentialsForm},
-  /*...mapGetters('account', {credentials: 'getCredentials'}),*/
+  components: {UserOverviewForm}
 })
 </script>
