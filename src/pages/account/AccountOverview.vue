@@ -8,8 +8,10 @@
 
 import {defineComponent} from "vue";
 import CredentialsForm from "@/pages/account/components/CredentialsForm.vue";
+import {mapGetters} from "vuex";
 
 export default defineComponent({
-  components: {CredentialsForm}
+  components: {CredentialsForm},
+  /*...mapGetters('account', {credentials: 'getCredentials'}),*/
 })
 </script>

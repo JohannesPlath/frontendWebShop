@@ -86,9 +86,9 @@ export default {
       if (!this.form) return
       this.loading = true
       setTimeout(() => (this.loading = false), 2000)
-      this.setCredentials(this.form).then(
+      /*this.setCredentials(this.form).then(
         this.$router.push({path: '/shop'})
-      )
+      )*/
     },
 
     required(v) {

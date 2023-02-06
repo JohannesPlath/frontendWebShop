@@ -17,12 +17,12 @@
     <v-list :lines="false" density="compact" nav>
       <v-list-item
         v-for="(item, i) in items" :key="i" :to="item.route"
-        :value="item" active-color="primary"
+        :value="item" active-color="primary" :title="item.text"
       >
         <template #prepend>
           <v-icon :icon="item.icon"/>
         </template>
-        <v-list-item-title v-text="item.text"/>
+        <v-list-item-title/>
       </v-list-item>
     </v-list>
     <template v-slot:append>
