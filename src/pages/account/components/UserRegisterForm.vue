@@ -17,7 +17,7 @@
               label="First Name"
               placeholder="Johnny"
               required
-            ></v-text-field>
+            />
             <v-text-field
               ref="familyName"
               v-model="familyName"
@@ -33,21 +33,21 @@
               :rules="[
                 () => !!address || 'This field is required',
                 () => !!address && address.length <= 25 || 'Address must be less than 25 characters',
-                addressCheck
+                //addressCheck
               ]"
               label="Address Line"
               placeholder="Snowy Rock Place 34"
               counter="25"
               required
-            ></v-text-field>
+            />
             <v-text-field
               ref="city"
               v-model="city"
-              :rules="[() => !!city || 'This field is required', addressCheck]"
+              :rules="[() => !!city || 'This field is required', /*addressCheck*/]"
               label="City"
               placeholder="Berlin"
               required
-            ></v-text-field>
+            />
             <v-text-field
               ref="state"
               v-model="state"
@@ -55,7 +55,7 @@
               label="State/Province/Region"
               required
               placeholder="TX"
-            ></v-text-field>
+            />
             <v-text-field
               ref="zip"
               v-model="zip"
@@ -63,7 +63,7 @@
               label="ZIP / Postal Code"
               required
               placeholder="79938"
-            ></v-text-field>
+            />
             <v-autocomplete
               ref="country"
               v-model="country"
@@ -72,15 +72,15 @@
               label="Country"
               placeholder="Select..."
               required
-            ></v-autocomplete>
+            />
             <v-text-field
               ref="mail"
               v-model="email"
               :rules="[() => !!email || 'This field is required']"
-              label="Mail Adress"
+              label="Mail Address"
               required
               placeholder="mail@me.uk"
-            ></v-text-field>
+            />
             <v-text-field
               ref="password"
               v-model="password"
@@ -90,13 +90,13 @@
               ]"
               label="Password"
               required
-              placeholder="1234"
+              placeholder="0-9_lower_and_upper_case"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show1 ? 'text' : 'password'"
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
             <v-text-field
-              ref="passwordconfirmed"
+              ref="password-confirmed"
               v-model="confirmPassword"
               :rules="[
                 () => !!confirmPassword || 'This field is required',
@@ -108,7 +108,7 @@
               :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show2 ? 'text' : 'password'"
               @click:append="show2 = !show2"
-            ></v-text-field>
+            />
 
             <v-card>
               <v-card-text>
@@ -116,44 +116,44 @@
                   <v-checkbox-btn
                     v-model="enabled"
                     class="pe-2"
-                  ></v-checkbox-btn>
+                  />
                   <v-text-field
                     :disabled="!enabled"
                     hide-details
                     label="I´m 18 years old or have an receipt of my Doctor"
-                  ></v-text-field>
+                  />
                 </div>
               </v-card-text>
             </v-card>
-
           </v-card-text>
-          <v-divider></v-divider>
+          <v-divider/>
           <v-card-actions>
-            <v-btn variant="text"
-                   @click="resetForm()"
+            <v-btn
+              variant="text"
+              @click="resetForm()"
             >
               Cancel
             </v-btn>
-            <v-spacer></v-spacer>
-            <v-slide-x-reverse-transition>
-              <v-tooltip
-                v-if="formHasErrors"
-                location="left"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    icon
-                    class="my-0"
-                    v-bind="attrs"
+            <v-spacer/>
+            <!--            <v-slide-x-reverse-transition>
+                          <v-tooltip
+                            v-if="formHasErrors"
+                            location="left"
+                          >
+                            <template #activator="{ on, attrs }">
+                              <v-btn
+                                icon
+                                class="my-0"
+                                v-bind="attrs"
 
-                    v-on="on"
-                  >
-                    <v-icon>mdi-refresh</v-icon>
-                  </v-btn>
-                </template>
-                <span>Refresh form</span>
-              </v-tooltip>
-            </v-slide-x-reverse-transition>
+                                v-on="on"
+                              >
+                                <v-icon>mdi-refresh</v-icon>
+                              </v-btn>
+                            </template>
+                            <span>Refresh form</span>
+                          </v-tooltip>
+                        </v-slide-x-reverse-transition>-->
             <v-btn
               :disabled="!enabled"
               color="primary"
@@ -243,7 +243,9 @@ export default {
         if (!this.form[f]) this.formHasErrors = true
         //this.$refs[f].validate(true)
       })
+      /*if (!this.formHasErrors) {*/
       this.register(this.form)
+      //}
       /*this.setCredentials(this.form).then(
         this.$router.push({path: '/shop'})
       )*/

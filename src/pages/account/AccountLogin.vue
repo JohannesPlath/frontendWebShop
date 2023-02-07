@@ -80,7 +80,7 @@ export default {
 
   methods: {
     onSubmit() {
-      this.signIn({mail: this.email, passw: this.password})
+      this.logIn({email: this.email, passw: this.password})
       if (!this.form) return
       this.loading = true
       setTimeout(() => (this.loading = false), 2000)
@@ -93,7 +93,7 @@ export default {
       return !!v || 'Field is required'
     },
 
-    ...mapActions('account', ['setCredentials', 'signIn']),
+    ...mapActions('account', ['setCredentials', 'logIn']),
 
   },
 

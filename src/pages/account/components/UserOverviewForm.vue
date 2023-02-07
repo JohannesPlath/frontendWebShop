@@ -17,7 +17,7 @@
               label="First Name"
 
               required
-            ></v-text-field>
+            />
             <v-text-field
               ref="familyName"
               v-model="familyName" input
@@ -39,7 +39,7 @@
               placeholder="Snowy Rock Place 34"
               counter="25"
               required
-            ></v-text-field>
+            />
             <v-text-field
               ref="city"
               v-model="city" input
@@ -47,7 +47,7 @@
               label="City"
               placeholder="Berlin"
               required
-            ></v-text-field>
+            />
             <v-text-field
               ref="state"
               v-model="state"
@@ -55,7 +55,7 @@
               label="State/Province/Region"
               required
               placeholder="TX"
-            ></v-text-field>
+            />
             <v-text-field
               ref="zip"
               v-model="zip" input
@@ -63,7 +63,7 @@
               label="ZIP / Postal Code"
               required
               placeholder="79938"
-            ></v-text-field>
+            />
             <v-autocomplete
               ref="country"
               v-model="countries" input
@@ -72,7 +72,7 @@
               label="Country"
               placeholder="Select..."
               required
-            ></v-autocomplete>
+            />
             <v-text-field
               ref="mail"
               v-model="email" input
@@ -80,35 +80,48 @@
               label="Mail Adress"
               required
               placeholder="mail@me.uk"
-            ></v-text-field>
+            />
+            <v-text-field
+              ref="oldPassword"
+              v-model="oldpassword" input
+              :rules="[
+                () => !!oldpassword || 'This field is required',
+              ]"
+              label="old Password"
+              required
+              placeholder="our old password you like to change"
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="show1 ? 'text' : 'password'"
+              @click:append="show1 = !show1"
+            />
             <v-text-field
               ref="newPassword"
-              v-model="password" input
+              v-model="newpassword" input
               :rules="[
-                            () => !!password || 'This field is required',
-                            () => !!password && password.length >= 8 || 'Min 8 characters'
-                          ]"
+                () => !!newpassword || 'This field is required',
+                () => !!newpassword && newpassword.length >= 8 || 'Min 8 characters'
+              ]"
               label="new Password"
               required
               placeholder="1234"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show1 ? 'text' : 'password'"
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
             <v-text-field
               ref="newPasswordconfirmed"
               v-model="confirmPassword" input
               :rules="[
-                            () => !!confirmPassword || 'This field is required',
-                            () => password === confirmPassword || 'Confirmed Password is not eqaul!'
-                          ]"
+                () => !!confirmPassword || 'This field is required',
+                () => newpassword === confirmPassword || 'Confirmed Password is not eqaul!'
+              ]"
               label="new Password"
               required
               placeholder="1234"
               :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
               :type="show2 ? 'text' : 'password'"
               @click:append="show2 = !show2"
-            ></v-text-field>
+            />
 
             <v-card>
               <v-card-text>
@@ -116,20 +129,19 @@
                   <v-checkbox-btn
                     v-model="enabled"
                     class="pe-2"
-                  ></v-checkbox-btn>
+                  />
                   <v-text-field
                     :disabled="!enabled"
                     hide-details
                     label="I´m 18 years old or have an receipt of my Doctor"
-                  ></v-text-field>
+                  />
                 </div>
               </v-card-text>
             </v-card>
-
           </v-card-text>
-          <v-divider></v-divider>
+          <v-divider/>
           <v-card-actions>
-            <v-spacer></v-spacer>
+            <v-spacer/>
             <!--            <v-slide-x-reverse-transition>
                           <v-tooltip
                             v-if="formHasErrors"
@@ -180,7 +192,8 @@ export default {
     country: null,
     email: null,
     formHasErrors: false,
-    password: null,
+    oldpassword: null,
+    newpassword: null,
     confirmPassword: null,
     show1: false,
     show2: false,
@@ -200,7 +213,8 @@ export default {
         zip: this.zip,
         country: this.country,
         email: this.email,
-        password: this.password,
+        oldpassword: this.oldpassword,
+        newpassword: this.newpassword,
         confirmPassword: this.confirmPassword,
       }
     },
@@ -221,10 +235,16 @@ export default {
       handler(newValue, oldValue) {
         console.log('userCredentials handler: ', this.zip)
         console.log('user', newValue);
-        this.zip = newValue.zip
-        this.city = newValue.city
         this.firstname = newValue.firstname
         this.familyName = newValue.familyName //todo rest auffüllen
+        this.address = newValue.address
+        this.city = newValue.city
+        this.state = newValue.state
+        this.zip = newValue.zip
+        this.country = newValue.country
+        console.log('userCredentials handler: ', newValue.country)
+        this.email = newValue.email
+
       }
     }
   },

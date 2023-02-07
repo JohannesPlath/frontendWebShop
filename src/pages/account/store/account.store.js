@@ -16,7 +16,7 @@ const account = {
         state: "brandenburg",
         zip: "12345",
         country: "Deutschland",
-        mail: "no registered mail",
+        email: "no registered mail",
         password: "",
         confirmedPassword: "",
       }
@@ -30,10 +30,10 @@ const account = {
   },
 
   actions: {
-    async signIn({state, commit}, payload) {
-      //console.log("payload ", payload.mail, " ", payload.passw)
+    async logIn({state, commit}, payload) {
+      console.log("payload ", payload.email, " ", payload.passw)
       const singInAnswer = await accountService.sendLoginData({state, commit}, payload)
-      const user = new User(singInAnswer.userID, singInAnswer.firstname, singInAnswer.familyName, singInAnswer.address, singInAnswer.city, singInAnswer.state, singInAnswer.zip, singInAnswer.country, singInAnswer.mail, singInAnswer.password)
+      const user = new User(singInAnswer.userID, singInAnswer.firstname, singInAnswer.familyName, singInAnswer.address, singInAnswer.city, singInAnswer.state, singInAnswer.zip, singInAnswer.country, singInAnswer.email, singInAnswer.password)
       commit('setCredentials', user)
       commit("signInMutation")
 

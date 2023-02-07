@@ -5,7 +5,7 @@ import accountStore from "@/pages/account/store/account.store";
 export const accountService = {
 
   async sendLoginData({state, commit}, payload) {
-    let accountDTO = new AccountDTO(null, null, null, null, null, null, null, null, payload.mail, payload.passw)
+    let accountDTO = new AccountDTO(null, null, null, null, null, null, null, null, payload.email, payload.passw)
     const loginAnswer = await axios.post("http://localhost:8080/user/login/", accountDTO)
     return loginAnswer.data;
   },
@@ -13,6 +13,7 @@ export const accountService = {
   async register(payload) {
     console.log('Account.service accountService register: ', payload)
     let accountDTO = new AccountDTO(null, payload.firstname, payload.familyName, payload.address, payload.city, payload.state, payload.zip, payload.country, payload.email, payload.password)
+    console.log('accountService register: accountDTO ', accountDTO)
     const registerAnswer = await axios.post("http://localhost:8080/user/register/", accountDTO)
     return registerAnswer.data;
   },
