@@ -6,7 +6,9 @@
 import ShopCart from "@/pages/cart/components/ShopCart";
 
 export default {
-  components: {ShopCart}
+  components: {ShopCart},
+
+
 }
 </script>
 

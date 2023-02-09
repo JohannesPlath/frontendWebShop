@@ -155,6 +155,7 @@
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
+import payment from "@/store/modules/payment/payment";
 
 
 export default {
@@ -183,7 +184,6 @@ export default {
         color: 'secondary',
         icon: 'mdi-cart',
       },
-
   }),
 
 
@@ -192,10 +192,16 @@ export default {
     ...mapGetters('account', {credentials: 'getCredentials'}),
     ...mapGetters('payment', {payment: 'getPayment'}),
   },
+
+  mounted() {
+    this.$store.dispatch('cart/fetchCartOfUser')
+  },
+
   methods: {
     payment() {
       return payment
     },
+
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
 
     addOne(product) {
@@ -212,7 +218,9 @@ export default {
       console.log('methods finalizeOrder: ', cartProducts, credentials, payment)
       this.finalize(cartProducts, credentials, payment)
     }
-  }
+  },
+
+
 }
 
 </script>

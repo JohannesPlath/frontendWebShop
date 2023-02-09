@@ -1,3 +1,6 @@
+import {ProductModel} from "@/pages/shop/store/models/product-model";
+import {cartService} from "@/pages/cart/store/cart.service";
+
 const state = {
   items: [],
   quantity: 0,
@@ -30,6 +33,22 @@ const getters = {
 
 
 const actions = {
+
+  fetchCartOfUser({state, commit, rootState}) {
+    let id = rootState.account.credential.userID;
+    console.log('actions fetchCartOfUser: rootstate..id ', id)
+    cartService.getCartOfUser(id, res => {
+      const products = []
+      for (const p of res) {
+        products.push({
+          product: new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl),
+          quantity: 0
+        })
+      }
+      commit('setCartProducts', products) //todo objekt übergeben
+    })
+  },
+
   reduceProductFromCart({state, commit, rootState}, product) {
     let userId = rootState.account.credential.userID
     console.log("@ cart reduceOne: ", product, userId)
@@ -105,8 +124,6 @@ const mutations = {
     state.checkoutStatus = status
   }*/
 }
-
-import {cartService} from './cart.service'
 
 export default {
   namespaced: true,

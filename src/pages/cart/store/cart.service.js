@@ -33,6 +33,18 @@ export const cartService = {
     axios.post("http://localhost:8080/cart/ProductFromCart/", changeAtCartDTO)
   },
 
+  async getCartOfUser(id, cb) {
+    console.log('cartService getCartOfUser: ', id);
+    let changeAtCartDTO = new ChangeAtCartDTO(null, id, 0)
+    try {
+      const productList = await axios.post("http://localhost:8080/cart/fetchCartOfUser/", changeAtCartDTO);//{params: {uuid: id}});
+      cb(productList.data)
+      console.log("-------------> ", productList);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
 
   getItemsAndCount(items) {
     let dtoList = []

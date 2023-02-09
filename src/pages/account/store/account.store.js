@@ -16,7 +16,7 @@ const account = {
         country: "Deutschland",
         email: "no registered mail",
         password: "",
-        confirmedPassword: "",
+        confirmedPassword: "", //todo Löschen und testen
       }
     }
   },

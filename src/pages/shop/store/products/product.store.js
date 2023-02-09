@@ -1,4 +1,4 @@
-import {service} from "@/pages/shop/store/products/product.service";
+import {productService} from "@/pages/shop/store/products/product.service";
 
 const state = {
   all: [],
@@ -18,7 +18,7 @@ const getters = {
 
 const actions = {
   fetchAllProducts({commit}) {
-    service.getProducts(res => {
+    productService.getProducts(res => {
       const products = []
       for (const p of res) {
         products.push({
