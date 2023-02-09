@@ -1,0 +1,65 @@
+endpunkte des backends/GateWay
+
+done - GET/allProducts/ -> wareHouseBackend // await axios.get("http://localhost:8080/product")
+- GET/CartStatus/{USERID}  bekommt List<Products> (inkl. anzahl)
+done - Post/ProductToCart    // axios.post("http://localhost:8080/cart/ProductToCart/", changeAtCartDTO)
+done - Post/ProductFromCart/ ggf als json /DTO
+- (to CartService) DELETE/Order{userID}
+done - Sync LogIn:  POST/login/userdata (als Json: nur cridentials)  -> keycloak //axios.post("http://localhost:8080/user/login/",  accountDTO)
+- Sync Register:  PUT/register/userdata (als Json: alle daten)  -> keycloak
+- sync lockout: GET/logout/userID -> to keycloak
+- ChoosePaymentl (sync): PUT/payment/{userID}/{Paymentprovider}
+- PUT/finalize{userID}
+- Put/deleteOrder/{userID}
+
+----------------------------------
+
+umbau am Frontend:
+done - loginPage (mail/passw) vor Accountpage / Registrierung
+- shop sperren ohne Registrierung
+- cart infos aus Backend beziehen - abrufen der CartBackend infos zu einem user
+done - nachricht an CartBackend bei "AddToCart"
+
+ DTOs definieren:
+
+export class ChangeAtCartDTO {
+
+  constructor(productId, userID, count) {
+    this.productId = productId;
+    this.userID = userID;
+    this.count = count;
+  }
+}
+
+export class ProductModel {
+
+  constructor(uuid, title, currency, category, count, price, description, picUrl, countForCart) {
+    this.uuid = uuid;
+    this.title = title;
+    this.currency = currency;
+    this.category = category;
+    this.count = count;
+    this.price = price;
+    this.description = description;
+    this.picUrl = picUrl;
+    this.countForCart = countForCart;
+
+  }
+}
+
+
+export class AccountDTO{
+
+  constructor(userID, firstname, familyName, address, city, state, zip, country, mail, password) {
+    this.userID = userID;
+    this.firstname = firstname;
+    this.familyName = familyName;
+    this.address = address;
+    this.city = city;
+    this.state = state;
+    this.zip = zip;
+    this.country = country;
+    this.mail = mail;
+    this.password = password;
+  }
+}

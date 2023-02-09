@@ -30,14 +30,18 @@ const getters = {
 
 
 const actions = {
-  reduceProductFromCart({state, commit}, product) {
-    //console.log("@ cart reduceOne: ", product)
+  reduceProductFromCart({state, commit, rootState}, product) {
+    let userId = rootState.account.credential.userID
+    console.log("@ cart reduceOne: ", product, userId)
+    cartService.reduceProduct(userId, product, -1)
     commit('reduceProductFromCart', product)
   },
 
-  addProductToCart({state, commit}, product) {
-    //console.log("@ cart : ", product)
-    commit('pushProductToCart', product)
+  addProductToCart({state, commit, rootState}, product) {
+    let userId = rootState.account.credential.userID
+    console.log("@ cart : ", userId)
+    cartService.addProduct(userId, product, 1)
+    commit('pushProductToCart', product, userId)
   },
 
   /* getCountOfCart({state, commit}){
@@ -45,7 +49,7 @@ const actions = {
      return state.quantity;
    }*/
 
-  finalize({state, commit}, credentials, payment) {
+  finalize(state, products, credentials, payment) {
     console.log('actions finalizeOrder: ', state.items, credentials, payment)
     commit('finalizeOrder', state, credentials, payment)
   }
@@ -53,18 +57,14 @@ const actions = {
 
 // mutations
 const mutations = {
-  /*
-    getCountOfCartMutation(state, count) {
-      return state.quantity;
-    },
-  */
 
   finalizeOrder(state, credentials, payment) {
     cartService.pushToCartBackend(state.items, credentials, payment)
   },
 
+  pushProductToCart(state, product, userId) {
 
-  pushProductToCart(state, product, amount) {
+    //todo löschen wenn backend aktiv
     let existItem = state.items.find(item => item.product.uuid === product.uuid);
     if (existItem) {
       existItem.amount++;
