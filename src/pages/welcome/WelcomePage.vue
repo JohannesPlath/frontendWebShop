@@ -1,5 +1,5 @@
 <template>
-  <div class="gallery" />
+  <div class="gallery"/>
   <div v-for="photo in photos" :key="photo" class="gallery-panel">
     <img :src="photo" alt="picture of nice weed">
   </div>
@@ -17,7 +17,15 @@ export default {
       'src/assets/pics/vertical-isolated-shot-marijuana-blunt-white.jpg',
       'src/assets/pics/marijuana-g966935eb2_1920.jpg',
       'src/assets/pics/weed-ge36fcac46_1920.jpg',
-      'src/assets/pics/purple-hemp-flowers-medical-cannabis.jpg'
+      'src/assets/pics/avery-meeker-0skab8kzSxo-unsplash.jpg',
+      'src/assets/pics/christopher-lemercier-KKiVzGhHR0k-unsplash.jpg',
+      'src/assets/pics/crystalweed-cannabis-sEWqMCemlVA-unsplash.jpg',
+      'src/assets/pics/diyahna-lewis---JxxyIUHnU-unsplash.jpg',
+      'src/assets/pics/flowers-gd7e30204f_1920.jpg',
+      'src/assets/pics/purple-hemp-flowers-medical-cannabis.jpg',
+      'src/assets/pics/roman-kasyan-zlUgzTz56jo-unsplash.jpg',
+      'src/assets/pics/ryan-lange-J5-MNWFzHZs-unsplash.jpg',
+      'src/assets/pics/teanna-morgan-JfEiDHqOyyk-unsplash.jpg',
 
     ]
   }),
