@@ -66,7 +66,7 @@
             />
             <v-autocomplete
               ref="country"
-              v-model="countries" input
+              v-model="country" input
               :rules="[() => !!country || 'This field is required']"
               :items="countries"
               label="Country"
@@ -109,11 +109,11 @@
               @click:append="show1 = !show1"
             />
             <v-text-field
-              ref="newPasswordconfirmed"
-              v-model="confirmPassword" input
+              ref="confirmedNewPassword"
+              v-model="confirmNewPassword" input
               :rules="[
-                () => !!confirmPassword || 'This field is required',
-                () => newpassword === confirmPassword || 'Confirmed Password is not eqaul!'
+                () => !!confirmNewPassword || 'This field is required',
+                () => newpassword === confirmNewPassword || 'Confirmed Password is not eqaul!'
               ]"
               label="new Password"
               required
@@ -141,7 +141,7 @@
           </v-card-text>
           <v-divider/>
           <v-card-actions>
-            <v-spacer/>
+            <v-spacer></v-spacer>
             <!--            <v-slide-x-reverse-transition>
                           <v-tooltip
                             v-if="formHasErrors"
@@ -194,7 +194,7 @@ export default {
     formHasErrors: false,
     oldpassword: null,
     newpassword: null,
-    confirmPassword: null,
+    confirmNewPassword: null,
     show1: false,
     show2: false,
     enabled: false,
@@ -215,7 +215,7 @@ export default {
         email: this.email,
         oldpassword: this.oldpassword,
         newpassword: this.newpassword,
-        confirmPassword: this.confirmPassword,
+        confirmNewPassword: this.confirmNewPassword,
       }
     },
 

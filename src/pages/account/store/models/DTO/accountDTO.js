@@ -1,6 +1,6 @@
 export class AccountDTO {
 
-  constructor(userID, firstname, familyName, address, city, state, zip, country, email, password) {
+  constructor(userID, firstname, familyName, address, city, state, zip, country, email, password, newPassword) {
     this.userID = userID;
     this.firstname = firstname;
     this.familyName = familyName;
@@ -11,5 +11,6 @@ export class AccountDTO {
     this.country = country;
     this.email = email;
     this.password = password;
+    this.newPassword = newPassword;
   }
 }

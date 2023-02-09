@@ -1,6 +1,4 @@
 import {accountService} from "@/pages/account/store/account.service";
-import {mapActions} from "vuex";
-import {is} from "@babel/types";
 import {User} from "@/pages/account/store/models/user";
 
 const account = {
@@ -32,18 +30,15 @@ const account = {
   actions: {
     async logIn({state, commit}, payload) {
       console.log("payload ", payload.email, " ", payload.passw)
-      const singInAnswer = await accountService.sendLoginData({state, commit}, payload)
+      const singInAnswer = await accountService.sendLoginData(payload)
       const user = new User(singInAnswer.userID, singInAnswer.firstname, singInAnswer.familyName, singInAnswer.address, singInAnswer.city, singInAnswer.state, singInAnswer.zip, singInAnswer.country, singInAnswer.email, singInAnswer.password)
       commit('setCredentials', user)
       commit("signInMutation")
-
-
     },
     async register({state, commit}, payload) {
       console.log('@accountStore actions register: ', payload)
       const registeredUser = await accountService.register(payload)
       commit('setCredentials', registeredUser)
-
     },
 
     setCredentials({state, commit}, payload) {
