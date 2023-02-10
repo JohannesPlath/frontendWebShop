@@ -1,5 +1,5 @@
 import {createStore, createLogger} from 'vuex'
-import cart from '../pages/cart/store/cart'
+import cart from '../pages/cart/store/cart.store'
 import products from '../pages/shop/store/products/product.store'
 import account from '../pages/account/store/account.store'
 import payment from "@/store/modules/payment/payment";

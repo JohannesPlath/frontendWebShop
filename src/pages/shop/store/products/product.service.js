@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const service = {
+export const productService = {
   async getProducts(cb) {
     console.log("-------------> ");
     try {

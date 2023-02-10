@@ -7,7 +7,7 @@
       :src="product.picUrl"
       height="200px"
       cover
-    ></v-img>
+    />
 
     <v-card-title>
       {{ product.title }}
@@ -35,13 +35,13 @@
         Explore
       </v-btn>
 
-      <v-spacer></v-spacer>
+      <v-spacer/>
 
 
       <v-btn
         :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'"
         @click="show = !show"
-      ></v-btn>
+      />
     </v-card-actions>
 
     <v-expand-transition
@@ -49,9 +49,7 @@
       variant="text"
     >
       <div v-show="show">
-        <v-divider></v-divider>
-
-
+        <v-divider/>
         <v-card-text>
           {{ product.description }}
         </v-card-text>

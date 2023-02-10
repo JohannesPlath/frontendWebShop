@@ -22,14 +22,14 @@
 
       <v-list-item
         v-for="item in cartProducts"
-        :key="item.product.uuid"
-        :title="item.product.title"
-        :subtitle=" 'Price: ' + item.product.price + ' €, Amount: ' + item.amount "
+        :key="item.uuid"
+        :title="item.title"
+        :subtitle=" 'Price: ' + item.price + ' €, Amount: ' + item.count "
       >
         <template #prepend>
           <v-avatar>
             <v-img
-              :src="item.product.picUrl"
+              :src="item.picUrl"
               alt="John"
             />
           </v-avatar>
@@ -40,14 +40,14 @@
             color="grey-lighten-1"
             icon="mdi-plus"
             variant="text"
-            @click="addOne(item.product)"
+            @click="addOne(item)"
           />
 
           <v-btn
             color="grey-lighten-1"
             icon="mdi-minus"
             variant="text"
-            @click="removeOne(item.product)"
+            @click="removeOne(item)"
           />
         </template>
       </v-list-item>
@@ -143,10 +143,9 @@
           <v-btn
             :color="itemFinalize.secColor"
             variant="outlined"
-            @click=finalizeOrder(cartProducts,credentials,payment)
+            @click="finalizeOrder(cartProducts,credentials,payment)"
           >
             Order NOW
-
           </v-btn>
         </v-card-text>
       </v-card>
@@ -155,6 +154,7 @@
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
+import payment from "@/store/modules/payment/payment";
 
 
 export default {
@@ -183,7 +183,6 @@ export default {
         color: 'secondary',
         icon: 'mdi-cart',
       },
-
   }),
 
 
@@ -192,10 +191,16 @@ export default {
     ...mapGetters('account', {credentials: 'getCredentials'}),
     ...mapGetters('payment', {payment: 'getPayment'}),
   },
+
+  mounted() {
+    this.$store.dispatch('cart/fetchCartOfUser')
+  },
+
   methods: {
     payment() {
       return payment
     },
+
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
 
     addOne(product) {
@@ -212,7 +217,9 @@ export default {
       console.log('methods finalizeOrder: ', cartProducts, credentials, payment)
       this.finalize(cartProducts, credentials, payment)
     }
-  }
+  },
+
+
 }
 
 </script>
