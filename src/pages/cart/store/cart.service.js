@@ -24,7 +24,7 @@ export const cartService = {
     let changeAtCartDTO = new ChangeAtCartDTO(product.uuid, userId, amount)
     console.log('cartService addProduct: ', changeAtCartDTO)
     axios.post("http://localhost:8080/cart/ProductToCart/", changeAtCartDTO)
-    //todo Ask for cart of user
+    //todo Ask for cart of user/**/
   },
 
 
@@ -37,13 +37,13 @@ export const cartService = {
   async getCartOfUser(id, cb) {
     console.log('cartService getCartOfUser: ', id);
     let changeAtCartDTO = new ChangeAtCartDTO(null, id, 0)
-    try {
-      const cartOfUser = await axios.post("http://localhost:8080/cart/fetchCartOfUser/", changeAtCartDTO);//{params: {uuid: id}});
-      cb(cartOfUser.data)
-      console.log("-------------> ", cartOfUser.data);
-    } catch (error) {
+
+    const cartOfUser = await axios.post("http://localhost:8080/cart/fetchCartOfUser/", changeAtCartDTO);//{params: {uuid: id}});
+    console.log("-------------> ", cartOfUser.data);
+    return cartOfUser.data
+    /*} catch (error) {
       console.error(error);
-    }
+    }*/
   },
 
 

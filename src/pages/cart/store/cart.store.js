@@ -34,32 +34,32 @@ const getters = {
 
 const actions = {
 
-  fetchCartOfUser({state, commit, rootState}) {
+  async fetchCartOfUser({state, commit, rootState}) {
     let id = rootState.account.credential.userID;
     console.log('actions fetchCartOfUser: rootstate..id ', id)
-    cartService.getCartOfUser(id, res => {
-      console.log('actions : ', res)
-      console.log('actions res.productList: ', res.productList)
-      for (const p of res.productList) {
-        console.log('actions  for-loop p: ', p)
-        const cartProduct = new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl)
-        commit('addToLocalCart', cartProduct)
-      }
+    const res = await cartService.getCartOfUser(id);
+    console.log('actions : ', res)
+    console.log('actions res.productList: ', res.productList)
+    for (const p of res.productList) {
+      console.log('actions  for-loop p: ', p)
+      const cartProduct = new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl)
+      commit('addToLocalCart', cartProduct)
+    }
+    console.log('actions state.quantity = res.sumOfProducts: ', state.quantity, res.sumOfProducts)
+    //state.quantity = res.sumOfProducts;
+    console.log('actions state.cartTotalPrice = res.sumOfPrice;: ', state.cartTotalPrice, res.sumOfPrice)
+    //state.cartTotalPrice = res.sumOfPrice;
+    console.log('actions @ fetchCart Of User state.items : ', this.state.items)
 
-      state.items = res.productList;
-      state.quantity = res.sumOfProducts;
-      state.cartTotalPrice = res.sumOfPrice;
-      console.log('actions @ fetchCart Of User state.items : ', state.items)
+    /*const cart = []
+     for (const p of res) {
+       cart.push({
+         product: new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl),
+         quantity: 0
+       })
+     }*/
+    //todo objekt übergeben
 
-      /*const cart = []
-       for (const p of res) {
-         cart.push({
-           product: new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl),
-           quantity: 0
-         })
-       }*/
-      //todo objekt übergeben
-    })
   },
 
   reduceProductFromCart({state, commit, rootState}, product) {
@@ -90,9 +90,12 @@ const actions = {
 // mutations
 const mutations = {
 
+
   addToLocalCart(state, cartProduct) {
     console.log('mutations addToLocalCart: ', state)
     console.log('mutations addToLocalCart: cartpr ', cartProduct)
+    state.quantity = state.quantity + cartProduct.count;
+    state.cartTotalPrice = state.cartTotalPrice + (cartProduct.count * cartProduct.price);
     state.items.push(cartProduct);
   },
 
@@ -128,6 +131,8 @@ const mutations = {
     console.log('mutations reduceProductFromCart: state.items', state.items)
     state.quantity--;
     state.cartTotalPrice -= deleteProduct.price;
+    console.log("state.items: ", state.items)
+
   },
 
   /*incrementItemQuantity(state, {id}) {
