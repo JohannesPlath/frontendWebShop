@@ -1,5 +1,6 @@
 import {ProductModel} from "@/pages/shop/store/models/product-model";
 import {cartService} from "@/pages/cart/store/cart.service";
+import {CartOfUserDTO} from "@/pages/cart/store/DTO/cartOfUserDTO";
 
 const state = {
   items: [],
@@ -36,50 +37,41 @@ const actions = {
 
   async fetchCartOfUser({state, commit, rootState}) {
     let id = rootState.account.credential.userID;
-    console.log('actions fetchCartOfUser: rootstate..id ', id)
+    //console.log('actions fetchCartOfUser: rootstate..id ', id)
     const res = await cartService.getCartOfUser(id);
-    console.log('actions : ', res)
-    console.log('actions res.productList: ', res.productList)
-    for (const p of res.productList) {
+    const cartOfUserDTO = new CartOfUserDTO(res.userID, res.sumOfProducts, res.sumOfPrice, res.productList)
+    /*console.log('actions : ', cartOfUserDTO)
+    console.log('actions res.productList: ', cartOfUserDTO.productList)*/
+    commit('clearState', state)
+    for (const p of cartOfUserDTO.productList) {
       console.log('actions  for-loop p: ', p)
       const cartProduct = new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl)
       commit('addToLocalCart', cartProduct)
     }
-    console.log('actions state.quantity = res.sumOfProducts: ', state.quantity, res.sumOfProducts)
-    //state.quantity = res.sumOfProducts;
-    console.log('actions state.cartTotalPrice = res.sumOfPrice;: ', state.cartTotalPrice, res.sumOfPrice)
-    //state.cartTotalPrice = res.sumOfPrice;
-    console.log('actions @ fetchCart Of User state.items : ', state.items)
-
-    /*const cart = []
-     for (const p of res) {
-       cart.push({
-         product: new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl),
-         quantity: 0
-       })
-     }*/
-    //todo objekt übergeben
-
+    /* console.log('actions state.quantity = res.sumOfProducts: ', state.quantity, res.sumOfProducts)
+     //state.quantity = res.sumOfProducts;
+     console.log('actions state.cartTotalPrice = res.sumOfPrice;: ', state.cartTotalPrice, res.sumOfPrice)
+     //state.cartTotalPrice = res.sumOfPrice;
+     console.log('actions @ fetchCart Of User state.items : ', state.items)
+ */
+    commit('setCartTotalPrice', cartOfUserDTO.sumOfPrice)
+    commit('setQuantity', cartOfUserDTO.sumOfProducts)
   },
 
-  reduceProductFromCart({state, commit, rootState}, product) {
+  async reduceProductFromCart({state, commit, rootState, dispatch}, product) {
     let userId = rootState.account.credential.userID
     console.log("@ cart reduceOne: ", product, userId)
-    cartService.reduceProduct(userId, product, -1)
-    commit('reduceProductFromCart', product)
+    await cartService.reduceProduct(userId, product, -1)
+    dispatch('fetchCartOfUser', {state, commit, rootState});
   },
 
-  addProductToCart({state, commit, rootState}, product) {
+  async addProductToCart({state, commit, rootState, dispatch}, product) {
     let userId = rootState.account.credential.userID
     console.log("@ cart : ", userId)
-    cartService.addProduct(userId, product, 1)
-    commit('pushProductToCart', product, userId)
+    console.log("@ cart addproduct: ", product)
+    await cartService.addProduct(userId, product, 1)
+    dispatch('fetchCartOfUser', {state, commit, rootState});
   },
-
-  /* getCountOfCart({state, commit}){
-     commit('getCountOfCartMutation', count)
-     return state.quantity;
-   }*/
 
   finalize(state, products, credentials, payment) {
     console.log('actions finalizeOrder: ', state.items, credentials, payment)
@@ -90,6 +82,19 @@ const actions = {
 // mutations
 const mutations = {
 
+  clearState(state) {
+    state.items = [];
+    state.cartTotalPrice = 0;
+    state.quantity = 0;
+  },
+
+  setCartTotalPrice(state, cartTotalPrice) {
+    state.cartTotalPrice = cartTotalPrice;
+  },
+
+  setQuantity(state, quantity) {
+    state.quantity = quantity;
+  },
 
   addToLocalCart(state, cartProduct) {
     console.log('mutations addToLocalCart: ', state)
@@ -103,26 +108,26 @@ const mutations = {
     cartService.pushToCartBackend(state.items, credentials, payment)
   },
 
-  pushProductToCart(state, product, userId) {
 
-    //todo löschen wenn backend aktiv
-    let existItem = state.items.find(item => item.product.uuid === product.uuid);
-    if (existItem) {
-      existItem.amount++;
-    } else {
-      state.items.push({
-        product: product,
-        amount: 1,
-      })
+  /* pushProductToCart(state, product, userId) {
 
-    }
-    state.quantity++;
-    state.cartTotalPrice = state.cartTotalPrice + product.price;
-  },
+     //todo löschen wenn backend aktiv
+     let existItem = state.items.find(item => item.uuid === product.uuid);
+     if (existItem) {
+       existItem.amount++;
+     } else {
+       state.items.push({
+         product: product,
+         amount: 1,
+       })
+     }
+     state.quantity++;
+     state.cartTotalPrice = state.cartTotalPrice + product.price;
+   },
+ */
 
-
-  reduceProductFromCart(state, deleteProduct) {
-    let existItem = state.items.find(item => item.product.uuid === deleteProduct.uuid);
+  /*reduceProductFromCart(state, deleteProduct) {
+    let existItem = state.items.find(item => item.uuid === deleteProduct.uuid);
     console.log('mutations reduceProductFromCart: ', existItem)
     existItem.amount--;
     if (existItem.amount === 0) {
@@ -133,7 +138,7 @@ const mutations = {
     state.cartTotalPrice -= deleteProduct.price;
     console.log("state.items: ", state.items)
 
-  },
+  },*/
 
   /*incrementItemQuantity(state, {id}) {
     const cartItem = state.items.find(item => item.id === id)

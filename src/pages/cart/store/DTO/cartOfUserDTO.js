@@ -1,4 +1,4 @@
-export class CartOfUser {
+export class CartOfUserDTO {
 
   constructor(userId, sumOfProducts, sumOfPrice, productList) {
     this.userID = userId;

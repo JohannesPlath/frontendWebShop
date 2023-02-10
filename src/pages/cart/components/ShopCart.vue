@@ -40,14 +40,14 @@
             color="grey-lighten-1"
             icon="mdi-plus"
             variant="text"
-            @click="addOne(item.product)"
+            @click="addOne(item)"
           />
 
           <v-btn
             color="grey-lighten-1"
             icon="mdi-minus"
             variant="text"
-            @click="removeOne(item.product)"
+            @click="removeOne(item)"
           />
         </template>
       </v-list-item>
@@ -143,10 +143,9 @@
           <v-btn
             :color="itemFinalize.secColor"
             variant="outlined"
-            @click=finalizeOrder(cartProducts,credentials,payment)
+            @click="finalizeOrder(cartProducts,credentials,payment)"
           >
             Order NOW
-
           </v-btn>
         </v-card-text>
       </v-card>
