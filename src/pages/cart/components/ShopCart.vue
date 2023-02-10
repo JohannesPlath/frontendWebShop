@@ -22,14 +22,14 @@
 
       <v-list-item
         v-for="item in cartProducts"
-        :key="item.product.uuid"
-        :title="item.product.title"
-        :subtitle=" 'Price: ' + item.product.price + ' €, Amount: ' + item.amount "
+        :key="item.uuid"
+        :title="item.title"
+        :subtitle=" 'Price: ' + item.price + ' €, Amount: ' + item.count "
       >
         <template #prepend>
           <v-avatar>
             <v-img
-              :src="item.product.picUrl"
+              :src="item.picUrl"
               alt="John"
             />
           </v-avatar>

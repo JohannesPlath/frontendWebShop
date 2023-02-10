@@ -49,7 +49,7 @@ const actions = {
     //state.quantity = res.sumOfProducts;
     console.log('actions state.cartTotalPrice = res.sumOfPrice;: ', state.cartTotalPrice, res.sumOfPrice)
     //state.cartTotalPrice = res.sumOfPrice;
-    console.log('actions @ fetchCart Of User state.items : ', this.state.items)
+    console.log('actions @ fetchCart Of User state.items : ', state.items)
 
     /*const cart = []
      for (const p of res) {
