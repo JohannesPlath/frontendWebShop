@@ -38,14 +38,27 @@ const actions = {
     let id = rootState.account.credential.userID;
     console.log('actions fetchCartOfUser: rootstate..id ', id)
     cartService.getCartOfUser(id, res => {
-      const products = []
-      for (const p of res) {
-        products.push({
-          product: new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl),
-          quantity: 0
-        })
+      console.log('actions : ', res)
+      console.log('actions res.productList: ', res.productList)
+      for (const p of res.productList) {
+        console.log('actions  for-loop p: ', p)
+        const cartProduct = new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl)
+        commit('addToLocalCart', cartProduct)
       }
-      commit('setCartProducts', products) //todo objekt übergeben
+
+      state.items = res.productList;
+      state.quantity = res.sumOfProducts;
+      state.cartTotalPrice = res.sumOfPrice;
+      console.log('actions @ fetchCart Of User state.items : ', state.items)
+
+      /*const cart = []
+       for (const p of res) {
+         cart.push({
+           product: new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl),
+           quantity: 0
+         })
+       }*/
+      //todo objekt übergeben
     })
   },
 
@@ -76,6 +89,12 @@ const actions = {
 
 // mutations
 const mutations = {
+
+  addToLocalCart(state, cartProduct) {
+    console.log('mutations addToLocalCart: ', state)
+    console.log('mutations addToLocalCart: cartpr ', cartProduct)
+    state.items.push(cartProduct);
+  },
 
   finalizeOrder(state, credentials, payment) {
     cartService.pushToCartBackend(state.items, credentials, payment)
