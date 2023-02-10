@@ -44,7 +44,6 @@ export class ProductModel {
     this.description = description;
     this.picUrl = picUrl;
     this.countForCart = countForCart;
-
   }
 }
 
