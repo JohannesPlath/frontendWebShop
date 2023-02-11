@@ -142,25 +142,7 @@
           <v-divider/>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <!--            <v-slide-x-reverse-transition>
-                          <v-tooltip
-                            v-if="formHasErrors"
-                            location="left"
-                          >
-                            <template v-slot:activator="{ on, attrs }">
-                              <v-btn
-                                icon
-                                class="my-0"
-                                v-bind="attrs"
 
-                                v-on="on"
-                              >
-                                <v-icon>mdi-refresh</v-icon>
-                              </v-btn>
-                            </template>
-                            <span>Refresh form</span>
-                          </v-tooltip>
-                        </v-slide-x-reverse-transition>-->
             <v-btn
               :disabled="!enabled"
               color="primary"
@@ -200,9 +182,9 @@ export default {
     enabled: false,
   }),
   computed: {
-    userCredentials() {
-      return this.credentials
-    },
+    /* userCredentials() {
+       return this.credentials
+     },*/
     form() {
       return {
         firstname: this.firstname,
@@ -226,10 +208,10 @@ export default {
   },
 
   watch: {
-    name() {
-      this.errorMessages = ''
-    },
-    userCredentials: {
+    /* name() {
+       this.errorMessages = ''
+     },*/
+    credentials: {
       immediate: true,
       deep: false,
       handler(newValue, oldValue) {

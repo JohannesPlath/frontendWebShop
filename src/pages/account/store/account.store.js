@@ -6,7 +6,7 @@ const account = {
   state() {
     return {
       credential: {
-        userID: "3226024e-704d-4fa9-bf9b-fd7233ee2d14",
+        userID: null,
         firstname: "John",
         familyName: "NotRegistered",
         address: "FancyStreet 32",
@@ -24,7 +24,8 @@ const account = {
   getters: {
     getCredentials(state) {
       return state.credential
-    }
+    },
+
   },
 
   actions: {
@@ -32,8 +33,14 @@ const account = {
       console.log("payload ", payload.email, " ", payload.passw)
       const singInAnswer = await accountService.sendLoginData(payload)
       const user = new User(singInAnswer.userID, singInAnswer.firstname, singInAnswer.familyName, singInAnswer.address, singInAnswer.city, singInAnswer.state, singInAnswer.zip, singInAnswer.country, singInAnswer.email, singInAnswer.password)
-      commit('setCredentials', user)
-      commit("signInMutation")
+      if (singInAnswer.userID != null) {
+        commit('setCredentials', user)
+        commit("signInMutation", user)
+        return user;
+      } else {
+        commit('failInfo')
+      }
+
     },
     async register({state, commit}, payload) {
       console.log('@accountStore actions register: ', payload)
@@ -53,6 +60,11 @@ const account = {
 
   mutations: {
     signInMutation(state, mail, passw) {
+
+    },
+
+    failInfo(state) {
+
     },
 
     registerMutation(state, mail, passw) {

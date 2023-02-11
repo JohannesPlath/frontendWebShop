@@ -59,16 +59,19 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "AccountLayout",
-
+  computed: {
+    ...mapGetters('account', {credentials: 'getCredentials'}),
+  },
   data: () => ({
     form: true,
     email: null,
     password: null,
     loading: false,
+    userID: null,
     itemFinalize:
       {
         secColor: 'purple',
@@ -77,22 +80,34 @@ export default {
       },
   }),
 
-
+  watch: {
+    name() {
+      this.errorMessages = ''
+    },
+    credentials: {
+      immediate: true,
+      deep: false,
+      handler(newValue, oldValue) {
+        console.log('user', newValue);
+        this.userID = newValue.userID;
+      }
+    }
+  },
   methods: {
     onSubmit() {
-      this.logIn({email: this.email, passw: this.password})
+
       if (!this.form) return
       this.loading = true
+      let logInData = this.logIn({email: this.email, passw: this.password})
       setTimeout(() => (this.loading = false), 2000)
-      /*this.setCredentials(this.form).then(
+      if (this.userID != null) {
         this.$router.push({path: '/shop'})
-      )*/
+      }
     },
 
     required(v) {
       return !!v || 'Field is required'
     },
-
     ...mapActions('account', ['setCredentials', 'logIn']),
 
   },
