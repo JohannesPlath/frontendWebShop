@@ -218,6 +218,14 @@ export default {
     name() {
       this.errorMessages = ''
     },
+    credentials: {
+      immediate: true,
+      deep: false,
+      handler(newValue, oldValue) {
+        console.log('user', newValue);
+        this.userID = newValue.userID;
+      }
+    }
   },
 
   methods: {
@@ -236,19 +244,16 @@ export default {
       this.$refs.form.reset()
 
     },
-    submit() {
+    submit: async function () {
       console.log('methods submit: form ', this.form)
       this.formHasErrors = false
       Object.keys(this.form).forEach(f => {
         if (!this.form[f]) this.formHasErrors = true
-        //this.$refs[f].validate(true)
+        this.$refs.form.validate(true)
       })
-      /*if (!this.formHasErrors) {*/
-      this.register(this.form)
-      //}
-      /*this.setCredentials(this.form).then(
-        this.$router.push({path: '/shop'})
-      )*/
+      if (!this.formHasErrors) {
+        await this.register(this.form)
+      }
     },
   },
 

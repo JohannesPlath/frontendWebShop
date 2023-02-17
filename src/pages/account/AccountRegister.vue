@@ -3,16 +3,12 @@
     class="mx-auto"
     width="350"
     prepend-icon="mdi-account"
-
   >
     <template v-slot:title>
       Try to Register yourselfe:
     </template>
-
-
   </v-card>
   <credentials-form>
-
   </credentials-form>
 </template>
 

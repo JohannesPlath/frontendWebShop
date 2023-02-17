@@ -118,9 +118,15 @@
         <v-card-text class="bg-white text--primary">
           <p>your order will payed by: </p>
           <p>{{ payment.name }} </p>
+          <v-select
+            label="Select"
+            :items="['PayPal', 'Bill', 'Klarna']"
+            variant="solo"
+          ></v-select>
           <v-btn
             :color="itemBank.secColor"
             variant="outlined"
+            @click="setPayment"
           >
             Change
           </v-btn>
@@ -202,6 +208,7 @@ export default {
     },
 
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
+    ...mapActions('payment', ['setPayment']),
 
     addOne(product) {
       //console.log("addOne", product)

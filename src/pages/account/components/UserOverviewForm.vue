@@ -141,7 +141,7 @@
           </v-card-text>
           <v-divider/>
           <v-card-actions>
-            <v-spacer></v-spacer>
+            <v-spacer/>
 
             <v-btn
               :disabled="!enabled"
@@ -247,17 +247,23 @@ export default {
       this.$refs.form.reset()
 
     },
-    submit() {
+    async submit() {
       console.log('methods submit: form ', this.form)
       this.formHasErrors = false
       Object.keys(this.form).forEach(f => {
-        if (!this.form[f]) this.formHasErrors = true
-        //this.$refs[f].validate(true)
+        if (!this.form[f])
+          this.formHasErrors = true
+        this.$refs.form.validate(true)
+        if (this.newpassword != this.confirmNewPassword) {
+          this.formHasErrors = true
+        }
       })
-      this.register(this.form)
-      /*this.setCredentials(this.form).then(
+      let user
+      if (!this.formHasErrors)
+        user = await this.register(this.form)
+      if (user.userID != null) {
         this.$router.push({path: '/shop'})
-      )*/
+      }
     },
   },
 

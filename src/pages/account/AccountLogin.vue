@@ -94,13 +94,12 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
-
+    async onSubmit() {
       if (!this.form) return
       this.loading = true
-      let logInData = this.logIn({email: this.email, passw: this.password})
+      let user = await this.logIn({email: this.email, passw: this.password})
       setTimeout(() => (this.loading = false), 2000)
-      if (this.userID != null) {
+      if (user.userID != null) {
         this.$router.push({path: '/shop'})
       }
     },
