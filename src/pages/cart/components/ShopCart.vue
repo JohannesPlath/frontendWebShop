@@ -117,7 +117,7 @@
         </v-card-title>
         <v-card-text class="bg-white text--primary">
           <p>your order will payed by: </p>
-          <p>{{ payment.name }} </p>
+          <p>{{ payment }} </p>
           <v-select
             v-model="paymentChoose"
             label="Select"
@@ -126,13 +126,6 @@
             @update:menu="onPaymentSelect"
           ></v-select>
 
-          <v-btn
-            :color="itemBank.secColor"
-            variant="outlined"
-            @click="setPayment"
-          >
-            Change
-          </v-btn>
         </v-card-text>
       </v-card>
     </v-timeline-item>
@@ -163,7 +156,7 @@
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
-import payment from "@/store/modules/payment/payment";
+import paymentStore from "@/pages/cart/store/payment.store";
 
 
 export default {
@@ -197,6 +190,9 @@ export default {
 
 
   computed: {
+    paymentStore() {
+      return paymentStore
+    },
     ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice']),
     ...mapGetters('account', {credentials: 'getCredentials'}),
     ...mapGetters('payment', {payment: 'getPayment'}),
@@ -207,11 +203,11 @@ export default {
   },
 
   methods: {
-    payment() {
-      return payment
-    },
+
     onPaymentSelect() {
-      console.log('methods onPaymentSelect: ', this.paymentChoose)
+      console.log('methods onPaymentSelect this.paymentChoose: ', this.paymentChoose)
+      console.log('methods onPaymentSelect this.credentials: ', this.credentials.userID)
+      this.setPayment(this.credentials, this.paymentChoose)
     },
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
     ...mapActions('payment', ['setPayment']),
@@ -226,9 +222,9 @@ export default {
       this.reduceProductFromCart(product)
     },
 
-    finalizeOrder(cartProducts, credentials, payment) {
-      console.log('methods finalizeOrder: ', cartProducts, credentials, payment)
-      this.finalize(cartProducts, credentials, payment)
+    finalizeOrder(cartProducts, credentials, paymentStore) {
+      console.log('methods finalizeOrder: ', cartProducts, credentials, paymentStore)
+      this.finalize(cartProducts, credentials, paymentStore)
     }
   },
 
