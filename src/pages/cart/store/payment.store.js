@@ -19,8 +19,11 @@ const paymentStore = {
       state.payment.name = payload
     }
   },
+
   actions: {
     async setPayment(context, userId, payload) {
+      console.log("@ payment.store @ setPayment context: ", context)
+      console.log("@ payment.store @ setPayment userId: ", userId)
       console.log("@ payment.store @ setPayment payload: ", payload)
       await cartService.setPayment(userId, payload)
       context.commit('setPayment', payload)

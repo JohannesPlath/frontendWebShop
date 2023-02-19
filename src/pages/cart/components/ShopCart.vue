@@ -116,7 +116,7 @@
             </h2>
             <div>
               <p>your order will payed by: </p>
-              <p>{{ payment.name }} </p>
+              <p>{{ payment }} </p>
               <v-select
                 v-model="paymentChoose"
                 label="Select"
@@ -220,7 +220,7 @@ export default {
     onPaymentSelect() {
       console.log('methods onPaymentSelect this.paymentChoose: ', this.paymentChoose)
       console.log('methods onPaymentSelect this.credentials: ', this.credentials.userID)
-      this.setPayment(this.credentials, this.paymentChoose)
+      this.setPayment(this.credentials.userID, this.paymentChoose)
     },
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
     ...mapActions('payment', ['setPayment']),
