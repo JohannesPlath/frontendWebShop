@@ -119,10 +119,13 @@
           <p>your order will payed by: </p>
           <p>{{ payment.name }} </p>
           <v-select
+            v-model="paymentChoose"
             label="Select"
             :items="['PayPal', 'Bill', 'Klarna']"
             variant="solo"
+            @update:menu="onPaymentSelect"
           ></v-select>
+
           <v-btn
             :color="itemBank.secColor"
             variant="outlined"
@@ -189,6 +192,7 @@ export default {
         color: 'secondary',
         icon: 'mdi-cart',
       },
+    paymentChoose: null,
   }),
 
 
@@ -206,7 +210,9 @@ export default {
     payment() {
       return payment
     },
-
+    onPaymentSelect() {
+      console.log('methods onPaymentSelect: ', this.paymentChoose)
+    },
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
     ...mapActions('payment', ['setPayment']),
 

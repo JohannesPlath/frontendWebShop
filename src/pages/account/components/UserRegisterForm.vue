@@ -135,25 +135,7 @@
               Cancel
             </v-btn>
             <v-spacer/>
-            <!--            <v-slide-x-reverse-transition>
-                          <v-tooltip
-                            v-if="formHasErrors"
-                            location="left"
-                          >
-                            <template #activator="{ on, attrs }">
-                              <v-btn
-                                icon
-                                class="my-0"
-                                v-bind="attrs"
 
-                                v-on="on"
-                              >
-                                <v-icon>mdi-refresh</v-icon>
-                              </v-btn>
-                            </template>
-                            <span>Refresh form</span>
-                          </v-tooltip>
-                        </v-slide-x-reverse-transition>-->
             <v-btn
               :disabled="!enabled"
               color="primary"
@@ -174,7 +156,7 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   data: () => ({
-    countries: ['Argentina', 'Australia', 'Austria', 'Belgium', 'Brazil', 'Bulgaria', 'Croatia', 'Czech Republic', 'Denmark', 'Deutschland', 'Finland', 'France', 'Germany', 'Greece', 'Grenada', 'Hungary', 'Iceland', 'Israel', 'Italy', 'Jamaica', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Malta', 'Mauritius', 'Mexico', 'Monaco', 'Montenegro', 'Netherlands Antilles', 'Norway', 'Paraguay', 'Peru', 'Poland', 'Portugal', 'Romania', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'South Korea', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Venezuela'],
+    countries: ['Australia', 'Austria', 'Belgium', 'Czech Republic', 'Denmark', 'Deutschland', 'Finland', 'France', 'Germany', 'Greece', 'Grenada', 'Hungary', 'Italy', 'Jamaica', 'Luxembourg', 'Norway', 'Paraguay', 'Peru', 'Poland', 'Portugal', 'Slovakia', 'Slovenia', 'South Korea', 'Spain', 'Sweden', 'Switzerland', 'Ukraine', 'United Kingdom', 'United States', 'Venezuela'],
     errorMessages: '',
     firstname: null,
     familyName: null,
