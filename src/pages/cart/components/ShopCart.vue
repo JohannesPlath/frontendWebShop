@@ -217,10 +217,11 @@ export default {
 
   methods: {
 
-    onPaymentSelect() {
+    onPaymentSelect: function () {
       console.log('methods onPaymentSelect this.paymentChoose: ', this.paymentChoose)
       console.log('methods onPaymentSelect this.credentials: ', this.credentials.userID)
-      this.setPayment(this.credentials.userID, this.paymentChoose)
+      if (this.paymentChoose == null) return
+      this.setPayment({uuid: this.credentials.userID, payment: this.paymentChoose})
     },
     ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
     ...mapActions('payment', ['setPayment']),

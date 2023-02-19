@@ -9,9 +9,9 @@ done - Post/ProductFromCart/ ggf als json /DTO
 done - Sync LogIn:  POST/login/userdata (als Json: nur cridentials)  -> keycloak //axios.post("http://localhost:8080/user/login/",  accountDTO)
 done - Sync Register:  PUT/register/userdata (als Json: alle daten)  -> keycloak
 done - sync lockout: axios.post("http://localhost:8080/user/logout/", accountDTO) mit userId in account dto
-- ChoosePaymentl (sync): PUT/paymentStore/{userID}/{Paymentprovider}
+done   ChoosePayment (sync): POST/paymentStore/payment/ + new PaymentDTO(userId:uuid, payment:String)
 - PUT/finalize{userID}
-- Put/deleteOrder/{userID}
+Done Post/deleteOrder/{userID}
 
 ----------------------------------
 

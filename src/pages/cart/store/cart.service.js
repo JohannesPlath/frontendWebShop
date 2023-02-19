@@ -1,13 +1,16 @@
 import axios from 'axios'
 import {ChangeAtCartDTO} from "@/pages/cart/store/DTO/changeAtCartDTO";
+import {PaymentDTO} from "@/pages/cart/store/DTO/paymentDTO";
 
 export const cartService = {
 
-  async setPayment(userId, paymnet) {
-    console.log('cartService setPayment: user + payment', userId, " ", paymnet)
-    const pathVar = {uuid: userId, paymnet: paymnet}
-    console.log('cartService setPayment: ', pathVar)
-    //return await axios.put("http://localhost:8080/paymentStore/", pathVar)
+  async setPayment(payload) {
+    //const pathVar = {uuid: userId, paymnet: paymnet}
+    console.log('cartService setPayment: user + payment', payload.uuid, " ", payload.payment)
+    const paymentDTO = new PaymentDTO(payload.uuid, payload.payment)
+    //const pathVar = {uuid: userId, paymnet: paymnet}
+    console.log('cartService setPayment paymentDto: ', paymentDTO)
+    return await axios.post("http://localhost:8080/paymentStore/payment/", paymentDTO)
   },
 
   async addProduct(userId, product, amount) {

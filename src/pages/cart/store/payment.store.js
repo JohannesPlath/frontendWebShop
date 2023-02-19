@@ -1,4 +1,5 @@
 import {cartService} from "@/pages/cart/store/cart.service";
+import {ifStatement} from "@babel/types";
 
 const paymentStore = {
   namespaced: true,
@@ -21,12 +22,13 @@ const paymentStore = {
   },
 
   actions: {
-    async setPayment(context, userId, payload) {
+    async setPayment(context, payload) {
+      console.log("@ payment.store @ setPayment payload ", payload)
       console.log("@ payment.store @ setPayment context: ", context)
-      console.log("@ payment.store @ setPayment userId: ", userId)
-      console.log("@ payment.store @ setPayment payload: ", payload)
-      await cartService.setPayment(userId, payload)
-      context.commit('setPayment', payload)
+      console.log("@ payment.store @ setPayment userId: ", payload.uuid)
+      console.log("@ payment.store @ setPayment payload: ", payload.payment)
+      let hasSetPayment = await cartService.setPayment(payload)
+      if (hasSetPayment) context.commit('setPayment', payload.payment)
     }
   }
 }
