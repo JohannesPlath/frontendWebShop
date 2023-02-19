@@ -52,107 +52,120 @@
         </template>
       </v-list-item>
     </v-list>
+
+    <v-card-text>
+      <v-timeline side="end" color="secondary">
+        <v-timeline-item
+          style="max-width: fit-content"
+          :dot-color="itemFinalize.secColor"
+          :icon="itemFinalize.icon"
+          fill-dot
+        >
+
+          <div>
+            <h2 :class="['pt-1 headline font-weight-bold', `text-${itemFinalize.color}`]">
+              Sum of your order:
+            </h2>
+            <div>
+              <p> Sum of products: {{ quantity }} </p>
+              <p>total Price: {{ getCartTotalPrice.toFixed(2) }} € </p>
+            </div>
+          </div>
+
+        </v-timeline-item>
+
+        <v-timeline-item
+          style="max-width: fit-content"
+          :dot-color="itemAddress.secColor"
+          :icon="itemAddress.icon"
+          fill-dot
+        >
+          <div>
+            <h2 :class="['pt-1 headline font-weight-bold', `text-${itemFinalize.color}`]">
+              Check your Address:
+            </h2>
+            <div>
+              <h3>your order will be send to: </h3>
+              <p> {{ credentials.firstname }} {{ credentials.familyName }} </p>
+              <p> {{ credentials.address }} </p>
+              <p> {{ credentials.zip }} {{ credentials.city }} </p>
+              <p> {{ credentials.state }} </p>
+
+              <v-btn
+                :color="itemAddress.secColor"
+                variant="outlined"
+                to="/account/overview"
+              >
+                Change
+              </v-btn>
+            </div>
+          </div>
+
+        </v-timeline-item>
+
+        <v-timeline-item
+          style="max-width: fit-content"
+          :dot-color="itemBank.secColor"
+          :icon="itemBank.icon"
+          fill-dot
+        >
+
+          <div>
+            <h2 :class="['pt-1 headline font-weight-bold', `text-${itemFinalize.color}`]">
+              Check your Payment:
+            </h2>
+            <div>
+              <p>your order will payed by: </p>
+              <p>{{ payment.name }} </p>
+              <v-select
+                v-model="paymentChoose"
+                label="Select"
+                :items="['PayPal', 'Bill', 'Klarna']"
+                variant="solo"
+                @update:menu="onPaymentSelect"
+              ></v-select>
+
+              <v-btn
+                :color="itemBank.secColor"
+                variant="outlined"
+                @click="setPayment"
+              >
+                Change
+              </v-btn>
+            </div>
+          </div>
+
+        </v-timeline-item>
+
+        <v-timeline-item
+          style="max-width: fit-content"
+          :dot-color="itemFinalize.secColor"
+          :icon="itemFinalize.icon"
+          fill-dot
+        >
+
+          <div>
+            <h2 :class="['pt-1 headline font-weight-bold', `text-${itemFinalize.color}`]">
+              Finalize:
+            </h2>
+            <div>
+              <p>If everything is ok, push order</p>
+              <v-btn
+                :color="itemFinalize.secColor"
+                variant="outlined"
+                @click="finalizeOrder(cartProducts,credentials,payment)"
+              >
+                Order NOW
+              </v-btn>
+            </div>
+          </div>
+
+        </v-timeline-item>
+      </v-timeline>
+    </v-card-text>
+
   </v-card>
 
-  <v-timeline side="end" color="secondary">
-    <v-timeline-item
-      style="max-width: fit-content"
-      :dot-color="itemFinalize.secColor"
-      :icon="itemFinalize.icon"
-      fill-dot
-    >
-      <v-card>
-        <v-card-title :class="['text-h6', `bg-${itemFinalize.color}`]">
-          Sum of your order:
-        </v-card-title>
-        <v-card-text class="bg-white text--primary">
-          <p> Sum of products: {{ quantity }} </p>
-          <p>total Price: {{ getCartTotalPrice.toFixed(2) }} € </p>
-          <!--          <v-btn
-            :color="itemFinalize.color"
-            variant="outlined">
-            Accept
-          </v-btn>-->
-        </v-card-text>
-      </v-card>
-    </v-timeline-item>
-
-    <v-timeline-item
-      style="max-width: fit-content"
-      :dot-color="itemAddress.secColor"
-      :icon="itemAddress.icon"
-      fill-dot
-    >
-      <v-card>
-        <v-card-title :class="['text-h6', `bg-${itemAddress.color}`]">
-          Check your Address:
-        </v-card-title>
-        <v-card-text class="bg-white text--primary">
-          <h3>your order will be send to: </h3>
-          <p> {{ credentials.firstname }} {{ credentials.familyName }} </p>
-          <p> {{ credentials.address }} </p>
-          <p> {{ credentials.zip }} {{ credentials.city }} </p>
-          <p> {{ credentials.state }} </p>
-
-          <v-btn
-            :color="itemAddress.secColor"
-            variant="outlined"
-            to="/account/overview"
-          >
-            Change
-          </v-btn>
-        </v-card-text>
-      </v-card>
-    </v-timeline-item>
-
-    <v-timeline-item
-      style="max-width: fit-content"
-      :dot-color="itemBank.secColor"
-      :icon="itemBank.icon"
-      fill-dot
-    >
-      <v-card>
-        <v-card-title :class="['text-h6', `bg-${itemBank.color}`]">
-          Check your Payment:
-        </v-card-title>
-        <v-card-text class="bg-white text--primary">
-          <p>your order will payed by: </p>
-          <p>{{ payment }} </p>
-          <v-select
-            v-model="paymentChoose"
-            label="Select"
-            :items="['PayPal', 'Bill', 'Klarna']"
-            variant="solo"
-            @update:menu="onPaymentSelect"
-          ></v-select>
-
-        </v-card-text>
-      </v-card>
-    </v-timeline-item>
-
-    <v-timeline-item
-      style="max-width: fit-content"
-      :dot-color="itemFinalize.secColor"
-      :icon="itemFinalize.icon"
-      fill-dot
-    >
-      <v-card>
-        <v-card-title :class="['text-h6', `bg-${itemFinalize.color}`]">
-          Finalize:
-        </v-card-title>
-        <v-card-text class="bg-white text--primary">
-          <p>If everything is ok, push order</p>
-          <v-btn
-            :color="itemFinalize.secColor"
-            variant="outlined"
-            @click="finalizeOrder(cartProducts,credentials,payment)"
-          >
-            Order NOW
-          </v-btn>
-        </v-card-text>
-      </v-card>
-    </v-timeline-item>
-  </v-timeline>
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";

@@ -7,7 +7,7 @@ export const cartService = {
     console.log('cartService setPayment: user + payment', userId, " ", paymnet)
     const pathVar = {uuid: userId, paymnet: paymnet}
     console.log('cartService setPayment: ', pathVar)
-    return await axios.put("http://localhost:8080/paymentStore/", pathVar)
+    //return await axios.put("http://localhost:8080/paymentStore/", pathVar)
   },
 
   async addProduct(userId, product, amount) {
