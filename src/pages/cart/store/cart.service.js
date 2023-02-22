@@ -37,7 +37,12 @@ export const cartService = {
     }*/
   },
 
-
+  async finalizeOrder(credentials, payment) {
+    console.log('cartService finalizeOrder: ', credentials.uuid, payment)
+    let finalizeOrder = new PaymentDTO(credentials.userID, payment)
+    const resp = await axios.post("http://localhost:8080/finalize/order/", finalizeOrder)
+    console.log('cartService finalizeOrder response: ', resp.data)
+  }
   /* getItemsAndCount(items) {
      let dtoList = []
      for (let item of items) {

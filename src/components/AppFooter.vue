@@ -22,7 +22,6 @@
 export default {
   data: () => ({
     links: [
-      'Home',
       'About Us',
       'Team',
       'Services',
@@ -31,7 +30,6 @@ export default {
   }),
 }
 </script>
-
 
 
 <!--<template>

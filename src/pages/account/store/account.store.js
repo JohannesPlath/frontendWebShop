@@ -16,7 +16,6 @@ const account = {
         country: "Deutschland",
         email: "no registered mail",
         password: "",
-        confirmedPassword: "", //todo Löschen und testen
       }
     }
   },
@@ -38,7 +37,7 @@ const account = {
         commit("signInMutation", user)
         return user;
       } else {
-        commit('failInfo')
+        commit('failInfo', state)
       }
 
     },
@@ -70,6 +69,7 @@ const account = {
     },
 
     failInfo(state) {
+      //state.dialog = true;
 
     },
 

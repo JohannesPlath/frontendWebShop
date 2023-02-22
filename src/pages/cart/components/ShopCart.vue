@@ -153,7 +153,7 @@
               <v-btn
                 :color="itemFinalize.secColor"
                 variant="outlined"
-                @click="finalizeOrder(cartProducts,credentials,payment)"
+                @click="finalizeOrder(credentials, payment)"
               >
                 Order NOW
               </v-btn>
@@ -204,7 +204,7 @@ export default {
 
   computed: {
     paymentStore() {
-      return paymentStore
+      return paymentStore // todo ggf löschen
     },
     ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice']),
     ...mapGetters('account', {credentials: 'getCredentials'}),
@@ -236,9 +236,9 @@ export default {
       this.reduceProductFromCart(product)
     },
 
-    finalizeOrder(cartProducts, credentials, paymentStore) {
-      console.log('methods finalizeOrder: ', cartProducts, credentials, paymentStore)
-      this.finalize(cartProducts, credentials, paymentStore)
+    finalizeOrder(credentials, payment) {
+      console.log('methods finalizeOrder: ', credentials, payment)
+      this.finalize({credentials, payment})
     }
   },
 

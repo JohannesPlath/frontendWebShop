@@ -156,6 +156,19 @@
       </v-col>
     </v-row>
   </v-form>
+  <v-dialog
+    v-model="dialog"
+    width="auto"
+  >
+    <v-card>
+      <v-card-text>
+        Something went wrong, please check your input!
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -180,6 +193,7 @@ export default {
     show1: false,
     show2: false,
     enabled: false,
+    dialog: false,
   }),
   computed: {
     /* userCredentials() {
@@ -263,6 +277,8 @@ export default {
         user = await this.register(this.form)
       if (user.userID != null) {
         this.$router.push({path: '/shop'})
+      } else {
+        this.dialog = true
       }
     },
   },

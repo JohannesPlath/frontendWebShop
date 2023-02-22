@@ -22,14 +22,7 @@ const getters = {
   getCartTotalPrice: (state) => {
     return state.cartTotalPrice;
   },
-  /*cartTotalPrice: (state) => {
-     let result;
-      for (let x = 0; x < state.items.length; x++) {
-        this.result += Interger.valueOf(state.items.at(x).price)
-        console.log("result ", this.result);
-        console.log("state.items.at(x).price ", state.items.at(x).price)
-      }
-  }*/
+
 }
 
 
@@ -73,9 +66,10 @@ const actions = {
     dispatch('fetchCartOfUser', {state, commit, rootState});
   },
 
-  finalize(state, products, credentials, payment) {
-    console.log('actions finalizeOrder: ', state.items, credentials, payment)
-    commit('finalizeOrder', state, credentials, payment)
+  async finalize(state, {credentials, payment}) {
+    console.log('actions finalizeOrder: ', state, "\n", credentials.userID, "\n", payment)
+    let resp = await cartService.finalizeOrder(credentials, payment)
+    //commit('finalizeOrder', state, credentials, payment)
   }
 }
 
