@@ -1,6 +1,6 @@
 export class FinalizeDTO {
   constructor(userID, payment) {
-    this.userId = userID;
+    this.userID = userID;
     this.payment = payment;
   }
 }

@@ -166,6 +166,19 @@
 
   </v-card>
 
+  <v-dialog
+    v-model="dialog"
+    width="auto"
+  >
+    <v-card>
+      <v-card-text>
+        {{ finalizeText }}
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="primary" block @click="changePopUp()">Close Dialog</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
@@ -199,6 +212,8 @@ export default {
         icon: 'mdi-cart',
       },
     paymentChoose: null,
+    dialog: false,
+    finalizeText: "",
   }),
 
 
@@ -206,7 +221,7 @@ export default {
     paymentStore() {
       return paymentStore // todo ggf löschen
     },
-    ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice']),
+    ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice', 'finalizeText', 'isFinalized']),
     ...mapGetters('account', {credentials: 'getCredentials'}),
     ...mapGetters('payment', {payment: 'getPayment'}),
   },
@@ -216,6 +231,10 @@ export default {
   },
 
   methods: {
+    changePopUp() {
+      this.dialog = false
+      //this.setIsFinalisedFalse();
+    },
 
     onPaymentSelect: function () {
       console.log('methods onPaymentSelect this.paymentChoose: ', this.paymentChoose)
@@ -223,7 +242,7 @@ export default {
       if (this.paymentChoose == null) return
       this.setPayment({uuid: this.credentials.userID, payment: this.paymentChoose})
     },
-    ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
+    ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize', 'setIsFinalisedFalseAtCartStore']),
     ...mapActions('payment', ['setPayment']),
 
     addOne(product) {
@@ -237,9 +256,14 @@ export default {
     },
 
     finalizeOrder(credentials, payment) {
-      console.log('methods finalizeOrder: ', credentials, payment)
+      console.log('methods finalizeOrder: ', credentials.userID, payment)
+      console.log('methods finalizeOrder + isFinalized: ', this.isFinalized)
       this.finalize({credentials, payment})
+    },
+    setIsFinalisedFalse() {
+      this.setIsFinalisedFalseAtCartStore()
     }
+
   },
 
 
