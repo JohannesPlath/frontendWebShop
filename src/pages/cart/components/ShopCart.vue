@@ -124,14 +124,14 @@
                 variant="solo"
                 @update:menu="onPaymentSelect"
               ></v-select>
-
-              <v-btn
-                :color="itemBank.secColor"
-                variant="outlined"
-                @click="setPayment"
-              >
-                Change
-              </v-btn>
+              <!--
+                            <v-btn
+                              :color="itemBank.secColor"
+                              variant="outlined"
+                              @click="setPayment"
+                            >
+                              Change
+                            </v-btn>-->
             </div>
           </div>
 
@@ -213,7 +213,7 @@ export default {
       },
     paymentChoose: null,
     dialog: false,
-    finalizeText: "",
+    
   }),
 
 
