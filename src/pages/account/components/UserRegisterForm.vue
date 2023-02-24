@@ -211,9 +211,6 @@ export default {
   },
 
   watch: {
-    name() {
-      this.errorMessages = ''
-    },
     credentials: {
       immediate: true,
       deep: false,

@@ -7,14 +7,19 @@ const state = {
   quantity: 0,
   checkoutStatus: null,
   cartTotalPrice: 0,
-  isFinalized: false,
-  finalizeText: null,
+  hasNewMessage: false,
+  finalizeText: "testText",
+  isFinalized: false
 }
 
 // getters
 const getters = {
   cartProducts: (state) => {
     return state.items
+  },
+
+  hasNewMessage: (state) => {
+    return state.hasNewMessage
   },
 
   isFinalized: (state) => {
@@ -71,6 +76,7 @@ const actions = {
   async finalize({state, commit, rootState, dispatch}, payload) {
     console.log('actions finalizeOrder: ', payload.credentials.userID, " --> ", payload.payment)
     let resp = await cartService.finalizeOrder(payload.credentials.userID, payload.payment);
+    commit('newMessage', state)
     console.log('actions finalize respose ----->> : ', resp.data)
     if (resp.data.hasBeenFinalized) {
       console.log('actions finalize: if clause + ', resp.data.hasBeenFinalized)
@@ -82,21 +88,25 @@ const actions = {
     }
   },
 
-  /*setIsFinalisedFalseAtCartStore({state, commit, rootState, dispatch}) {
+  setIsFinalisedFalseAtCartStore({state, commit, rootState, dispatch}) {
     commit('setIsFinalisedFalseAtCartStore')
-  }*/
+  }
 }
 
 // mutations
 const mutations = {
 
-  /*isFinalized(state) {
-    state.isFinalized = false;
-  },*/
-  /* setIsFinalisedFalseAtCartStore(state) {
-     console.log('mutations setIsFinalisedFalseAtCartStore: ', "-------------------------------------->>>>>>>>>>>>>>>>>>>>>>>")
-     state.isFinalized = false
+  /* isFinalized(state) {
+     state.hasNewMessage = false;
    },*/
+  setIsFinalisedFalseAtCartStore(state) {
+    console.log('mutations setIsFinalisedFalseAtCartStore: ', "-------------------------------------->>>>>>>>>>>>>>>>>>>>>>>")
+    state.hasNewMessage = false
+  },
+
+  newMessage(state) {
+    state.hasNewMessage = true;
+  },
 
   clearState(state) {
     state.items = [];
@@ -119,12 +129,13 @@ const mutations = {
   },
 
   mutateFinalizeOrder(state, respData) {
+    state.hasNewMessage = true
     state.isFinalized = respData.hasBeenFinalized
     console.log('mutations mutateFinalizeOrder:  respData', respData)
     console.log('mutations mutateFinalizeOrder: ', "------------------------>>>>>>>>>>>>>>>>>>>>>>>", respData.hasBeenFinalized)
     state.finalizeText = respData.message
     console.log('mutations mutateFinalizeOrder: ', state.finalizeText)
-    console.log('mutations mutateFinalizeOrder: -------->>>>>>>  state.isFinalized ', state.isFinalized)
+    console.log('mutations mutateFinalizeOrder: -------->>>>>>>  state.isFinalized ', state.hasNewMessage)
   },
 
 }

@@ -211,12 +211,23 @@ export default {
 
 
   computed: {
-    paymentStore() {
-      return paymentStore // todo ggf löschen
-    },
-    ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice', 'finalizeText', 'isFinalized']),
+    /* paymentStore() {
+       return paymentStore // todo ggf löschen
+     },*/
+    ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice', 'finalizeText', 'isFinalized', 'hasNewMessage']),
     ...mapGetters('account', {credentials: 'getCredentials'}),
     ...mapGetters('payment', {payment: 'getPayment'}),
+  },
+
+  watch: {
+    hasNewMessage: {
+      immediate: true,
+      deep: false,
+      handler(newValue, oldValue) {
+        console.log('newVar', newValue);
+        this.dialog = newValue;
+      }
+    }
   },
 
   mounted() {
@@ -226,7 +237,7 @@ export default {
   methods: {
     changePopUp() {
       this.dialog = false
-      //this.setIsFinalisedFalse();
+      this.setIsFinalisedFalse();
     },
 
     onPaymentSelect: function () {
@@ -239,12 +250,10 @@ export default {
     ...mapActions('payment', ['setPayment']),
 
     addOne(product) {
-      //console.log("addOne", product)
       this.addProductToCart(product)
     },
 
     removeOne(product) {
-      //console.log("removeOne", product)
       this.reduceProductFromCart(product)
     },
 

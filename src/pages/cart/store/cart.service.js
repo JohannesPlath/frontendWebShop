@@ -40,7 +40,7 @@ export const cartService = {
 
   async finalizeOrder(userID, payment) {
     console.log('cartService finalizeOrder: ', userID, payment)
-    let finalizeOrder = new FinalizeDTO(userID, payment, null, null)
+    let finalizeOrder = new FinalizeDTO(userID, payment, null, false)
     console.log('cartService finalizeOrder object FinalizeDTO: ', finalizeOrder)
 
     return await axios.post("http://localhost:8080/finalize/order/", finalizeOrder)
