@@ -39,61 +39,52 @@ const actions = {
 
   async fetchCartOfUser({state, commit, rootState}) {
     let id = rootState.account.credential.userID;
-    //console.log('actions fetchCartOfUser: rootstate..id ', id)
     const res = await cartService.getCartOfUser(id);
     const cartOfUserDTO = new CartOfUserDTO(res.userID, res.sumOfProducts, res.sumOfPrice, res.productList)
-    /*console.log('actions : ', cartOfUserDTO)
-    console.log('actions res.productList: ', cartOfUserDTO.productList)*/
     commit('clearState', state)
+    let totalPrice = 0
+    let totalQauntity = 0
     for (const p of cartOfUserDTO.productList) {
-      //  console.log('actions  for-loop p: ', p)
       const cartProduct = new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl)
+      totalPrice += (p.price * p.count)
+      totalQauntity += p.count
       commit('addToLocalCart', cartProduct)
     }
-    /* console.log('actions state.quantity = res.sumOfProducts: ', state.quantity, res.sumOfProducts)
-     //state.quantity = res.sumOfProducts;
-     console.log('actions state.cartTotalPrice = res.sumOfPrice;: ', state.cartTotalPrice, res.sumOfPrice)
-     //state.cartTotalPrice = res.sumOfPrice;
-     console.log('actions @ fetchCart Of User state.items : ', state.items)
- */
-    commit('setCartTotalPrice', cartOfUserDTO.sumOfPrice)
-    commit('setQuantity', cartOfUserDTO.sumOfProducts)
+    commit('setCartTotalPrice', totalPrice)
+    commit('setQuantity', totalQauntity)
   },
 
   async reduceProductFromCart({state, commit, rootState, dispatch}, product) {
     let userId = rootState.account.credential.userID
-    console.log("@ cart reduceOne: ", product, userId)
     await cartService.reduceProduct(userId, product, -1)
     dispatch('fetchCartOfUser', {state, commit, rootState});
   },
 
   async addProductToCart({state, commit, rootState, dispatch}, product) {
     let userId = rootState.account.credential.userID
-    console.log("@ cart : ", userId)
-    console.log("@ cart addproduct: ", product)
     await cartService.addProduct(userId, product, 1)
     dispatch('fetchCartOfUser', {state, commit, rootState});
-    commit('setIsFinalized', state)
+
   },
 
 
   async finalize({state, commit, rootState, dispatch}, payload) {
-    console.log('actions finalizeOrder: ', payload.credentials.userID, " --> ", payload.payment)// "\n", credentials.userID, "\n", payment)
+    console.log('actions finalizeOrder: ', payload.credentials.userID, " --> ", payload.payment)
     let resp = await cartService.finalizeOrder(payload.credentials.userID, payload.payment);
     console.log('actions finalize respose ----->> : ', resp.data)
     if (resp.data.hasBeenFinalized) {
       console.log('actions finalize: if clause + ', resp.data.hasBeenFinalized)
       commit("clearState", state) // todo hier weiter, warum commit mmnicht geht
       dispatch('fetchCartOfUser', {state, commit, rootState})
-
+      commit('mutateFinalizeOrder', resp.data)
+    } else {
+      commit('mutateFinalizeOrder', resp.data)
     }
-    console.log('actions finalize "state": ', state)
-    commit('mutateFinalizeOrder', resp.data)
   },
 
-  setIsFinalisedFalseAtCartStore({state, commit, rootState, dispatch}) {
+  /*setIsFinalisedFalseAtCartStore({state, commit, rootState, dispatch}) {
     commit('setIsFinalisedFalseAtCartStore')
-  }
+  }*/
 }
 
 // mutations
@@ -102,10 +93,10 @@ const mutations = {
   /*isFinalized(state) {
     state.isFinalized = false;
   },*/
-  setIsFinalisedFalseAtCartStore(state) {
-    console.log('mutations setIsFinalisedFalseAtCartStore: ', "-------------------------------------->>>>>>>>>>>>>>>>>>>>>>>")
-    state.isFinalized = false
-  },
+  /* setIsFinalisedFalseAtCartStore(state) {
+     console.log('mutations setIsFinalisedFalseAtCartStore: ', "-------------------------------------->>>>>>>>>>>>>>>>>>>>>>>")
+     state.isFinalized = false
+   },*/
 
   clearState(state) {
     state.items = [];

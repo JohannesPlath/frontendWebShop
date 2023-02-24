@@ -124,14 +124,6 @@
                 variant="solo"
                 @update:menu="onPaymentSelect"
               ></v-select>
-              <!--
-                            <v-btn
-                              :color="itemBank.secColor"
-                              variant="outlined"
-                              @click="setPayment"
-                            >
-                              Change
-                            </v-btn>-->
             </div>
           </div>
 
@@ -183,6 +175,7 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import paymentStore from "@/pages/cart/store/payment.store";
+import cartStore from "@/pages/cart/store/cart.store";
 
 
 export default {
@@ -213,7 +206,7 @@ export default {
       },
     paymentChoose: null,
     dialog: false,
-    
+
   }),
 
 
