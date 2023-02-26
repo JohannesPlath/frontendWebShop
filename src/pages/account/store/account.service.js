@@ -4,21 +4,21 @@ import {AccountDTO} from "@/pages/account/store/models/DTO/accountDTO";
 export const accountService = {
 
   async sendLoginData(payload) {
-    console.log('accountService sendLoginData + payload: ', payload)
+    //console.log('accountService sendLoginData + payload: ', payload)
     let accountDTO = new AccountDTO(null, null, null, null, null, null, null, null, payload.email, payload.passw, payload.newpassword)
     const loginAnswer = await axios.post("http://localhost:8080/user/login/", accountDTO)
     return loginAnswer.data;
   },
 
   register: async function (payload) {
-    console.log('Account.service accountService register: ', payload)
+    //console.log('Account.service accountService register: ', payload)
     let accountDTO
     if (payload.userID != null) {
       accountDTO = new AccountDTO(payload.userID, payload.firstname, payload.familyName, payload.address, payload.city, payload.state, payload.zip, payload.country, payload.email, payload.oldpassword, payload.newpassword)
     } else {
       accountDTO = new AccountDTO(null, payload.firstname, payload.familyName, payload.address, payload.city, payload.state, payload.zip, payload.country, payload.email, payload.oldpassword, payload.newpassword)
     }
-    console.log('accountService register: accountDTO ', accountDTO)
+    //console.log('accountService register: accountDTO ', accountDTO)
     const registerAnswer = await axios.post("http://localhost:8080/user/register/", accountDTO)
     return registerAnswer.data;
   },

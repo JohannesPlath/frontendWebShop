@@ -131,11 +131,11 @@ const mutations = {
   mutateFinalizeOrder(state, respData) {
     state.hasNewMessage = true
     state.isFinalized = respData.hasBeenFinalized
-    console.log('mutations mutateFinalizeOrder:  respData', respData)
-    console.log('mutations mutateFinalizeOrder: ', "------------------------>>>>>>>>>>>>>>>>>>>>>>>", respData.hasBeenFinalized)
+    // console.log('mutations mutateFinalizeOrder:  respData', respData)
+    // console.log('mutations mutateFinalizeOrder: ', "------------------------>>>>>>>>>>>>>>>>>>>>>>>", respData.hasBeenFinalized)
     state.finalizeText = respData.message
-    console.log('mutations mutateFinalizeOrder: ', state.finalizeText)
-    console.log('mutations mutateFinalizeOrder: -------->>>>>>>  state.isFinalized ', state.hasNewMessage)
+    // console.log('mutations mutateFinalizeOrder: ', state.finalizeText)
+    // console.log('mutations mutateFinalizeOrder: -------->>>>>>>  state.isFinalized ', state.hasNewMessage)
   },
 
 }
