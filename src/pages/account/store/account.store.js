@@ -16,7 +16,6 @@ const account = {
         country: "Deutschland",
         email: "no registered mail",
         password: "",
-        confirmedPassword: "", //todo Löschen und testen
       }
     }
   },
@@ -25,7 +24,6 @@ const account = {
     getCredentials(state) {
       return state.credential
     },
-
   },
 
   actions: {
@@ -38,10 +36,10 @@ const account = {
         commit("signInMutation", user)
         return user;
       } else {
-        commit('failInfo')
+        commit('failInfo', state)
       }
-
     },
+
     async register({state, commit}, payload) {
       console.log('@accountStore actions register: ', payload)
       const registeredUser = await accountService.register(payload)
@@ -66,11 +64,10 @@ const account = {
 
   mutations: {
     signInMutation(state, mail, passw) {
-
     },
 
     failInfo(state) {
-
+      //state.dialog = true;
     },
 
     registerMutation(state, mail, passw) {

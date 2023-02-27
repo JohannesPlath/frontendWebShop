@@ -149,6 +149,19 @@
       </v-col>
     </v-row>
   </v-form>
+  <v-dialog
+    v-model="dialog"
+    width="auto"
+  >
+    <v-card>
+      <v-card-text>
+        Something went wrong, please check your input!
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -172,6 +185,7 @@ export default {
     show1: false,
     show2: false,
     enabled: false,
+    dialog: false
   }),
 
   computed: {
@@ -197,9 +211,6 @@ export default {
   },
 
   watch: {
-    name() {
-      this.errorMessages = ''
-    },
     credentials: {
       immediate: true,
       deep: false,
@@ -233,8 +244,15 @@ export default {
         if (!this.form[f]) this.formHasErrors = true
         this.$refs.form.validate(true)
       })
+      let user
       if (!this.formHasErrors) {
-        await this.register(this.form)
+        user = await this.register(this.form)
+      }
+      if (user != null && user.userID != null) {
+        console.log('@ User Register methods submit + uiser: ', user)
+        this.$router.push({path: '/shop'})
+      } else {
+        this.dialog = true
       }
     },
   },

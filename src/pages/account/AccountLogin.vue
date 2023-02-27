@@ -38,6 +38,7 @@
             >
               Sign In
             </v-btn>
+
             <br>
             <v-btn
 
@@ -54,6 +55,19 @@
           </v-form>
         </v-card>
       </v-sheet>
+      <v-dialog
+        v-model="dialog"
+        width="auto"
+      >
+        <v-card>
+          <v-card-text>
+            Something went wrong, please check your input!
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </router-view>
   </v-container>
 </template>
@@ -78,6 +92,7 @@ export default {
         color: 'secondary',
         icon: 'mdi-cart',
       },
+    dialog: false,
   }),
 
   watch: {
@@ -99,8 +114,11 @@ export default {
       this.loading = true
       let user = await this.logIn({email: this.email, passw: this.password})
       setTimeout(() => (this.loading = false), 2000)
-      if (user.userID != null) {
+      if (user != null) {
         this.$router.push({path: '/shop'})
+      } else {
+        console.log('methods onSubmit: ', user, " ", this.dialog)
+        this.dialog = true
       }
     },
 

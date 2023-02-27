@@ -83,9 +83,9 @@
             />
             <v-text-field
               ref="oldPassword"
-              v-model="oldpassword" input
+              v-model="oldPassword" input
               :rules="[
-                () => !!oldpassword || 'This field is required',
+                () => !!oldPassword || 'This field is required',
               ]"
               label="old Password"
               required
@@ -96,10 +96,10 @@
             />
             <v-text-field
               ref="newPassword"
-              v-model="newpassword" input
+              v-model="newPassword" input
               :rules="[
-                () => !!newpassword || 'This field is required',
-                () => !!newpassword && newpassword.length >= 8 || 'Min 8 characters'
+                () => !!newPassword || 'This field is required',
+                () => !!newPassword && newPassword.length >= 8 || 'Min 8 characters'
               ]"
               label="new Password"
               required
@@ -113,7 +113,7 @@
               v-model="confirmNewPassword" input
               :rules="[
                 () => !!confirmNewPassword || 'This field is required',
-                () => newpassword === confirmNewPassword || 'Confirmed Password is not eqaul!'
+                () => newPassword === confirmNewPassword || 'Confirmed Password is not eqaul!'
               ]"
               label="new Password"
               required
@@ -156,6 +156,19 @@
       </v-col>
     </v-row>
   </v-form>
+  <v-dialog
+    v-model="dialog"
+    width="auto"
+  >
+    <v-card>
+      <v-card-text>
+        Something went wrong, please check your input!
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -174,19 +187,22 @@ export default {
     country: null,
     email: null,
     formHasErrors: false,
-    oldpassword: null,
-    newpassword: null,
+    oldPassword: null,
+    newPassword: null,
     confirmNewPassword: null,
     show1: false,
     show2: false,
     enabled: false,
+    dialog: false,
+    userID: null,
   }),
   computed: {
-    /* userCredentials() {
-       return this.credentials
-     },*/
+    userCredentials() {
+      return this.credentials
+    },
     form() {
       return {
+        userID: this.userID,
         firstname: this.firstname,
         familyName: this.familyName,
         address: this.address,
@@ -195,8 +211,8 @@ export default {
         zip: this.zip,
         country: this.country,
         email: this.email,
-        oldpassword: this.oldpassword,
-        newpassword: this.newpassword,
+        oldPassword: this.oldPassword,
+        newPassword: this.newPassword,
         confirmNewPassword: this.confirmNewPassword,
       }
     },
@@ -215,8 +231,7 @@ export default {
       immediate: true,
       deep: false,
       handler(newValue, oldValue) {
-        console.log('userCredentials handler: ', this.zip)
-        console.log('user', newValue);
+        this.userID = newValue.userID
         this.firstname = newValue.firstname
         this.familyName = newValue.familyName //todo rest auffüllen
         this.address = newValue.address
@@ -224,7 +239,7 @@ export default {
         this.state = newValue.state
         this.zip = newValue.zip
         this.country = newValue.country
-        console.log('userCredentials handler: ', newValue.country)
+        console.log('userCredentials handler: ', newValue)
         this.email = newValue.email
 
       }
@@ -254,24 +269,21 @@ export default {
         if (!this.form[f])
           this.formHasErrors = true
         this.$refs.form.validate(true)
-        if (this.newpassword != this.confirmNewPassword) {
+        if (this.newPassword != this.confirmNewPassword) {
           this.formHasErrors = true
         }
       })
       let user
       if (!this.formHasErrors)
         user = await this.register(this.form)
-      if (user.userID != null) {
+      if (user != null && user.userID != null) {
         this.$router.push({path: '/shop'})
+      } else {
+        this.dialog = true
       }
     },
   },
 
-  /* mounted() {
-    if (this.credentials.familyName === "NotRegistered") {
-      //this.$router.push({path: '/account/login'})
-    }
-  }*/
 
 }
 </script>

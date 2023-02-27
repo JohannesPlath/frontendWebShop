@@ -124,14 +124,6 @@
                 variant="solo"
                 @update:menu="onPaymentSelect"
               ></v-select>
-
-              <v-btn
-                :color="itemBank.secColor"
-                variant="outlined"
-                @click="setPayment"
-              >
-                Change
-              </v-btn>
             </div>
           </div>
 
@@ -153,7 +145,7 @@
               <v-btn
                 :color="itemFinalize.secColor"
                 variant="outlined"
-                @click="finalizeOrder(cartProducts,credentials,payment)"
+                @click="finalizeOrder(credentials, payment)"
               >
                 Order NOW
               </v-btn>
@@ -166,10 +158,24 @@
 
   </v-card>
 
+  <v-dialog
+    v-model="dialog"
+    width="auto"
+  >
+    <v-card>
+      <v-card-text>
+        {{ finalizeText }}
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="primary" block @click="changePopUp()">Close Dialog</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
 import paymentStore from "@/pages/cart/store/payment.store";
+import cartStore from "@/pages/cart/store/cart.store";
 
 
 export default {
@@ -199,16 +205,29 @@ export default {
         icon: 'mdi-cart',
       },
     paymentChoose: null,
+    dialog: false,
+
   }),
 
 
   computed: {
-    paymentStore() {
-      return paymentStore
-    },
-    ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice']),
+    /* paymentStore() {
+       return paymentStore // todo ggf löschen
+     },*/
+    ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice', 'finalizeText', 'isFinalized', 'hasNewMessage']),
     ...mapGetters('account', {credentials: 'getCredentials'}),
     ...mapGetters('payment', {payment: 'getPayment'}),
+  },
+
+  watch: {
+    hasNewMessage: {
+      immediate: true,
+      deep: false,
+      handler(newValue, oldValue) {
+        console.log('newVar', newValue);
+        this.dialog = newValue;
+      }
+    }
   },
 
   mounted() {
@@ -216,6 +235,10 @@ export default {
   },
 
   methods: {
+    changePopUp() {
+      this.dialog = false
+      this.setIsFinalisedFalse();
+    },
 
     onPaymentSelect: function () {
       console.log('methods onPaymentSelect this.paymentChoose: ', this.paymentChoose)
@@ -223,23 +246,26 @@ export default {
       if (this.paymentChoose == null) return
       this.setPayment({uuid: this.credentials.userID, payment: this.paymentChoose})
     },
-    ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize']),
+    ...mapActions('cart', ['addProductToCart', 'reduceProductFromCart', 'finalize', 'setIsFinalisedFalseAtCartStore']),
     ...mapActions('payment', ['setPayment']),
 
     addOne(product) {
-      //console.log("addOne", product)
       this.addProductToCart(product)
     },
 
     removeOne(product) {
-      //console.log("removeOne", product)
       this.reduceProductFromCart(product)
     },
 
-    finalizeOrder(cartProducts, credentials, paymentStore) {
-      console.log('methods finalizeOrder: ', cartProducts, credentials, paymentStore)
-      this.finalize(cartProducts, credentials, paymentStore)
+    finalizeOrder(credentials, payment) {
+      console.log('methods finalizeOrder: ', credentials.userID, payment)
+      console.log('methods finalizeOrder + isFinalized: ', this.isFinalized)
+      this.finalize({credentials, payment})
+    },
+    setIsFinalisedFalse() {
+      this.setIsFinalisedFalseAtCartStore()
     }
+
   },
 
 

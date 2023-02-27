@@ -7,12 +7,23 @@ const state = {
   quantity: 0,
   checkoutStatus: null,
   cartTotalPrice: 0,
+  hasNewMessage: false,
+  finalizeText: "testText",
+  isFinalized: false
 }
 
 // getters
 const getters = {
   cartProducts: (state) => {
     return state.items
+  },
+
+  hasNewMessage: (state) => {
+    return state.hasNewMessage
+  },
+
+  isFinalized: (state) => {
+    return state.isFinalized
   },
 
   quantity: (state) => {
@@ -22,14 +33,10 @@ const getters = {
   getCartTotalPrice: (state) => {
     return state.cartTotalPrice;
   },
-  /*cartTotalPrice: (state) => {
-     let result;
-      for (let x = 0; x < state.items.length; x++) {
-        this.result += Interger.valueOf(state.items.at(x).price)
-        console.log("result ", this.result);
-        console.log("state.items.at(x).price ", state.items.at(x).price)
-      }
-  }*/
+
+  finalizeText: (state) => {
+    return state.finalizeText;
+  }
 }
 
 
@@ -37,50 +44,67 @@ const actions = {
 
   async fetchCartOfUser({state, commit, rootState}) {
     let id = rootState.account.credential.userID;
-    //console.log('actions fetchCartOfUser: rootstate..id ', id)
     const res = await cartService.getCartOfUser(id);
     const cartOfUserDTO = new CartOfUserDTO(res.userID, res.sumOfProducts, res.sumOfPrice, res.productList)
-    /*console.log('actions : ', cartOfUserDTO)
-    console.log('actions res.productList: ', cartOfUserDTO.productList)*/
     commit('clearState', state)
+    let totalPrice = 0
+    let totalQauntity = 0
     for (const p of cartOfUserDTO.productList) {
-      console.log('actions  for-loop p: ', p)
       const cartProduct = new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl)
+      totalPrice += (p.price * p.count) // todo absprechen ob werte für menge und summe aus dto kommen oder berechnet werden
+      totalQauntity += p.count
       commit('addToLocalCart', cartProduct)
     }
-    /* console.log('actions state.quantity = res.sumOfProducts: ', state.quantity, res.sumOfProducts)
-     //state.quantity = res.sumOfProducts;
-     console.log('actions state.cartTotalPrice = res.sumOfPrice;: ', state.cartTotalPrice, res.sumOfPrice)
-     //state.cartTotalPrice = res.sumOfPrice;
-     console.log('actions @ fetchCart Of User state.items : ', state.items)
- */
-    commit('setCartTotalPrice', cartOfUserDTO.sumOfPrice)
-    commit('setQuantity', cartOfUserDTO.sumOfProducts)
+    commit('setCartTotalPrice', totalPrice)
+    commit('setQuantity', totalQauntity)
   },
 
   async reduceProductFromCart({state, commit, rootState, dispatch}, product) {
     let userId = rootState.account.credential.userID
-    console.log("@ cart reduceOne: ", product, userId)
     await cartService.reduceProduct(userId, product, -1)
     dispatch('fetchCartOfUser', {state, commit, rootState});
   },
 
   async addProductToCart({state, commit, rootState, dispatch}, product) {
     let userId = rootState.account.credential.userID
-    console.log("@ cart : ", userId)
-    console.log("@ cart addproduct: ", product)
     await cartService.addProduct(userId, product, 1)
     dispatch('fetchCartOfUser', {state, commit, rootState});
+
   },
 
-  finalize(state, products, credentials, payment) {
-    console.log('actions finalizeOrder: ', state.items, credentials, payment)
-    commit('finalizeOrder', state, credentials, payment)
+  async finalize({state, commit, rootState, dispatch}, payload) {
+    console.log('actions finalizeOrder: ', payload.credentials.userID, " --> ", payload.payment)
+    let resp = await cartService.finalizeOrder(payload.credentials.userID, payload.payment);
+    commit('newMessage', state)
+    console.log('actions finalize respose ----->> : ', resp.data)
+    if (resp.data.hasBeenFinalized) {
+      console.log('actions finalize: if clause + ', resp.data.hasBeenFinalized)
+      commit("clearState", state)
+      dispatch('fetchCartOfUser', {state, commit, rootState})
+      commit('mutateFinalizeOrder', resp.data)
+    } else {
+      commit('mutateFinalizeOrder', resp.data)
+    }
+  },
+
+  setIsFinalisedFalseAtCartStore({state, commit, rootState, dispatch}) {
+    commit('setIsFinalisedFalseAtCartStore')
   }
 }
 
 // mutations
 const mutations = {
+
+  /* isFinalized(state) {
+     state.hasNewMessage = false;
+   },*/
+  setIsFinalisedFalseAtCartStore(state) {
+    state.hasNewMessage = false
+  },
+
+  newMessage(state) {
+    state.hasNewMessage = true;
+  },
 
   clearState(state) {
     state.items = [];
@@ -97,61 +121,21 @@ const mutations = {
   },
 
   addToLocalCart(state, cartProduct) {
-    console.log('mutations addToLocalCart: ', state)
-    console.log('mutations addToLocalCart: cartpr ', cartProduct)
     state.quantity = state.quantity + cartProduct.count;
     state.cartTotalPrice = state.cartTotalPrice + (cartProduct.count * cartProduct.price);
     state.items.push(cartProduct);
   },
 
-  finalizeOrder(state, credentials, payment) {
-    cartService.pushToCartBackend(state.items, credentials, payment)
+  mutateFinalizeOrder(state, respData) {
+    state.hasNewMessage = true
+    state.isFinalized = respData.hasBeenFinalized
+    // console.log('mutations mutateFinalizeOrder:  respData', respData)
+    // console.log('mutations mutateFinalizeOrder: ', "------------------------>>>>>>>>>>>>>>>>>>>>>>>", respData.hasBeenFinalized)
+    state.finalizeText = respData.message
+    // console.log('mutations mutateFinalizeOrder: ', state.finalizeText)
+    // console.log('mutations mutateFinalizeOrder: -------->>>>>>>  state.isFinalized ', state.hasNewMessage)
   },
 
-
-  /* pushProductToCart(state, product, userId) {
-
-     //todo löschen wenn backend aktiv
-     let existItem = state.items.find(item => item.uuid === product.uuid);
-     if (existItem) {
-       existItem.amount++;
-     } else {
-       state.items.push({
-         product: product,
-         amount: 1,
-       })
-     }
-     state.quantity++;
-     state.cartTotalPrice = state.cartTotalPrice + product.price;
-   },
- */
-
-  /*reduceProductFromCart(state, deleteProduct) {
-    let existItem = state.items.find(item => item.uuid === deleteProduct.uuid);
-    console.log('mutations reduceProductFromCart: ', existItem)
-    existItem.amount--;
-    if (existItem.amount === 0) {
-      state.items.splice(state.items.indexOf(existItem), 1)
-    }
-    console.log('mutations reduceProductFromCart: state.items', state.items)
-    state.quantity--;
-    state.cartTotalPrice -= deleteProduct.price;
-    console.log("state.items: ", state.items)
-
-  },*/
-
-  /*incrementItemQuantity(state, {id}) {
-    const cartItem = state.items.find(item => item.id === id)
-    cartItem.quantity++
-  },
-
-  setCartItems(state, {items}) {
-    state.items = items
-  },
-
-  setCheckoutStatus(state, status) {
-    state.checkoutStatus = status
-  }*/
 }
 
 export default {

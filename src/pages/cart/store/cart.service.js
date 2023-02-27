@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {ChangeAtCartDTO} from "@/pages/cart/store/DTO/changeAtCartDTO";
 import {PaymentDTO} from "@/pages/cart/store/DTO/paymentDTO";
+import {FinalizeDTO} from "@/pages/cart/store/DTO/finalizeDTO";
 
 export const cartService = {
 
@@ -37,7 +38,13 @@ export const cartService = {
     }*/
   },
 
+  async finalizeOrder(userID, payment) {
+    console.log('cartService finalizeOrder: ', userID, payment)
+    let finalizeOrder = new FinalizeDTO(userID, payment, null, false)
+    console.log('cartService finalizeOrder object FinalizeDTO: ', finalizeOrder)
 
+    return await axios.post("http://localhost:8080/finalize/order/", finalizeOrder)
+  }
   /* getItemsAndCount(items) {
      let dtoList = []
      for (let item of items) {

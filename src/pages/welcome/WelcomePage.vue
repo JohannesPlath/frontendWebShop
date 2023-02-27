@@ -10,20 +10,21 @@ export default {
   data: () => ({
     photos: [
       'src/assets/pics/2h-media-1SDw4biQ6us-unsplash.jpg',
+      'src/assets/pics/diyahna-lewis---JxxyIUHnU-unsplash.jpg',
+      'src/assets/pics/metal-grinder-weed-canabis-oil-joint-posing.jpg',
+      'src/assets/pics/roman-kasyan-zlUgzTz56jo-unsplash.jpg',
+      'src/assets/pics/ryan-lange-J5-MNWFzHZs-unsplash.jpg',
+      'src/assets/pics/teanna-morgan-JfEiDHqOyyk-unsplash.jpg',
+      'src/assets/pics/purple-hemp-flowers-medical-cannabis.jpg',
       'src/assets/pics/2h-media-9oIym89cYIc-unsplash.jpg',
       'src/assets/pics/2h-media-mQVlwFd3OPA-unsplash.jpg',
-      'src/assets/pics/metal-grinder-weed-canabis-oil-joint-posing.jpg',
+      'src/assets/pics/addict-gc6eed1d19_1280.png',
       'src/assets/pics/vertical-isolated-shot-marijuana-blunt-white.jpg',
       'src/assets/pics/marijuana-g966935eb2_1920.jpg',
       'src/assets/pics/avery-meeker-0skab8kzSxo-unsplash.jpg',
       'src/assets/pics/christopher-lemercier-KKiVzGhHR0k-unsplash.jpg',
       'src/assets/pics/crystalweed-cannabis-sEWqMCemlVA-unsplash.jpg',
-      'src/assets/pics/diyahna-lewis---JxxyIUHnU-unsplash.jpg',
       'src/assets/pics/flowers-gd7e30204f_1920.jpg',
-      'src/assets/pics/purple-hemp-flowers-medical-cannabis.jpg',
-      'src/assets/pics/roman-kasyan-zlUgzTz56jo-unsplash.jpg',
-      'src/assets/pics/ryan-lange-J5-MNWFzHZs-unsplash.jpg',
-      'src/assets/pics/teanna-morgan-JfEiDHqOyyk-unsplash.jpg',
     ]
   }),
 }
