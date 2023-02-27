@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ShopCart from "@/pages/cart/components/ShopCart";
+import ShopCart from "@/pages/cart/components/Cart.vue";
 
 export default {
   components: {ShopCart},

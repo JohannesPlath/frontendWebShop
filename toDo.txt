@@ -10,15 +10,15 @@ done - Sync LogIn:  POST/login/userdata (als Json: nur cridentials)  -> keycloak
 done - Sync Register:  PUT/register/userdata (als Json: alle daten)  -> keycloak
 done - sync lockout: axios.post("http://localhost:8080/user/logout/", accountDTO) mit userId in account dto
 done   ChoosePayment (sync): POST/paymentStore/payment/ + new PaymentDTO(userId:uuid, payment:String)
-- PUT/finalize{userID}
-Done Post/deleteOrder/{userID}
+done - Post/finalize{finalizeDTO}?? nötig ??
+ Post/deleteOrder/{userID}
 
 ----------------------------------
 
 umbau am Frontend:
 done - loginPage (mail/passw) vor Accountpage / Registrierung
-- shop sperren ohne Registrierung
-- cart infos aus Backend beziehen - abrufen der CartBackend infos zu einem user
+done - shop sperren ohne Registrierung
+done - cart infos aus Backend beziehen - abrufen der CartBackend infos zu einem user
 done - nachricht an CartBackend bei "AddToCart"
 
  DTOs definieren:
@@ -71,5 +71,14 @@ export class ChangeAtCartDTO {
     this.productId = productId;
     this.userID = userID;
     this.count = count;
+  }
+}
+
+export class FinalizeDTO {
+  constructor(userID, payment, message, hsBeenFinalized) {
+    this.userID = userID;
+    this.payment = payment;
+    this.message = message;
+    this.hasBeenFinalized = hsBeenFinalized;
   }
 }

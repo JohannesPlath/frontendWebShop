@@ -7,6 +7,7 @@ import AccountLayout from "@/pages/account/AccountLayout.vue";
 import AccountRegister from "@/pages/account/AccountRegister.vue";
 import AccountOverview from "@/pages/account/AccountOverview.vue";
 import store from '@/store/index'
+import Disclaimer from "@/pages/Disclaimer.vue";
 
 const routes = [
   {
@@ -46,6 +47,11 @@ const routes = [
     component: CartPage,
   },
 
+  {
+    path: '/disclaimer',
+    name: 'Disclaimer',
+    component: Disclaimer
+  }
 
 ];
 
@@ -65,7 +71,7 @@ router.beforeEach((to, from, next) => {
     next()
   } else if (to.name === 'Home') {
     next()
-  } else if (to.name === 'AccountRegister') {
+  } else if (to.name === 'AccountRegister' || to.name === 'Disclaimer') {
     next()
   } else if (isUserId) {
     next()
