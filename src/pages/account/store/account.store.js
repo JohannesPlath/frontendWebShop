@@ -24,7 +24,6 @@ const account = {
     getCredentials(state) {
       return state.credential
     },
-
   },
 
   actions: {
@@ -39,8 +38,8 @@ const account = {
       } else {
         commit('failInfo', state)
       }
-
     },
+
     async register({state, commit}, payload) {
       console.log('@accountStore actions register: ', payload)
       const registeredUser = await accountService.register(payload)
@@ -65,12 +64,10 @@ const account = {
 
   mutations: {
     signInMutation(state, mail, passw) {
-
     },
 
     failInfo(state) {
       //state.dialog = true;
-
     },
 
     registerMutation(state, mail, passw) {

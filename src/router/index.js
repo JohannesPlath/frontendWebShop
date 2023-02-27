@@ -7,17 +7,12 @@ import AccountLayout from "@/pages/account/AccountLayout.vue";
 import AccountRegister from "@/pages/account/AccountRegister.vue";
 import AccountOverview from "@/pages/account/AccountOverview.vue";
 import store from '@/store/index'
-import account from "@/pages/account/store/account.store";
-import {mapGetters} from "vuex";
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
-    meta: {
-      requiresAuth: true
-    },
   },
   {
     path: '/account',
@@ -32,17 +27,11 @@ const routes = [
         path: 'register',
         component: AccountRegister,
         name: 'AccountRegister',
-        meta: {
-          requiresAuth: true
-        },
       },
       {
         path: 'login',
         component: AccountLogin,
         name: 'AccountLogin',
-        meta: {
-          requiresAuth: true
-        },
       }],
   },
   {
@@ -55,7 +44,9 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: CartPage,
-  }
+  },
+
+
 ];
 
 const router = createRouter({
@@ -63,38 +54,25 @@ const router = createRouter({
   routes,
 });
 
-/*router.beforeEach((to, from, next) => {
-    console.log('store : ', store.account/!*.credential?.userID*!/)
-    let isUserId = store.account && store.account.userID
-    console.log('@ index-js : UserId ', isUserId)
-    if (isUserId || to.name === 'AccountLogin' || to.name === 'Home') {
-      next()
-    } else {
-      next({name: 'AccountRegister'})
-    }
-    //next()
-  }
-);*/
 
-let actualUser = store.getters["account/getCredentials"]
 router.beforeEach((to, from, next) => {
-  console.log('store : ', store.account)// !*.credential?.userID*!/)
-  console.log('actualUser : ', actualUser)// !*.credential?.userID*!/)
-  let isUserId = store.account && store.account.userID
+  let actualUser = store.getters["account/getCredentials"]
+  console.log('store : ', store.account)
+  console.log('actualUser : ', actualUser)
+  let isUserId = actualUser && actualUser.userID
   console.log('@ index-js : UserId ', isUserId)
   if (to.name === 'AccountLogin') {
-    next() // login route is always  okay (we could use the requires auth flag below). prevent a redirect loop
+    next()
   } else if (to.name === 'Home') {
     next()
   } else if (to.name === 'AccountRegister') {
     next()
-  } else if (to.meta && to.meta.requiresAuth === false) {
-    next() // requires auth is explicitly set to false
-  } else if (store.getters.isLoggedIn) {
-    next() // i'm logged in. carry on
+  } else if (isUserId) {
+    next()
   } else {
     next({name: 'AccountLogin'}) // always put your redirect as the default case
   }
 })
+
 
 export default router;

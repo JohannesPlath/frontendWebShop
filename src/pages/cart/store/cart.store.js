@@ -51,7 +51,7 @@ const actions = {
     let totalQauntity = 0
     for (const p of cartOfUserDTO.productList) {
       const cartProduct = new ProductModel(p.id, p.title, p.currency, p.category, p.count, p.price, p.description, p.picUrl)
-      totalPrice += (p.price * p.count)
+      totalPrice += (p.price * p.count) // todo absprechen ob werte für menge und summe aus dto kommen oder berechnet werden
       totalQauntity += p.count
       commit('addToLocalCart', cartProduct)
     }
@@ -72,7 +72,6 @@ const actions = {
 
   },
 
-
   async finalize({state, commit, rootState, dispatch}, payload) {
     console.log('actions finalizeOrder: ', payload.credentials.userID, " --> ", payload.payment)
     let resp = await cartService.finalizeOrder(payload.credentials.userID, payload.payment);
@@ -80,7 +79,7 @@ const actions = {
     console.log('actions finalize respose ----->> : ', resp.data)
     if (resp.data.hasBeenFinalized) {
       console.log('actions finalize: if clause + ', resp.data.hasBeenFinalized)
-      commit("clearState", state) // todo hier weiter, warum commit mmnicht geht
+      commit("clearState", state)
       dispatch('fetchCartOfUser', {state, commit, rootState})
       commit('mutateFinalizeOrder', resp.data)
     } else {
@@ -100,7 +99,6 @@ const mutations = {
      state.hasNewMessage = false;
    },*/
   setIsFinalisedFalseAtCartStore(state) {
-    console.log('mutations setIsFinalisedFalseAtCartStore: ', "-------------------------------------->>>>>>>>>>>>>>>>>>>>>>>")
     state.hasNewMessage = false
   },
 
