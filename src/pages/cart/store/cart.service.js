@@ -2,14 +2,15 @@ import axios from 'axios'
 import {ChangeAtCartDTO} from "@/pages/cart/store/DTO/changeAtCartDTO";
 import {PaymentDTO} from "@/pages/cart/store/DTO/paymentDTO";
 import {FinalizeDTO} from "@/pages/cart/store/DTO/finalizeDTO";
+import {Constance} from "@/constance";
 
 export const cartService = {
 
   async setPayment(payload) {
-    //const pathVar = {uuid: userId, paymnet: paymnet}
+    //constance.js pathVar = {uuid: userId, paymnet: paymnet}
     console.log('cartService setPayment: user + payment', payload.uuid, " ", payload.payment)
     const paymentDTO = new PaymentDTO(payload.uuid, payload.payment)
-    //const pathVar = {uuid: userId, paymnet: paymnet}
+    //constance.js pathVar = {uuid: userId, paymnet: paymnet}
     console.log('cartService setPayment paymentDto: ', paymentDTO)
     return await axios.post("http://localhost:8080/paymentStore/payment/", paymentDTO)
   },
@@ -17,20 +18,20 @@ export const cartService = {
   async addProduct(userId, product, amount) {
     let changeAtCartDTO = new ChangeAtCartDTO(product.uuid, userId, amount)
     console.log('cartService addProduct: ', changeAtCartDTO)
-    await axios.post("http://localhost:8080/cart/ProductToCart/", changeAtCartDTO)
+    await axios.post(Constance.BACKEND_URl + "cart/ProductToCart/", changeAtCartDTO)
   },
 
 
   async reduceProduct(userId, product, amount) {
     let changeAtCartDTO = new ChangeAtCartDTO(product.uuid, userId, amount)
     console.log('cartService reduceProduct: ', changeAtCartDTO)
-    await axios.post("http://localhost:8080/cart/ProductFromCart/", changeAtCartDTO)
+    await axios.post(Constance.BACKEND_URl + "cart/ProductFromCart/", changeAtCartDTO)
   },
 
   async getCartOfUser(id) {
     console.log('cartService getCartOfUser: ', id);
     let changeAtCartDTO = new ChangeAtCartDTO(null, id, 0)
-    const response = await axios.post("http://localhost:8080/cart/fetchCartOfUser/", changeAtCartDTO);//{params: {uuid: id}});
+    const response = await axios.post(Constance.BACKEND_URl + "cart/fetchCartOfUser/", changeAtCartDTO);//{params: {uuid: id}});
     console.log("-------------> ", response.data);
     return response.data
     /*} catch (error) {
@@ -43,7 +44,7 @@ export const cartService = {
     let finalizeOrder = new FinalizeDTO(userID, payment, null, false)
     console.log('cartService finalizeOrder object FinalizeDTO: ', finalizeOrder)
 
-    return await axios.post("http://localhost:8080/finalize/order/", finalizeOrder)
+    return await axios.post(Constance.BACKEND_URl + "finalize/order/", finalizeOrder)
   }
   /* getItemsAndCount(items) {
      let dtoList = []

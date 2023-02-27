@@ -12,6 +12,17 @@
       >
         {{ link }}
       </v-btn>
+      <v-btn
+        v-for="link in links"
+        :key="link"
+        to="/disclaimer"
+        color="white"
+        variant="text"
+        class="mx-2"
+        rounded="xl"
+      >
+        disclaimer
+      </v-btn>
       <v-col class="text-center mt-4" cols="12">
         {{ new Date().getFullYear() }} — <strong>KBE - WS 22/23 </strong>
       </v-col>
@@ -22,10 +33,7 @@
 export default {
   data: () => ({
     links: [
-      'About Us',
-      'Team',
-      'Services',
-      'Contact Us',
+      'to shop',
     ],
   }),
 }
