@@ -23,10 +23,6 @@ const paymentStore = {
 
   actions: {
     async setPayment(context, payload) {
-      console.log("@ payment.store @ setPayment payload ", payload)
-      console.log("@ payment.store @ setPayment context: ", context)
-      console.log("@ payment.store @ setPayment userId: ", payload.uuid)
-      console.log("@ payment.store @ setPayment payload: ", payload.payment)
       let hasSetPayment = await cartService.setPayment(payload)
       if (hasSetPayment) context.commit('setPayment', payload.payment)
     }

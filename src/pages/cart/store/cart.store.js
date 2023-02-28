@@ -73,12 +73,9 @@ const actions = {
   },
 
   async finalize({state, commit, rootState, dispatch}, payload) {
-    console.log('actions finalizeOrder: ', payload.credentials.userID, " --> ", payload.payment)
     let resp = await cartService.finalizeOrder(payload.credentials.userID, payload.payment);
     commit('newMessage', state)
-    console.log('actions finalize respose ----->> : ', resp.data)
     if (resp.data.hasBeenFinalized) {
-      console.log('actions finalize: if clause + ', resp.data.hasBeenFinalized)
       commit("clearState", state)
       dispatch('fetchCartOfUser', {state, commit, rootState})
       commit('mutateFinalizeOrder', resp.data)
@@ -129,11 +126,7 @@ const mutations = {
   mutateFinalizeOrder(state, respData) {
     state.hasNewMessage = true
     state.isFinalized = respData.hasBeenFinalized
-    // console.log('mutations mutateFinalizeOrder:  respData', respData)
-    // console.log('mutations mutateFinalizeOrder: ', "------------------------>>>>>>>>>>>>>>>>>>>>>>>", respData.hasBeenFinalized)
     state.finalizeText = respData.message
-    // console.log('mutations mutateFinalizeOrder: ', state.finalizeText)
-    // console.log('mutations mutateFinalizeOrder: -------->>>>>>>  state.isFinalized ', state.hasNewMessage)
   },
 
 }

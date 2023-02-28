@@ -25,7 +25,6 @@ export default {
     ...mapActions('cart', ['addProductToCart']),
 
     addToCart(product) {
-      console.log("product: ", product)
       this.addProductToCart(product)
     },
 

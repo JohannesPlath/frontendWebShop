@@ -103,7 +103,6 @@ export default {
       immediate: true,
       deep: false,
       handler(newValue, oldValue) {
-        console.log('user', newValue);
         this.userID = newValue.userID;
       }
     }
@@ -117,7 +116,6 @@ export default {
       if (user != null) {
         this.$router.push({path: '/shop'})
       } else {
-        console.log('methods onSubmit: ', user, " ", this.dialog)
         this.dialog = true
       }
     },

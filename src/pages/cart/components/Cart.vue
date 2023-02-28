@@ -211,9 +211,7 @@ export default {
 
 
   computed: {
-    /* paymentStore() {
-       return paymentStore // todo ggf löschen
-     },*/
+
     ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice', 'finalizeText', 'isFinalized', 'hasNewMessage']),
     ...mapGetters('account', {credentials: 'getCredentials'}),
     ...mapGetters('payment', {payment: 'getPayment'}),
@@ -224,7 +222,6 @@ export default {
       immediate: true,
       deep: false,
       handler(newValue, oldValue) {
-        console.log('newVar', newValue);
         this.dialog = newValue;
       }
     }
@@ -241,8 +238,6 @@ export default {
     },
 
     onPaymentSelect: function () {
-      console.log('methods onPaymentSelect this.paymentChoose: ', this.paymentChoose)
-      console.log('methods onPaymentSelect this.credentials: ', this.credentials.userID)
       if (this.paymentChoose == null) return
       this.setPayment({uuid: this.credentials.userID, payment: this.paymentChoose})
     },
@@ -258,8 +253,6 @@ export default {
     },
 
     finalizeOrder(credentials, payment) {
-      console.log('methods finalizeOrder: ', credentials.userID, payment)
-      console.log('methods finalizeOrder + isFinalized: ', this.isFinalized)
       this.finalize({credentials, payment})
     },
     setIsFinalisedFalse() {
