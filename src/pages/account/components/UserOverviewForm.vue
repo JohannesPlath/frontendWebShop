@@ -239,7 +239,6 @@ export default {
         this.state = newValue.state
         this.zip = newValue.zip
         this.country = newValue.country
-        console.log('userCredentials handler: ', newValue)
         this.email = newValue.email
 
       }
@@ -263,7 +262,6 @@ export default {
 
     },
     async submit() {
-      console.log('methods submit: form ', this.form)
       this.formHasErrors = false
       Object.keys(this.form).forEach(f => {
         if (!this.form[f])

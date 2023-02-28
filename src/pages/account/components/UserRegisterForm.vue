@@ -215,7 +215,6 @@ export default {
       immediate: true,
       deep: false,
       handler(newValue, oldValue) {
-        console.log('user', newValue);
         this.userID = newValue.userID;
       }
     }
@@ -238,7 +237,6 @@ export default {
 
     },
     submit: async function () {
-      console.log('methods submit: form ', this.form)
       this.formHasErrors = false
       Object.keys(this.form).forEach(f => {
         if (!this.form[f]) this.formHasErrors = true
@@ -249,7 +247,6 @@ export default {
         user = await this.register(this.form)
       }
       if (user != null && user.userID != null) {
-        console.log('@ User Register methods submit + uiser: ', user)
         this.$router.push({path: '/shop'})
       } else {
         this.dialog = true

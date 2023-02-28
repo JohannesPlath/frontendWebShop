@@ -63,10 +63,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   let actualUser = store.getters["account/getCredentials"]
-  console.log('store : ', store.account)
-  console.log('actualUser : ', actualUser)
   let isUserId = actualUser && actualUser.userID
-  console.log('@ index-js : UserId ', isUserId)
   if (to.name === 'AccountLogin') {
     next()
   } else if (to.name === 'Home') {

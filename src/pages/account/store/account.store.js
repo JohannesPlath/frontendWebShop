@@ -28,7 +28,6 @@ const account = {
 
   actions: {
     async logIn({state, commit}, payload) {
-      console.log("payload ", payload.email, " ", payload.passw)
       const singInAnswer = await accountService.sendLoginData(payload)
       const user = new User(singInAnswer.userID, singInAnswer.firstname, singInAnswer.familyName, singInAnswer.address, singInAnswer.city, singInAnswer.state, singInAnswer.zip, singInAnswer.country, singInAnswer.email, singInAnswer.password)
       if (singInAnswer.userID != null) {
@@ -41,7 +40,6 @@ const account = {
     },
 
     async register({state, commit}, payload) {
-      console.log('@accountStore actions register: ', payload)
       const registeredUser = await accountService.register(payload)
       if (registeredUser.userID != null) {
         commit('setCredentials', registeredUser)
@@ -74,7 +72,6 @@ const account = {
     },
 
     clearCredentials(state, payload) {
-      console.log('mutations clearCredentials: ', payload)
       state.credential = {
         firstname: "John",
         familyName: "NotRegistered",

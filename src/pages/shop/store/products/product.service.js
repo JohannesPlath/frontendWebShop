@@ -1,12 +1,11 @@
 import axios from 'axios'
+import {Constance} from "@/constance";
 
 export const productService = {
   async getProducts(cb) {
-    console.log("-------------> ");
     try {
-      const productList = await axios.get("http://localhost:8080/product");
+      const productList = await axios.get(Constance.BACKEND_URl + "product");
       cb(productList.data)
-      console.log("-------------> ", productList);
     } catch (error) {
       console.error(error);
     }
