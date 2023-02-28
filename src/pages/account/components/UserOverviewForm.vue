@@ -233,7 +233,7 @@ export default {
       handler(newValue, oldValue) {
         this.userID = newValue.userID
         this.firstname = newValue.firstname
-        this.familyName = newValue.familyName //todo rest auffüllen
+        this.familyName = newValue.familyName
         this.address = newValue.address
         this.city = newValue.city
         this.state = newValue.state

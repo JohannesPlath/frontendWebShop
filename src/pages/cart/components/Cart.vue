@@ -211,9 +211,7 @@ export default {
 
 
   computed: {
-    /* paymentStore() {
-       return paymentStore // todo ggf löschen
-     },*/
+
     ...mapGetters('cart', ['cartProducts', 'quantity', 'getCartTotalPrice', 'finalizeText', 'isFinalized', 'hasNewMessage']),
     ...mapGetters('account', {credentials: 'getCredentials'}),
     ...mapGetters('payment', {payment: 'getPayment'}),
