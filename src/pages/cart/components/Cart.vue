@@ -8,11 +8,7 @@
       <v-icon color="purple">
         mdi-cart
       </v-icon>
-
       <v-spacer/>
-      <!--      <v-btn variant="text" icon="mdi-magnify"></v-btn>
-
-      <v-btn variant="text" icon="mdi-view-module"></v-btn>-->
     </v-toolbar>
 
     <v-list lines="two">
@@ -146,6 +142,7 @@
                 :color="itemFinalize.secColor"
                 variant="outlined"
                 @click="finalizeOrder(credentials, payment)"
+                to="/order"
               >
                 Order NOW
               </v-btn>

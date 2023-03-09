@@ -8,6 +8,7 @@ import AccountRegister from "@/pages/account/AccountRegister.vue";
 import AccountOverview from "@/pages/account/AccountOverview.vue";
 import store from '@/store/index'
 import Disclaimer from "@/pages/Disclaimer.vue";
+import OrderPage from "@/pages/order/components/OrderPage.vue";
 
 const routes = [
   {
@@ -50,9 +51,15 @@ const routes = [
   {
     path: '/disclaimer',
     name: 'Disclaimer',
-    component: Disclaimer
-  }
+    component: Disclaimer,
+  },
 
+  {
+    path: '/order',
+    name: 'Order',
+    component: OrderPage,
+
+  }
 ];
 
 const router = createRouter({

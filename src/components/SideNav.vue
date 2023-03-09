@@ -8,7 +8,6 @@
     <v-list>
       <v-list-item
         to="/account/login"
-        prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
         :title="credentials.firstname + ' ' + credentials.familyName"
         :subtitle="credentials.email"
       />
@@ -45,13 +44,14 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   data: () => ({
-    photo: 'src/assets/pics/marijuana-g966935eb2_1920.jpg',
+    photo: 'src/assets/pics/2h-media-mQVlwFd3OPA-unsplash.jpg',
 
     items: [
       {text: 'Start', icon: 'mdi-home', route: '/'},
       {text: 'Account', icon: 'mdi-account', route: '/account/overview'},
       {text: 'Shop', icon: 'mdi-domain', route: '/shop'},
-      {text: 'Cart', icon: 'mdi-contacts', route: '/cart'},
+      {text: 'Cart', icon: 'mdi-cart', route: '/cart'},
+      {text: 'Order', icon: 'mdi-post', route: '/order'},
     ],
   }),
   computed: {
